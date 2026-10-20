@@ -1,0 +1,204 @@
+{
+  "easycom": {
+    "autoscan": true,
+    "custom": {
+      "^App(.*)": "@/components/App$1.vue",
+      "^StateView$": "@/components/StateView.vue",
+      "^BottomSheet$": "@/components/BottomSheet.vue",
+      "^TaskCard$": "@/components/TaskCard.vue",
+      "^RecordCard$": "@/components/RecordCard.vue"
+    }
+  },
+  "pages": [
+    {
+      "path": "pages/index/index",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "#F5F7F5"
+      }
+    },
+    {
+      "path": "pages/ai/conversation",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "#F5F7F5"
+      }
+    },
+    {
+      "path": "pages/ai/create",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "#F5F7F5"
+      }
+    },
+    {
+      "path": "pages/ai/draft",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "#F5F7F5"
+      }
+    },
+    {
+      "path": "pages/ai/history",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "#F5F7F5"
+      }
+    },
+    {
+      "path": "pages/ai/run",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "#F5F7F5"
+      }
+    },
+    {
+      "path": "pages/auth/index",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "#F5F7F5"
+      }
+    },
+    {
+      "path": "pages/auth/policy",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "#F5F7F5"
+      }
+    },
+    {
+      "path": "pages/knowledge/detail",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "#F5F7F5"
+      }
+    },
+    {
+      "path": "pages/knowledge/index",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "#F5F7F5"
+      }
+    },
+    {
+      "path": "pages/plans/create",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "#F5F7F5"
+      }
+    },
+    {
+      "path": "pages/plans/detail",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "#F5F7F5"
+      }
+    },
+    {
+      "path": "pages/plans/task",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "#F5F7F5"
+      }
+    },
+    {
+      "path": "pages/profile/availability",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "#F5F7F5"
+      }
+    },
+    {
+      "path": "pages/profile/consents",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "#F5F7F5"
+      }
+    },
+    {
+      "path": "pages/profile/edit",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "#F5F7F5"
+      }
+    },
+    {
+      "path": "pages/profile/feedback",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "#F5F7F5"
+      }
+    },
+    {
+      "path": "pages/profile/goals",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "#F5F7F5"
+      }
+    },
+    {
+      "path": "pages/profile/notifications",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "#F5F7F5"
+      }
+    },
+    {
+      "path": "pages/profile/privacy",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "#F5F7F5"
+      }
+    },
+    {
+      "path": "pages/profile/settings",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "#F5F7F5"
+      }
+    },
+    {
+      "path": "pages/records/detail",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "#F5F7F5"
+      }
+    },
+    {
+      "path": "pages/records/edit",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "#F5F7F5"
+      }
+    },
+    {
+      "path": "pages/records/index",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "#F5F7F5"
+      }
+    },
+    {
+      "path": "pages/reviews/detail",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "#F5F7F5"
+      }
+    },
+    {
+      "path": "pages/reviews/index",
+      "style": {
+        "navigationStyle": "custom",
+        "backgroundColor": "#F5F7F5"
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "知衡",
+    "navigationBarBackgroundColor": "#F5F7F5",
+    "backgroundColor": "#F5F7F5",
+    "backgroundTextStyle": "dark",
+    "navigationStyle": "custom"
+  }
+}

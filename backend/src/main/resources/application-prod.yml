@@ -1,0 +1,8 @@
+zhiheng:
+  environment: PROD
+  security:
+    require-external-keys: true
+  auth:
+    local-development-registration: false
+    verification-delivery: ${ZH_VERIFICATION_DELIVERY:SMTP}
+  cors-allowed-origins: []

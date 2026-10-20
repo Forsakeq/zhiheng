@@ -1,0 +1,7 @@
+.build-cache/
+backend/target/
+backend/.local/
+backend/.idea/
+backend/logs/
+backend/.env
+*.log

@@ -1,0 +1,8762 @@
+{
+  "app_user": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "row_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "deleted_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "account_no",
+        "type": "CHAR(26) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "password_hash",
+        "type": "VARCHAR(255) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      },
+      {
+        "name": "password_updated_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      },
+      {
+        "name": "security_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "data_write_fence",
+        "type": "VARCHAR(24)",
+        "nullable": false
+      },
+      {
+        "name": "registered_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "last_login_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "lock_until",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "delete_requested_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "anonymized_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "email_lookup_hmac",
+        "type": "BINARY(32)",
+        "nullable": false
+      },
+      {
+        "name": "email_cipher",
+        "type": "VARBINARY(2048)",
+        "nullable": false
+      },
+      {
+        "name": "email_key_ref",
+        "type": "VARCHAR(128) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "email_verified_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "registration_policy_version",
+        "type": "VARCHAR(40) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "registration_policy_accepted_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      }
+    ],
+    "foreign": []
+  },
+  "user_profile": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "row_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "deleted_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "display_name",
+        "type": "VARCHAR(60)",
+        "nullable": false
+      },
+      {
+        "name": "avatar_file_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "time_zone",
+        "type": "VARCHAR(64) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "locale",
+        "type": "VARCHAR(20) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "adult_confirmed_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "onboarding_step",
+        "type": "VARCHAR(24)",
+        "nullable": false
+      },
+      {
+        "name": "onboarding_completed_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "bio_cipher",
+        "type": "VARBINARY(2048)",
+        "nullable": true
+      },
+      {
+        "name": "encryption_key_ref",
+        "type": "VARCHAR(128) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      },
+      {
+        "name": "week_start_day",
+        "type": "TINYINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "profile_completed_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      }
+    ],
+    "foreign": [
+      {
+        "table": "user_profile",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "user_profile",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "user_profile",
+        "columns": [
+          "user_id",
+          "avatar_file_id"
+        ],
+        "parent": "file_object",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "user_profile",
+          [
+            "user_id",
+            "avatar_file_id"
+          ],
+          "file_object",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      }
+    ]
+  },
+  "user_preference": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "row_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "deleted_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "preferred_wake_time",
+        "type": "TIME",
+        "nullable": true
+      },
+      {
+        "name": "preferred_bed_time",
+        "type": "TIME",
+        "nullable": true
+      },
+      {
+        "name": "preferred_activity_types_json",
+        "type": "JSON",
+        "nullable": false
+      },
+      {
+        "name": "excluded_activity_types_json",
+        "type": "JSON",
+        "nullable": false
+      },
+      {
+        "name": "daily_task_limit",
+        "type": "TINYINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "default_task_minutes",
+        "type": "SMALLINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "preferred_session_minutes",
+        "type": "SMALLINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "plan_tone",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      },
+      {
+        "name": "theme_mode",
+        "type": "VARCHAR(12)",
+        "nullable": false
+      },
+      {
+        "name": "reduced_motion",
+        "type": "TINYINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "font_scale",
+        "type": "DECIMAL(3,2)",
+        "nullable": false
+      },
+      {
+        "name": "quiet_hours_enabled",
+        "type": "TINYINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "quiet_start",
+        "type": "TIME",
+        "nullable": true
+      },
+      {
+        "name": "quiet_end",
+        "type": "TIME",
+        "nullable": true
+      },
+      {
+        "name": "preference_schema_version",
+        "type": "SMALLINT UNSIGNED",
+        "nullable": false
+      }
+    ],
+    "foreign": [
+      {
+        "table": "user_preference",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "user_preference",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      }
+    ]
+  },
+  "auth_identity": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "row_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "deleted_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "provider",
+        "type": "VARCHAR(32) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "provider_tenant",
+        "type": "VARCHAR(100) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "subject_hash",
+        "type": "BINARY(32)",
+        "nullable": false
+      },
+      {
+        "name": "subject_cipher",
+        "type": "VARBINARY(2048)",
+        "nullable": true
+      },
+      {
+        "name": "union_subject_hash",
+        "type": "BINARY(32)",
+        "nullable": true
+      },
+      {
+        "name": "binding_status",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      },
+      {
+        "name": "bound_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "last_authenticated_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "revoked_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "authorization_revision",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "encryption_key_ref",
+        "type": "VARCHAR(128) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      }
+    ],
+    "foreign": [
+      {
+        "table": "auth_identity",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "auth_identity",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      }
+    ]
+  },
+  "auth_session": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "installation_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "family_id",
+        "type": "CHAR(36) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "parent_session_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "replaced_by_session_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "token_hash",
+        "type": "BINARY(32)",
+        "nullable": false
+      },
+      {
+        "name": "security_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "issued_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "expires_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "family_expires_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "consumed_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "revoked_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "revoke_reason",
+        "type": "VARCHAR(32)",
+        "nullable": true
+      },
+      {
+        "name": "client_label",
+        "type": "VARCHAR(100)",
+        "nullable": true
+      },
+      {
+        "name": "ip_hash",
+        "type": "BINARY(32)",
+        "nullable": true
+      },
+      {
+        "name": "user_agent_digest",
+        "type": "BINARY(32)",
+        "nullable": true
+      },
+      {
+        "name": "client_audience",
+        "type": "VARCHAR(12) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "generation",
+        "type": "INT UNSIGNED",
+        "nullable": false
+      }
+    ],
+    "foreign": [
+      {
+        "table": "auth_session",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "auth_session",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "auth_session",
+        "columns": [
+          "user_id",
+          "installation_id"
+        ],
+        "parent": "client_installation",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "auth_session",
+          [
+            "user_id",
+            "installation_id"
+          ],
+          "client_installation",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "auth_session",
+        "columns": [
+          "user_id",
+          "family_id",
+          "client_audience",
+          "parent_session_id"
+        ],
+        "parent": "auth_session",
+        "parent_columns": [
+          "user_id",
+          "family_id",
+          "client_audience",
+          "id"
+        ],
+        "signature": [
+          "auth_session",
+          [
+            "user_id",
+            "family_id",
+            "client_audience",
+            "parent_session_id"
+          ],
+          "auth_session",
+          [
+            "user_id",
+            "family_id",
+            "client_audience",
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "auth_session",
+        "columns": [
+          "user_id",
+          "family_id",
+          "client_audience",
+          "replaced_by_session_id"
+        ],
+        "parent": "auth_session",
+        "parent_columns": [
+          "user_id",
+          "family_id",
+          "client_audience",
+          "id"
+        ],
+        "signature": [
+          "auth_session",
+          [
+            "user_id",
+            "family_id",
+            "client_audience",
+            "replaced_by_session_id"
+          ],
+          "auth_session",
+          [
+            "user_id",
+            "family_id",
+            "client_audience",
+            "id"
+          ]
+        ]
+      }
+    ]
+  },
+  "auth_verification": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "challenge_id",
+        "type": "CHAR(36) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "purpose",
+        "type": "VARCHAR(24)",
+        "nullable": false
+      },
+      {
+        "name": "channel",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      },
+      {
+        "name": "destination_hash",
+        "type": "BINARY(32)",
+        "nullable": true
+      },
+      {
+        "name": "destination_cipher",
+        "type": "VARBINARY(2048)",
+        "nullable": true
+      },
+      {
+        "name": "proof_hash",
+        "type": "BINARY(32)",
+        "nullable": false
+      },
+      {
+        "name": "encryption_key_ref",
+        "type": "VARCHAR(128) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      },
+      {
+        "name": "expires_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "attempt_count",
+        "type": "TINYINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "max_attempts",
+        "type": "TINYINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "consumed_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "locked_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "request_ip_hash",
+        "type": "BINARY(32)",
+        "nullable": true
+      },
+      {
+        "name": "invalidated_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "client_audience",
+        "type": "VARCHAR(12) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      }
+    ],
+    "foreign": [
+      {
+        "table": "auth_verification",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "auth_verification",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      }
+    ]
+  },
+  "client_installation": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "row_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "deleted_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "installation_key",
+        "type": "CHAR(36) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "platform",
+        "type": "VARCHAR(20)",
+        "nullable": false
+      },
+      {
+        "name": "app_version",
+        "type": "VARCHAR(32) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "os_version",
+        "type": "VARCHAR(64)",
+        "nullable": true
+      },
+      {
+        "name": "device_label",
+        "type": "VARCHAR(100)",
+        "nullable": true
+      },
+      {
+        "name": "capabilities_json",
+        "type": "JSON",
+        "nullable": false
+      },
+      {
+        "name": "last_seen_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "last_ack_seq",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "last_ack_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "bootstrap_id",
+        "type": "CHAR(36) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      },
+      {
+        "name": "bootstrap_from_seq",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "bootstrap_expires_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "bootstrap_epoch",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "bootstrap_progress_json",
+        "type": "JSON",
+        "nullable": true
+      },
+      {
+        "name": "notification_permission",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      },
+      {
+        "name": "revoked_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "installation_kind",
+        "type": "VARCHAR(12)",
+        "nullable": false
+      },
+      {
+        "name": "parent_installation_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "pairing_token_hash",
+        "type": "BINARY(32)",
+        "nullable": true
+      },
+      {
+        "name": "pairing_expires_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "device_scope_json",
+        "type": "JSON",
+        "nullable": true
+      },
+      {
+        "name": "device_credential_hash",
+        "type": "BINARY(32)",
+        "nullable": true
+      },
+      {
+        "name": "credential_expires_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "credential_revision",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "last_delivered_seq",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "sync_state",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      },
+      {
+        "name": "sync_epoch",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "bootstrap_completed_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      }
+    ],
+    "foreign": [
+      {
+        "table": "client_installation",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "client_installation",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "client_installation",
+        "columns": [
+          "user_id",
+          "parent_installation_id"
+        ],
+        "parent": "client_installation",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "client_installation",
+          [
+            "user_id",
+            "parent_installation_id"
+          ],
+          "client_installation",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      }
+    ]
+  },
+  "user_consent": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "row_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "deleted_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "purpose_code",
+        "type": "VARCHAR(32) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      },
+      {
+        "name": "policy_version",
+        "type": "VARCHAR(40) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "scope_json",
+        "type": "JSON",
+        "nullable": false
+      },
+      {
+        "name": "consent_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "granted_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "revoked_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "expires_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "installation_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "last_event_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      }
+    ],
+    "foreign": [
+      {
+        "table": "user_consent",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "user_consent",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "user_consent",
+        "columns": [
+          "user_id",
+          "installation_id"
+        ],
+        "parent": "client_installation",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "user_consent",
+          [
+            "user_id",
+            "installation_id"
+          ],
+          "client_installation",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "user_consent",
+        "columns": [
+          "user_id",
+          "id",
+          "last_event_id"
+        ],
+        "parent": "user_consent_event",
+        "parent_columns": [
+          "user_id",
+          "consent_id",
+          "id"
+        ],
+        "signature": [
+          "user_consent",
+          [
+            "user_id",
+            "id",
+            "last_event_id"
+          ],
+          "user_consent_event",
+          [
+            "user_id",
+            "consent_id",
+            "id"
+          ]
+        ]
+      }
+    ]
+  },
+  "user_consent_event": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "consent_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "event_type",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      },
+      {
+        "name": "consent_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "policy_version",
+        "type": "VARCHAR(40) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "scope_json",
+        "type": "JSON",
+        "nullable": false
+      },
+      {
+        "name": "occurred_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "installation_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "operation_id",
+        "type": "CHAR(36) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "notice_digest",
+        "type": "BINARY(32)",
+        "nullable": false
+      }
+    ],
+    "foreign": [
+      {
+        "table": "user_consent_event",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "user_consent_event",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "user_consent_event",
+        "columns": [
+          "user_id",
+          "consent_id"
+        ],
+        "parent": "user_consent",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "user_consent_event",
+          [
+            "user_id",
+            "consent_id"
+          ],
+          "user_consent",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "user_consent_event",
+        "columns": [
+          "user_id",
+          "installation_id"
+        ],
+        "parent": "client_installation",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "user_consent_event",
+          [
+            "user_id",
+            "installation_id"
+          ],
+          "client_installation",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      }
+    ]
+  },
+  "goal_definition": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "row_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "deleted_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "code",
+        "type": "VARCHAR(32) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "name",
+        "type": "VARCHAR(80)",
+        "nullable": false
+      },
+      {
+        "name": "description",
+        "type": "VARCHAR(500)",
+        "nullable": false
+      },
+      {
+        "name": "goal_category",
+        "type": "VARCHAR(24)",
+        "nullable": false
+      },
+      {
+        "name": "parameter_schema_json",
+        "type": "JSON",
+        "nullable": false
+      },
+      {
+        "name": "suggested_parameters_json",
+        "type": "JSON",
+        "nullable": true
+      },
+      {
+        "name": "icon_code",
+        "type": "VARCHAR(40) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      },
+      {
+        "name": "sort_order",
+        "type": "INT",
+        "nullable": false
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(12)",
+        "nullable": false
+      },
+      {
+        "name": "schema_version",
+        "type": "SMALLINT UNSIGNED",
+        "nullable": false
+      }
+    ],
+    "foreign": []
+  },
+  "user_goal": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "row_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "deleted_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "goal_definition_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "display_name",
+        "type": "VARCHAR(80)",
+        "nullable": false
+      },
+      {
+        "name": "parameters_json",
+        "type": "JSON",
+        "nullable": false
+      },
+      {
+        "name": "parameter_schema_version",
+        "type": "SMALLINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "priority",
+        "type": "TINYINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      },
+      {
+        "name": "start_local_date",
+        "type": "DATE",
+        "nullable": false
+      },
+      {
+        "name": "end_local_date",
+        "type": "DATE",
+        "nullable": true
+      },
+      {
+        "name": "goal_time_zone",
+        "type": "VARCHAR(64) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "success_criterion_json",
+        "type": "JSON",
+        "nullable": true
+      },
+      {
+        "name": "motivation_cipher",
+        "type": "VARBINARY(4096)",
+        "nullable": true
+      },
+      {
+        "name": "encryption_key_ref",
+        "type": "VARCHAR(128) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      },
+      {
+        "name": "completed_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      }
+    ],
+    "foreign": [
+      {
+        "table": "user_goal",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "user_goal",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "user_goal",
+        "columns": [
+          "goal_definition_id"
+        ],
+        "parent": "goal_definition",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "user_goal",
+          [
+            "goal_definition_id"
+          ],
+          "goal_definition",
+          [
+            "id"
+          ]
+        ]
+      }
+    ]
+  },
+  "availability_rule": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "row_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "deleted_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "label",
+        "type": "VARCHAR(80)",
+        "nullable": false
+      },
+      {
+        "name": "rule_kind",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      },
+      {
+        "name": "weekday",
+        "type": "TINYINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "start_minute",
+        "type": "SMALLINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "end_minute",
+        "type": "SMALLINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "time_zone",
+        "type": "VARCHAR(64) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "valid_from",
+        "type": "DATE",
+        "nullable": false
+      },
+      {
+        "name": "valid_until",
+        "type": "DATE",
+        "nullable": true
+      },
+      {
+        "name": "priority",
+        "type": "SMALLINT",
+        "nullable": false
+      },
+      {
+        "name": "is_enabled",
+        "type": "TINYINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "source_type",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      },
+      {
+        "name": "source_batch_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "end_day_offset",
+        "type": "TINYINT UNSIGNED",
+        "nullable": false
+      }
+    ],
+    "foreign": [
+      {
+        "table": "availability_rule",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "availability_rule",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "availability_rule",
+        "columns": [
+          "user_id",
+          "source_batch_id"
+        ],
+        "parent": "import_batch",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "availability_rule",
+          [
+            "user_id",
+            "source_batch_id"
+          ],
+          "import_batch",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      }
+    ]
+  },
+  "availability_exception": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "row_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "deleted_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "exception_date",
+        "type": "DATE",
+        "nullable": false
+      },
+      {
+        "name": "time_zone",
+        "type": "VARCHAR(64) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "mode",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      },
+      {
+        "name": "slots_json",
+        "type": "JSON",
+        "nullable": false
+      },
+      {
+        "name": "slots_schema_version",
+        "type": "SMALLINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "label",
+        "type": "VARCHAR(100)",
+        "nullable": false
+      },
+      {
+        "name": "reason_cipher",
+        "type": "VARBINARY(4096)",
+        "nullable": true
+      },
+      {
+        "name": "encryption_key_ref",
+        "type": "VARCHAR(128) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      },
+      {
+        "name": "is_enabled",
+        "type": "TINYINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "source_type",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      },
+      {
+        "name": "source_batch_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      }
+    ],
+    "foreign": [
+      {
+        "table": "availability_exception",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "availability_exception",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "availability_exception",
+        "columns": [
+          "user_id",
+          "source_batch_id"
+        ],
+        "parent": "import_batch",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "availability_exception",
+          [
+            "user_id",
+            "source_batch_id"
+          ],
+          "import_batch",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      }
+    ]
+  },
+  "health_record": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "row_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "deleted_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "client_record_id",
+        "type": "CHAR(36) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "record_type",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      },
+      {
+        "name": "started_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "ended_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "record_local_date",
+        "type": "DATE",
+        "nullable": false
+      },
+      {
+        "name": "record_time_zone",
+        "type": "VARCHAR(64) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "utc_offset_minutes",
+        "type": "SMALLINT",
+        "nullable": false
+      },
+      {
+        "name": "source_timezone",
+        "type": "VARCHAR(64) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      },
+      {
+        "name": "source_type",
+        "type": "VARCHAR(20)",
+        "nullable": false
+      },
+      {
+        "name": "source_connection_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "provider_record_key",
+        "type": "VARCHAR(190) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      },
+      {
+        "name": "quality_status",
+        "type": "VARCHAR(12)",
+        "nullable": false
+      },
+      {
+        "name": "invalid_reason",
+        "type": "VARCHAR(200)",
+        "nullable": true
+      },
+      {
+        "name": "notes_cipher",
+        "type": "MEDIUMBLOB",
+        "nullable": true
+      },
+      {
+        "name": "encryption_key_ref",
+        "type": "VARCHAR(128) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      },
+      {
+        "name": "confirmed_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "ai_draft_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "import_batch_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      }
+    ],
+    "foreign": [
+      {
+        "table": "health_record",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "health_record",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "health_record",
+        "columns": [
+          "user_id",
+          "source_connection_id"
+        ],
+        "parent": "external_data_connection",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "health_record",
+          [
+            "user_id",
+            "source_connection_id"
+          ],
+          "external_data_connection",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "health_record",
+        "columns": [
+          "user_id",
+          "ai_draft_id"
+        ],
+        "parent": "ai_draft",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "health_record",
+          [
+            "user_id",
+            "ai_draft_id"
+          ],
+          "ai_draft",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "health_record",
+        "columns": [
+          "user_id",
+          "import_batch_id"
+        ],
+        "parent": "import_batch",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "health_record",
+          [
+            "user_id",
+            "import_batch_id"
+          ],
+          "import_batch",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      }
+    ]
+  },
+  "sleep_record_detail": {
+    "columns": [
+      {
+        "name": "record_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "detail_type",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      },
+      {
+        "name": "sleep_start_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "wake_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "elapsed_minutes",
+        "type": "SMALLINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "rested_level",
+        "type": "TINYINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "sleep_kind",
+        "type": "VARCHAR(12)",
+        "nullable": false
+      },
+      {
+        "name": "measurement_method",
+        "type": "VARCHAR(24)",
+        "nullable": false
+      },
+      {
+        "name": "interruption_note_cipher",
+        "type": "VARBINARY(4096)",
+        "nullable": true
+      },
+      {
+        "name": "encryption_key_ref",
+        "type": "VARCHAR(128) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      }
+    ],
+    "foreign": [
+      {
+        "table": "sleep_record_detail",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "sleep_record_detail",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "sleep_record_detail",
+        "columns": [
+          "user_id",
+          "record_id",
+          "detail_type"
+        ],
+        "parent": "health_record",
+        "parent_columns": [
+          "user_id",
+          "id",
+          "record_type"
+        ],
+        "signature": [
+          "sleep_record_detail",
+          [
+            "user_id",
+            "record_id",
+            "detail_type"
+          ],
+          "health_record",
+          [
+            "user_id",
+            "id",
+            "record_type"
+          ]
+        ]
+      }
+    ]
+  },
+  "activity_record_detail": {
+    "columns": [
+      {
+        "name": "record_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "detail_type",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      },
+      {
+        "name": "activity_type",
+        "type": "VARCHAR(32) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "custom_activity_name",
+        "type": "VARCHAR(80)",
+        "nullable": true
+      },
+      {
+        "name": "actual_duration_minutes",
+        "type": "SMALLINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "duration_method",
+        "type": "VARCHAR(24)",
+        "nullable": false
+      },
+      {
+        "name": "perceived_intensity",
+        "type": "VARCHAR(12)",
+        "nullable": true
+      },
+      {
+        "name": "distance_meters",
+        "type": "DECIMAL(10,2)",
+        "nullable": true
+      },
+      {
+        "name": "distance_method",
+        "type": "VARCHAR(24)",
+        "nullable": true
+      },
+      {
+        "name": "location_label_cipher",
+        "type": "VARBINARY(2048)",
+        "nullable": true
+      },
+      {
+        "name": "encryption_key_ref",
+        "type": "VARCHAR(128) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      }
+    ],
+    "foreign": [
+      {
+        "table": "activity_record_detail",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "activity_record_detail",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "activity_record_detail",
+        "columns": [
+          "user_id",
+          "record_id",
+          "detail_type"
+        ],
+        "parent": "health_record",
+        "parent_columns": [
+          "user_id",
+          "id",
+          "record_type"
+        ],
+        "signature": [
+          "activity_record_detail",
+          [
+            "user_id",
+            "record_id",
+            "detail_type"
+          ],
+          "health_record",
+          [
+            "user_id",
+            "id",
+            "record_type"
+          ]
+        ]
+      }
+    ]
+  },
+  "meal_record_detail": {
+    "columns": [
+      {
+        "name": "record_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "detail_type",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      },
+      {
+        "name": "meal_type",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      },
+      {
+        "name": "description_cipher",
+        "type": "MEDIUMBLOB",
+        "nullable": false
+      },
+      {
+        "name": "encryption_key_ref",
+        "type": "VARCHAR(128) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "vegetable_present",
+        "type": "TINYINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "fruit_present",
+        "type": "TINYINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "protein_food_present",
+        "type": "TINYINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "whole_grain_present",
+        "type": "TINYINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "satiety_level",
+        "type": "TINYINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "meal_context",
+        "type": "VARCHAR(20)",
+        "nullable": true
+      }
+    ],
+    "foreign": [
+      {
+        "table": "meal_record_detail",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "meal_record_detail",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "meal_record_detail",
+        "columns": [
+          "user_id",
+          "record_id",
+          "detail_type"
+        ],
+        "parent": "health_record",
+        "parent_columns": [
+          "user_id",
+          "id",
+          "record_type"
+        ],
+        "signature": [
+          "meal_record_detail",
+          [
+            "user_id",
+            "record_id",
+            "detail_type"
+          ],
+          "health_record",
+          [
+            "user_id",
+            "id",
+            "record_type"
+          ]
+        ]
+      }
+    ]
+  },
+  "energy_record_detail": {
+    "columns": [
+      {
+        "name": "record_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "detail_type",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      },
+      {
+        "name": "energy_level",
+        "type": "TINYINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "scale_version",
+        "type": "SMALLINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "context_code",
+        "type": "VARCHAR(20)",
+        "nullable": true
+      },
+      {
+        "name": "description_cipher",
+        "type": "VARBINARY(8192)",
+        "nullable": true
+      },
+      {
+        "name": "encryption_key_ref",
+        "type": "VARCHAR(128) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      },
+      {
+        "name": "reported_method",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      }
+    ],
+    "foreign": [
+      {
+        "table": "energy_record_detail",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "energy_record_detail",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "energy_record_detail",
+        "columns": [
+          "user_id",
+          "record_id",
+          "detail_type"
+        ],
+        "parent": "health_record",
+        "parent_columns": [
+          "user_id",
+          "id",
+          "record_type"
+        ],
+        "signature": [
+          "energy_record_detail",
+          [
+            "user_id",
+            "record_id",
+            "detail_type"
+          ],
+          "health_record",
+          [
+            "user_id",
+            "id",
+            "record_type"
+          ]
+        ]
+      }
+    ]
+  },
+  "record_tag": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "row_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "deleted_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "tag_code",
+        "type": "CHAR(36) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "name_cipher",
+        "type": "VARBINARY(1024)",
+        "nullable": false
+      },
+      {
+        "name": "normalized_name_hash",
+        "type": "BINARY(32)",
+        "nullable": false
+      },
+      {
+        "name": "encryption_key_ref",
+        "type": "VARCHAR(128) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "color_token",
+        "type": "VARCHAR(24) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "applicable_record_type",
+        "type": "VARCHAR(16)",
+        "nullable": true
+      },
+      {
+        "name": "sort_order",
+        "type": "INT",
+        "nullable": false
+      },
+      {
+        "name": "is_archived",
+        "type": "TINYINT UNSIGNED",
+        "nullable": false
+      }
+    ],
+    "foreign": [
+      {
+        "table": "record_tag",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "record_tag",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      }
+    ]
+  },
+  "record_tag_relation": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "record_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "tag_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "assigned_source",
+        "type": "VARCHAR(20)",
+        "nullable": false
+      },
+      {
+        "name": "operation_id",
+        "type": "CHAR(36) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      }
+    ],
+    "foreign": [
+      {
+        "table": "record_tag_relation",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "record_tag_relation",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "record_tag_relation",
+        "columns": [
+          "user_id",
+          "record_id"
+        ],
+        "parent": "health_record",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "record_tag_relation",
+          [
+            "user_id",
+            "record_id"
+          ],
+          "health_record",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "record_tag_relation",
+        "columns": [
+          "user_id",
+          "tag_id"
+        ],
+        "parent": "record_tag",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "record_tag_relation",
+          [
+            "user_id",
+            "tag_id"
+          ],
+          "record_tag",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      }
+    ]
+  },
+  "record_attachment": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "record_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "file_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "attachment_role",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      },
+      {
+        "name": "sort_order",
+        "type": "SMALLINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "caption_cipher",
+        "type": "VARBINARY(2048)",
+        "nullable": true
+      },
+      {
+        "name": "encryption_key_ref",
+        "type": "VARCHAR(128) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      },
+      {
+        "name": "operation_id",
+        "type": "CHAR(36) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      }
+    ],
+    "foreign": [
+      {
+        "table": "record_attachment",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "record_attachment",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "record_attachment",
+        "columns": [
+          "user_id",
+          "record_id"
+        ],
+        "parent": "health_record",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "record_attachment",
+          [
+            "user_id",
+            "record_id"
+          ],
+          "health_record",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "record_attachment",
+        "columns": [
+          "user_id",
+          "file_id"
+        ],
+        "parent": "file_object",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "record_attachment",
+          [
+            "user_id",
+            "file_id"
+          ],
+          "file_object",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      }
+    ]
+  },
+  "plan": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "row_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "deleted_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "plan_key",
+        "type": "CHAR(36) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "name",
+        "type": "VARCHAR(100)",
+        "nullable": false
+      },
+      {
+        "name": "plan_kind",
+        "type": "VARCHAR(12)",
+        "nullable": false
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      },
+      {
+        "name": "range_start_date",
+        "type": "DATE",
+        "nullable": false
+      },
+      {
+        "name": "range_end_date",
+        "type": "DATE",
+        "nullable": false
+      },
+      {
+        "name": "plan_time_zone",
+        "type": "VARCHAR(64) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "active_version_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "latest_version_no",
+        "type": "INT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "source_type",
+        "type": "VARCHAR(20)",
+        "nullable": false
+      },
+      {
+        "name": "origin_draft_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "paused_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "archived_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      }
+    ],
+    "foreign": [
+      {
+        "table": "plan",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "plan",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "plan",
+        "columns": [
+          "user_id",
+          "origin_draft_id"
+        ],
+        "parent": "ai_draft",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "plan",
+          [
+            "user_id",
+            "origin_draft_id"
+          ],
+          "ai_draft",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "plan",
+        "columns": [
+          "user_id",
+          "id",
+          "active_version_id"
+        ],
+        "parent": "plan_version",
+        "parent_columns": [
+          "user_id",
+          "plan_id",
+          "id"
+        ],
+        "signature": [
+          "plan",
+          [
+            "user_id",
+            "id",
+            "active_version_id"
+          ],
+          "plan_version",
+          [
+            "user_id",
+            "plan_id",
+            "id"
+          ]
+        ]
+      }
+    ]
+  },
+  "plan_version": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "row_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "deleted_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "plan_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "version_no",
+        "type": "INT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      },
+      {
+        "name": "based_on_version_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "restore_from_version_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "source_type",
+        "type": "VARCHAR(20)",
+        "nullable": false
+      },
+      {
+        "name": "source_draft_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "effective_from",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "affected_task_ids_json",
+        "type": "JSON",
+        "nullable": false
+      },
+      {
+        "name": "change_summary",
+        "type": "VARCHAR(500)",
+        "nullable": false
+      },
+      {
+        "name": "constraint_snapshot_json",
+        "type": "JSON",
+        "nullable": false
+      },
+      {
+        "name": "validation_report_json",
+        "type": "JSON",
+        "nullable": true
+      },
+      {
+        "name": "sealed_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "sealed_by_operation_id",
+        "type": "CHAR(36) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      },
+      {
+        "name": "content_digest",
+        "type": "BINARY(32)",
+        "nullable": true
+      }
+    ],
+    "foreign": [
+      {
+        "table": "plan_version",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "plan_version",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "plan_version",
+        "columns": [
+          "user_id",
+          "plan_id"
+        ],
+        "parent": "plan",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "plan_version",
+          [
+            "user_id",
+            "plan_id"
+          ],
+          "plan",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "plan_version",
+        "columns": [
+          "user_id",
+          "plan_id",
+          "based_on_version_id"
+        ],
+        "parent": "plan_version",
+        "parent_columns": [
+          "user_id",
+          "plan_id",
+          "id"
+        ],
+        "signature": [
+          "plan_version",
+          [
+            "user_id",
+            "plan_id",
+            "based_on_version_id"
+          ],
+          "plan_version",
+          [
+            "user_id",
+            "plan_id",
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "plan_version",
+        "columns": [
+          "user_id",
+          "plan_id",
+          "restore_from_version_id"
+        ],
+        "parent": "plan_version",
+        "parent_columns": [
+          "user_id",
+          "plan_id",
+          "id"
+        ],
+        "signature": [
+          "plan_version",
+          [
+            "user_id",
+            "plan_id",
+            "restore_from_version_id"
+          ],
+          "plan_version",
+          [
+            "user_id",
+            "plan_id",
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "plan_version",
+        "columns": [
+          "user_id",
+          "source_draft_id"
+        ],
+        "parent": "ai_draft",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "plan_version",
+          [
+            "user_id",
+            "source_draft_id"
+          ],
+          "ai_draft",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      }
+    ]
+  },
+  "task": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "row_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "deleted_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "plan_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "current_plan_version_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "rule_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "occurrence_key",
+        "type": "VARCHAR(100) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      },
+      {
+        "name": "title",
+        "type": "VARCHAR(100)",
+        "nullable": false
+      },
+      {
+        "name": "task_type",
+        "type": "VARCHAR(24)",
+        "nullable": false
+      },
+      {
+        "name": "scheduled_start_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "scheduled_end_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "task_local_date",
+        "type": "DATE",
+        "nullable": false
+      },
+      {
+        "name": "task_time_zone",
+        "type": "VARCHAR(64) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "planned_duration_minutes",
+        "type": "SMALLINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      },
+      {
+        "name": "priority",
+        "type": "TINYINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "is_fixed",
+        "type": "TINYINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "instruction_cipher",
+        "type": "VARBINARY(8192)",
+        "nullable": true
+      },
+      {
+        "name": "encryption_key_ref",
+        "type": "VARCHAR(128) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      },
+      {
+        "name": "completed_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "cancelled_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "source_type",
+        "type": "VARCHAR(20)",
+        "nullable": false
+      }
+    ],
+    "foreign": [
+      {
+        "table": "task",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "task",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "task",
+        "columns": [
+          "user_id",
+          "plan_id"
+        ],
+        "parent": "plan",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "task",
+          [
+            "user_id",
+            "plan_id"
+          ],
+          "plan",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "task",
+        "columns": [
+          "user_id",
+          "plan_id",
+          "current_plan_version_id"
+        ],
+        "parent": "plan_version",
+        "parent_columns": [
+          "user_id",
+          "plan_id",
+          "id"
+        ],
+        "signature": [
+          "task",
+          [
+            "user_id",
+            "plan_id",
+            "current_plan_version_id"
+          ],
+          "plan_version",
+          [
+            "user_id",
+            "plan_id",
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "task",
+        "columns": [
+          "user_id",
+          "plan_id",
+          "rule_id"
+        ],
+        "parent": "plan_rule",
+        "parent_columns": [
+          "user_id",
+          "plan_id",
+          "id"
+        ],
+        "signature": [
+          "task",
+          [
+            "user_id",
+            "plan_id",
+            "rule_id"
+          ],
+          "plan_rule",
+          [
+            "user_id",
+            "plan_id",
+            "id"
+          ]
+        ]
+      }
+    ]
+  },
+  "plan_version_task": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "row_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "deleted_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "version_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "task_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "draft_task_key",
+        "type": "CHAR(36) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "sort_order",
+        "type": "INT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "title",
+        "type": "VARCHAR(100)",
+        "nullable": false
+      },
+      {
+        "name": "task_type",
+        "type": "VARCHAR(24)",
+        "nullable": false
+      },
+      {
+        "name": "scheduled_start_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "scheduled_end_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "planned_duration_minutes",
+        "type": "SMALLINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "task_time_zone",
+        "type": "VARCHAR(64) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "task_local_date",
+        "type": "DATE",
+        "nullable": false
+      },
+      {
+        "name": "is_fixed",
+        "type": "TINYINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "priority",
+        "type": "TINYINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "instruction_cipher",
+        "type": "VARBINARY(8192)",
+        "nullable": true
+      },
+      {
+        "name": "encryption_key_ref",
+        "type": "VARCHAR(128) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      },
+      {
+        "name": "reminder_snapshot_json",
+        "type": "JSON",
+        "nullable": false
+      },
+      {
+        "name": "change_action",
+        "type": "VARCHAR(12)",
+        "nullable": false
+      },
+      {
+        "name": "rule_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "occurrence_key",
+        "type": "VARCHAR(100) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      },
+      {
+        "name": "plan_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      }
+    ],
+    "foreign": [
+      {
+        "table": "plan_version_task",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "plan_version_task",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "plan_version_task",
+        "columns": [
+          "user_id",
+          "plan_id",
+          "version_id"
+        ],
+        "parent": "plan_version",
+        "parent_columns": [
+          "user_id",
+          "plan_id",
+          "id"
+        ],
+        "signature": [
+          "plan_version_task",
+          [
+            "user_id",
+            "plan_id",
+            "version_id"
+          ],
+          "plan_version",
+          [
+            "user_id",
+            "plan_id",
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "plan_version_task",
+        "columns": [
+          "user_id",
+          "plan_id",
+          "task_id"
+        ],
+        "parent": "task",
+        "parent_columns": [
+          "user_id",
+          "plan_id",
+          "id"
+        ],
+        "signature": [
+          "plan_version_task",
+          [
+            "user_id",
+            "plan_id",
+            "task_id"
+          ],
+          "task",
+          [
+            "user_id",
+            "plan_id",
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "plan_version_task",
+        "columns": [
+          "user_id",
+          "plan_id",
+          "rule_id"
+        ],
+        "parent": "plan_rule",
+        "parent_columns": [
+          "user_id",
+          "plan_id",
+          "id"
+        ],
+        "signature": [
+          "plan_version_task",
+          [
+            "user_id",
+            "plan_id",
+            "rule_id"
+          ],
+          "plan_rule",
+          [
+            "user_id",
+            "plan_id",
+            "id"
+          ]
+        ]
+      }
+    ]
+  },
+  "plan_rule": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "row_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "deleted_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "plan_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "rule_key",
+        "type": "CHAR(36) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "title",
+        "type": "VARCHAR(100)",
+        "nullable": false
+      },
+      {
+        "name": "task_type",
+        "type": "VARCHAR(24)",
+        "nullable": false
+      },
+      {
+        "name": "recurrence_kind",
+        "type": "VARCHAR(12)",
+        "nullable": false
+      },
+      {
+        "name": "weekdays_json",
+        "type": "JSON",
+        "nullable": true
+      },
+      {
+        "name": "start_local_time",
+        "type": "TIME",
+        "nullable": false
+      },
+      {
+        "name": "planned_duration_minutes",
+        "type": "SMALLINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "time_zone",
+        "type": "VARCHAR(64) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "valid_from",
+        "type": "DATE",
+        "nullable": false
+      },
+      {
+        "name": "valid_until",
+        "type": "DATE",
+        "nullable": true
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(12)",
+        "nullable": false
+      },
+      {
+        "name": "last_expanded_through",
+        "type": "DATE",
+        "nullable": true
+      },
+      {
+        "name": "template_revision",
+        "type": "INT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "end_local_time",
+        "type": "TIME",
+        "nullable": false
+      },
+      {
+        "name": "end_day_offset",
+        "type": "TINYINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "is_fixed",
+        "type": "TINYINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "instruction_cipher",
+        "type": "VARBINARY(8192)",
+        "nullable": true
+      },
+      {
+        "name": "encryption_key_ref",
+        "type": "VARCHAR(128) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      },
+      {
+        "name": "reminder_snapshot_json",
+        "type": "JSON",
+        "nullable": false
+      }
+    ],
+    "foreign": [
+      {
+        "table": "plan_rule",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "plan_rule",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "plan_rule",
+        "columns": [
+          "user_id",
+          "plan_id"
+        ],
+        "parent": "plan",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "plan_rule",
+          [
+            "user_id",
+            "plan_id"
+          ],
+          "plan",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      }
+    ]
+  },
+  "task_event": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "task_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "event_type",
+        "type": "VARCHAR(24)",
+        "nullable": false
+      },
+      {
+        "name": "operation_id",
+        "type": "CHAR(36) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "source_type",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      },
+      {
+        "name": "before_row_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "after_row_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "occurred_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "client_occurred_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "old_status",
+        "type": "VARCHAR(16)",
+        "nullable": true
+      },
+      {
+        "name": "new_status",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      },
+      {
+        "name": "before_schedule_json",
+        "type": "JSON",
+        "nullable": true
+      },
+      {
+        "name": "after_schedule_json",
+        "type": "JSON",
+        "nullable": true
+      },
+      {
+        "name": "reason_code",
+        "type": "VARCHAR(32)",
+        "nullable": true
+      },
+      {
+        "name": "reason_cipher",
+        "type": "VARBINARY(4096)",
+        "nullable": true
+      },
+      {
+        "name": "encryption_key_ref",
+        "type": "VARCHAR(128) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      },
+      {
+        "name": "plan_version_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "plan_version_task_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      }
+    ],
+    "foreign": [
+      {
+        "table": "task_event",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "task_event",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "task_event",
+        "columns": [
+          "user_id",
+          "task_id"
+        ],
+        "parent": "task",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "task_event",
+          [
+            "user_id",
+            "task_id"
+          ],
+          "task",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "task_event",
+        "columns": [
+          "user_id",
+          "plan_version_id",
+          "task_id",
+          "plan_version_task_id"
+        ],
+        "parent": "plan_version_task",
+        "parent_columns": [
+          "user_id",
+          "version_id",
+          "task_id",
+          "id"
+        ],
+        "signature": [
+          "task_event",
+          [
+            "user_id",
+            "plan_version_id",
+            "task_id",
+            "plan_version_task_id"
+          ],
+          "plan_version_task",
+          [
+            "user_id",
+            "version_id",
+            "task_id",
+            "id"
+          ]
+        ]
+      }
+    ]
+  },
+  "task_record_link": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "task_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "record_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "link_type",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      },
+      {
+        "name": "operation_id",
+        "type": "CHAR(36) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "linked_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      }
+    ],
+    "foreign": [
+      {
+        "table": "task_record_link",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "task_record_link",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "task_record_link",
+        "columns": [
+          "user_id",
+          "task_id"
+        ],
+        "parent": "task",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "task_record_link",
+          [
+            "user_id",
+            "task_id"
+          ],
+          "task",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "task_record_link",
+        "columns": [
+          "user_id",
+          "record_id"
+        ],
+        "parent": "health_record",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "task_record_link",
+          [
+            "user_id",
+            "record_id"
+          ],
+          "health_record",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      }
+    ]
+  },
+  "ai_conversation": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "row_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "deleted_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "conversation_key",
+        "type": "CHAR(36) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "title_cipher",
+        "type": "VARBINARY(2048)",
+        "nullable": true
+      },
+      {
+        "name": "encryption_key_ref",
+        "type": "VARCHAR(128) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(12)",
+        "nullable": false
+      },
+      {
+        "name": "context_policy",
+        "type": "VARCHAR(24)",
+        "nullable": false
+      },
+      {
+        "name": "last_message_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "last_message_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "message_count",
+        "type": "INT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "pinned_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "retention_until",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "scene",
+        "type": "VARCHAR(12)",
+        "nullable": false
+      }
+    ],
+    "foreign": [
+      {
+        "table": "ai_conversation",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "ai_conversation",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "ai_conversation",
+        "columns": [
+          "user_id",
+          "id",
+          "last_message_id"
+        ],
+        "parent": "ai_message",
+        "parent_columns": [
+          "user_id",
+          "conversation_id",
+          "id"
+        ],
+        "signature": [
+          "ai_conversation",
+          [
+            "user_id",
+            "id",
+            "last_message_id"
+          ],
+          "ai_message",
+          [
+            "user_id",
+            "conversation_id",
+            "id"
+          ]
+        ]
+      }
+    ]
+  },
+  "ai_message": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "conversation_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "client_message_id",
+        "type": "CHAR(36) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "role",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      },
+      {
+        "name": "message_type",
+        "type": "VARCHAR(24)",
+        "nullable": false
+      },
+      {
+        "name": "content_cipher",
+        "type": "MEDIUMBLOB",
+        "nullable": true
+      },
+      {
+        "name": "encryption_key_ref",
+        "type": "VARCHAR(128) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      },
+      {
+        "name": "delivery_status",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      },
+      {
+        "name": "reply_to_message_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "ai_run_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "draft_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "finish_reason",
+        "type": "VARCHAR(32)",
+        "nullable": true
+      },
+      {
+        "name": "content_digest",
+        "type": "BINARY(32)",
+        "nullable": true
+      }
+    ],
+    "foreign": [
+      {
+        "table": "ai_message",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "ai_message",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "ai_message",
+        "columns": [
+          "user_id",
+          "conversation_id"
+        ],
+        "parent": "ai_conversation",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "ai_message",
+          [
+            "user_id",
+            "conversation_id"
+          ],
+          "ai_conversation",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "ai_message",
+        "columns": [
+          "user_id",
+          "conversation_id",
+          "reply_to_message_id"
+        ],
+        "parent": "ai_message",
+        "parent_columns": [
+          "user_id",
+          "conversation_id",
+          "id"
+        ],
+        "signature": [
+          "ai_message",
+          [
+            "user_id",
+            "conversation_id",
+            "reply_to_message_id"
+          ],
+          "ai_message",
+          [
+            "user_id",
+            "conversation_id",
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "ai_message",
+        "columns": [
+          "user_id",
+          "ai_run_id"
+        ],
+        "parent": "ai_run",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "ai_message",
+          [
+            "user_id",
+            "ai_run_id"
+          ],
+          "ai_run",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "ai_message",
+        "columns": [
+          "user_id",
+          "draft_id"
+        ],
+        "parent": "ai_draft",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "ai_message",
+          [
+            "user_id",
+            "draft_id"
+          ],
+          "ai_draft",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      }
+    ]
+  },
+  "ai_run": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "row_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "deleted_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "run_key",
+        "type": "CHAR(36) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "kind",
+        "type": "VARCHAR(24)",
+        "nullable": false
+      },
+      {
+        "name": "conversation_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "input_message_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(20)",
+        "nullable": false
+      },
+      {
+        "name": "provider_code",
+        "type": "VARCHAR(40) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "model_name",
+        "type": "VARCHAR(100) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "prompt_template_version",
+        "type": "VARCHAR(40) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "input_snapshot_cipher",
+        "type": "MEDIUMBLOB",
+        "nullable": true
+      },
+      {
+        "name": "encryption_key_ref",
+        "type": "VARCHAR(128) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      },
+      {
+        "name": "captured_dataset_epoch",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "captured_consent_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "attempt_count",
+        "type": "TINYINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "started_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "finished_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "timeout_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "input_tokens",
+        "type": "INT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "output_tokens",
+        "type": "INT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "error_code",
+        "type": "VARCHAR(48) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      },
+      {
+        "name": "provider_request_id",
+        "type": "VARCHAR(128) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      }
+    ],
+    "foreign": [
+      {
+        "table": "ai_run",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "ai_run",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "ai_run",
+        "columns": [
+          "user_id",
+          "conversation_id"
+        ],
+        "parent": "ai_conversation",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "ai_run",
+          [
+            "user_id",
+            "conversation_id"
+          ],
+          "ai_conversation",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "ai_run",
+        "columns": [
+          "user_id",
+          "input_message_id"
+        ],
+        "parent": "ai_message",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "ai_run",
+          [
+            "user_id",
+            "input_message_id"
+          ],
+          "ai_message",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      }
+    ]
+  },
+  "ai_draft": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "row_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "deleted_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "draft_key",
+        "type": "CHAR(36) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "kind",
+        "type": "VARCHAR(20)",
+        "nullable": false
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      },
+      {
+        "name": "source_run_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "conversation_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "current_revision_no",
+        "type": "INT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "validated_revision_no",
+        "type": "INT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "base_plan_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "base_plan_version_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "captured_dataset_epoch",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "expires_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "applied_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "applied_resource_type",
+        "type": "VARCHAR(24)",
+        "nullable": true
+      },
+      {
+        "name": "applied_resource_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "applied_operation_id",
+        "type": "CHAR(36) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      }
+    ],
+    "foreign": [
+      {
+        "table": "ai_draft",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "ai_draft",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "ai_draft",
+        "columns": [
+          "user_id",
+          "source_run_id"
+        ],
+        "parent": "ai_run",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "ai_draft",
+          [
+            "user_id",
+            "source_run_id"
+          ],
+          "ai_run",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "ai_draft",
+        "columns": [
+          "user_id",
+          "conversation_id"
+        ],
+        "parent": "ai_conversation",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "ai_draft",
+          [
+            "user_id",
+            "conversation_id"
+          ],
+          "ai_conversation",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "ai_draft",
+        "columns": [
+          "user_id",
+          "base_plan_id"
+        ],
+        "parent": "plan",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "ai_draft",
+          [
+            "user_id",
+            "base_plan_id"
+          ],
+          "plan",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "ai_draft",
+        "columns": [
+          "user_id",
+          "base_plan_id",
+          "base_plan_version_id"
+        ],
+        "parent": "plan_version",
+        "parent_columns": [
+          "user_id",
+          "plan_id",
+          "id"
+        ],
+        "signature": [
+          "ai_draft",
+          [
+            "user_id",
+            "base_plan_id",
+            "base_plan_version_id"
+          ],
+          "plan_version",
+          [
+            "user_id",
+            "plan_id",
+            "id"
+          ]
+        ]
+      }
+    ]
+  },
+  "ai_draft_revision": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "draft_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "revision_no",
+        "type": "INT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "source_revision",
+        "type": "INT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "edit_source",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      },
+      {
+        "name": "payload_schema_version",
+        "type": "SMALLINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "payload_json",
+        "type": "JSON",
+        "nullable": false
+      },
+      {
+        "name": "base_snapshot_json",
+        "type": "JSON",
+        "nullable": false
+      },
+      {
+        "name": "validation_status",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      },
+      {
+        "name": "validation_report_json",
+        "type": "JSON",
+        "nullable": false
+      },
+      {
+        "name": "validated_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "payload_digest",
+        "type": "BINARY(32)",
+        "nullable": false
+      }
+    ],
+    "foreign": [
+      {
+        "table": "ai_draft_revision",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "ai_draft_revision",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "ai_draft_revision",
+        "columns": [
+          "user_id",
+          "draft_id"
+        ],
+        "parent": "ai_draft",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "ai_draft_revision",
+          [
+            "user_id",
+            "draft_id"
+          ],
+          "ai_draft",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      }
+    ]
+  },
+  "ai_message_citation": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "message_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "citation_no",
+        "type": "SMALLINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "article_version_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "knowledge_source_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "section_anchor",
+        "type": "VARCHAR(120) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      },
+      {
+        "name": "claim_excerpt_cipher",
+        "type": "VARBINARY(4096)",
+        "nullable": true
+      },
+      {
+        "name": "encryption_key_ref",
+        "type": "VARCHAR(128) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      },
+      {
+        "name": "retrieved_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "retrieval_method",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      }
+    ],
+    "foreign": [
+      {
+        "table": "ai_message_citation",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "ai_message_citation",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "ai_message_citation",
+        "columns": [
+          "user_id",
+          "message_id"
+        ],
+        "parent": "ai_message",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "ai_message_citation",
+          [
+            "user_id",
+            "message_id"
+          ],
+          "ai_message",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "ai_message_citation",
+        "columns": [
+          "article_version_id",
+          "knowledge_source_id"
+        ],
+        "parent": "knowledge_version_source",
+        "parent_columns": [
+          "article_version_id",
+          "knowledge_source_id"
+        ],
+        "signature": [
+          "ai_message_citation",
+          [
+            "article_version_id",
+            "knowledge_source_id"
+          ],
+          "knowledge_version_source",
+          [
+            "article_version_id",
+            "knowledge_source_id"
+          ]
+        ]
+      }
+    ]
+  },
+  "knowledge_article": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "row_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "deleted_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "article_code",
+        "type": "VARCHAR(64) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "slug",
+        "type": "VARCHAR(120) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "category",
+        "type": "VARCHAR(24)",
+        "nullable": false
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(12)",
+        "nullable": false
+      },
+      {
+        "name": "active_version_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "latest_version_no",
+        "type": "INT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "search_title",
+        "type": "VARCHAR(150)",
+        "nullable": false
+      },
+      {
+        "name": "search_keywords",
+        "type": "VARCHAR(500)",
+        "nullable": false
+      },
+      {
+        "name": "tag_codes_json",
+        "type": "JSON",
+        "nullable": false
+      },
+      {
+        "name": "sort_order",
+        "type": "INT",
+        "nullable": false
+      },
+      {
+        "name": "retired_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      }
+    ],
+    "foreign": [
+      {
+        "table": "knowledge_article",
+        "columns": [
+          "id",
+          "active_version_id"
+        ],
+        "parent": "knowledge_article_version",
+        "parent_columns": [
+          "article_id",
+          "id"
+        ],
+        "signature": [
+          "knowledge_article",
+          [
+            "id",
+            "active_version_id"
+          ],
+          "knowledge_article_version",
+          [
+            "article_id",
+            "id"
+          ]
+        ]
+      }
+    ]
+  },
+  "knowledge_article_version": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "row_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "deleted_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "article_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "version_no",
+        "type": "INT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      },
+      {
+        "name": "title",
+        "type": "VARCHAR(150)",
+        "nullable": false
+      },
+      {
+        "name": "summary",
+        "type": "VARCHAR(1000)",
+        "nullable": false
+      },
+      {
+        "name": "body_markdown",
+        "type": "MEDIUMTEXT",
+        "nullable": false
+      },
+      {
+        "name": "applicable_population",
+        "type": "VARCHAR(500)",
+        "nullable": false
+      },
+      {
+        "name": "limitations",
+        "type": "TEXT",
+        "nullable": false
+      },
+      {
+        "name": "source_checked_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "review_due_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "author_user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "reviewer_user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "review_comment",
+        "type": "VARCHAR(1000)",
+        "nullable": true
+      },
+      {
+        "name": "published_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "content_digest",
+        "type": "BINARY(32)",
+        "nullable": false
+      },
+      {
+        "name": "tags_json",
+        "type": "JSON",
+        "nullable": false
+      },
+      {
+        "name": "content_date",
+        "type": "DATE",
+        "nullable": true
+      },
+      {
+        "name": "rights_note",
+        "type": "VARCHAR(2000)",
+        "nullable": false
+      },
+      {
+        "name": "review_decision",
+        "type": "VARCHAR(16)",
+        "nullable": true
+      }
+    ],
+    "foreign": [
+      {
+        "table": "knowledge_article_version",
+        "columns": [
+          "article_id"
+        ],
+        "parent": "knowledge_article",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "knowledge_article_version",
+          [
+            "article_id"
+          ],
+          "knowledge_article",
+          [
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "knowledge_article_version",
+        "columns": [
+          "author_user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "knowledge_article_version",
+          [
+            "author_user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "knowledge_article_version",
+        "columns": [
+          "reviewer_user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "knowledge_article_version",
+          [
+            "reviewer_user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      }
+    ]
+  },
+  "knowledge_source": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "row_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "deleted_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "source_code",
+        "type": "VARCHAR(64) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "title",
+        "type": "VARCHAR(300)",
+        "nullable": false
+      },
+      {
+        "name": "publisher",
+        "type": "VARCHAR(200)",
+        "nullable": false
+      },
+      {
+        "name": "canonical_url",
+        "type": "VARCHAR(2048)",
+        "nullable": false
+      },
+      {
+        "name": "url_hash",
+        "type": "BINARY(32)",
+        "nullable": false
+      },
+      {
+        "name": "source_kind",
+        "type": "VARCHAR(24)",
+        "nullable": false
+      },
+      {
+        "name": "published_date",
+        "type": "DATE",
+        "nullable": true
+      },
+      {
+        "name": "accessed_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "verification_status",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      },
+      {
+        "name": "usage_basis",
+        "type": "VARCHAR(24)",
+        "nullable": false
+      },
+      {
+        "name": "license_note",
+        "type": "VARCHAR(1000)",
+        "nullable": true
+      },
+      {
+        "name": "source_language",
+        "type": "VARCHAR(16) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "content_fingerprint",
+        "type": "BINARY(32)",
+        "nullable": true
+      },
+      {
+        "name": "last_check_error",
+        "type": "VARCHAR(200)",
+        "nullable": true
+      },
+      {
+        "name": "verification_note",
+        "type": "VARCHAR(1000)",
+        "nullable": true
+      }
+    ],
+    "foreign": []
+  },
+  "knowledge_version_source": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "article_version_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "knowledge_source_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "reference_no",
+        "type": "SMALLINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "support_scope",
+        "type": "VARCHAR(500)",
+        "nullable": false
+      },
+      {
+        "name": "source_locator",
+        "type": "VARCHAR(300)",
+        "nullable": true
+      },
+      {
+        "name": "checked_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      }
+    ],
+    "foreign": [
+      {
+        "table": "knowledge_version_source",
+        "columns": [
+          "article_version_id"
+        ],
+        "parent": "knowledge_article_version",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "knowledge_version_source",
+          [
+            "article_version_id"
+          ],
+          "knowledge_article_version",
+          [
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "knowledge_version_source",
+        "columns": [
+          "knowledge_source_id"
+        ],
+        "parent": "knowledge_source",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "knowledge_version_source",
+          [
+            "knowledge_source_id"
+          ],
+          "knowledge_source",
+          [
+            "id"
+          ]
+        ]
+      }
+    ]
+  },
+  "daily_stat": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "row_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "deleted_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "stat_local_date",
+        "type": "DATE",
+        "nullable": false
+      },
+      {
+        "name": "stat_time_zone",
+        "type": "VARCHAR(64) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "metric_version",
+        "type": "VARCHAR(32) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "data_as_of_seq",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "dataset_epoch",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(12)",
+        "nullable": false
+      },
+      {
+        "name": "computed_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "valid_record_count",
+        "type": "INT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "coverage_json",
+        "type": "JSON",
+        "nullable": false
+      },
+      {
+        "name": "main_sleep_elapsed_minutes",
+        "type": "SMALLINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "nap_elapsed_minutes",
+        "type": "SMALLINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "actual_activity_minutes",
+        "type": "INT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "meal_record_count",
+        "type": "SMALLINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "energy_sample_count",
+        "type": "SMALLINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "energy_level_sum",
+        "type": "INT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "task_denominator",
+        "type": "SMALLINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "task_completed_count",
+        "type": "SMALLINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "task_skipped_count",
+        "type": "SMALLINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "quality_flags_json",
+        "type": "JSON",
+        "nullable": false
+      },
+      {
+        "name": "source_time_zones_json",
+        "type": "JSON",
+        "nullable": false
+      }
+    ],
+    "foreign": [
+      {
+        "table": "daily_stat",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "daily_stat",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      }
+    ]
+  },
+  "weekly_review": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "row_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "deleted_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "week_start_date",
+        "type": "DATE",
+        "nullable": false
+      },
+      {
+        "name": "week_end_date",
+        "type": "DATE",
+        "nullable": false
+      },
+      {
+        "name": "review_time_zone",
+        "type": "VARCHAR(64) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "revision_no",
+        "type": "INT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      },
+      {
+        "name": "metric_version",
+        "type": "VARCHAR(32) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "data_as_of_seq",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "dataset_epoch",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "coverage_json",
+        "type": "JSON",
+        "nullable": false
+      },
+      {
+        "name": "summary_cipher",
+        "type": "MEDIUMBLOB",
+        "nullable": true
+      },
+      {
+        "name": "encryption_key_ref",
+        "type": "VARCHAR(128) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      },
+      {
+        "name": "suggestions_json",
+        "type": "JSON",
+        "nullable": true
+      },
+      {
+        "name": "ai_run_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "generated_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      }
+    ],
+    "foreign": [
+      {
+        "table": "weekly_review",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "weekly_review",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "weekly_review",
+        "columns": [
+          "user_id",
+          "ai_run_id"
+        ],
+        "parent": "ai_run",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "weekly_review",
+          [
+            "user_id",
+            "ai_run_id"
+          ],
+          "ai_run",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      }
+    ]
+  },
+  "weekly_review_evidence": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "review_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "claim_key",
+        "type": "VARCHAR(80) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "evidence_type",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      },
+      {
+        "name": "daily_stat_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "record_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "task_event_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "evidence_row_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "evidence_as_of_seq",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "value_snapshot_json",
+        "type": "JSON",
+        "nullable": false
+      }
+    ],
+    "foreign": [
+      {
+        "table": "weekly_review_evidence",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "weekly_review_evidence",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "weekly_review_evidence",
+        "columns": [
+          "user_id",
+          "review_id"
+        ],
+        "parent": "weekly_review",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "weekly_review_evidence",
+          [
+            "user_id",
+            "review_id"
+          ],
+          "weekly_review",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "weekly_review_evidence",
+        "columns": [
+          "user_id",
+          "daily_stat_id"
+        ],
+        "parent": "daily_stat",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "weekly_review_evidence",
+          [
+            "user_id",
+            "daily_stat_id"
+          ],
+          "daily_stat",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "weekly_review_evidence",
+        "columns": [
+          "user_id",
+          "record_id"
+        ],
+        "parent": "health_record",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "weekly_review_evidence",
+          [
+            "user_id",
+            "record_id"
+          ],
+          "health_record",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "weekly_review_evidence",
+        "columns": [
+          "user_id",
+          "task_event_id"
+        ],
+        "parent": "task_event",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "weekly_review_evidence",
+          [
+            "user_id",
+            "task_event_id"
+          ],
+          "task_event",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      }
+    ]
+  },
+  "reminder_rule": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "row_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "deleted_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "rule_key",
+        "type": "CHAR(36) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "task_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "rule_type",
+        "type": "VARCHAR(20)",
+        "nullable": false
+      },
+      {
+        "name": "channel",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      },
+      {
+        "name": "target_installation_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "trigger_kind",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      },
+      {
+        "name": "offset_minutes",
+        "type": "SMALLINT",
+        "nullable": true
+      },
+      {
+        "name": "local_fire_time",
+        "type": "TIME",
+        "nullable": true
+      },
+      {
+        "name": "time_zone",
+        "type": "VARCHAR(64) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "is_enabled",
+        "type": "TINYINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "respect_quiet_hours",
+        "type": "TINYINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "quiet_policy",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      },
+      {
+        "name": "valid_from",
+        "type": "DATE",
+        "nullable": false
+      },
+      {
+        "name": "valid_until",
+        "type": "DATE",
+        "nullable": true
+      }
+    ],
+    "foreign": [
+      {
+        "table": "reminder_rule",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "reminder_rule",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "reminder_rule",
+        "columns": [
+          "user_id",
+          "task_id"
+        ],
+        "parent": "task",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "reminder_rule",
+          [
+            "user_id",
+            "task_id"
+          ],
+          "task",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "reminder_rule",
+        "columns": [
+          "user_id",
+          "target_installation_id"
+        ],
+        "parent": "client_installation",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "reminder_rule",
+          [
+            "user_id",
+            "target_installation_id"
+          ],
+          "client_installation",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      }
+    ]
+  },
+  "reminder_delivery": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "row_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "deleted_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "rule_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "task_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "task_row_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "installation_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "channel",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      },
+      {
+        "name": "fire_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "dedup_key",
+        "type": "BINARY(32)",
+        "nullable": false
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(20)",
+        "nullable": false
+      },
+      {
+        "name": "system_handle_cipher",
+        "type": "VARBINARY(2048)",
+        "nullable": true
+      },
+      {
+        "name": "encryption_key_ref",
+        "type": "VARCHAR(128) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      },
+      {
+        "name": "registered_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "delivered_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "cancelled_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "attempt_count",
+        "type": "TINYINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "last_error_code",
+        "type": "VARCHAR(48) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      },
+      {
+        "name": "expires_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "captured_dataset_epoch",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "captured_consent_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "rule_row_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      }
+    ],
+    "foreign": [
+      {
+        "table": "reminder_delivery",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "reminder_delivery",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "reminder_delivery",
+        "columns": [
+          "user_id",
+          "rule_id"
+        ],
+        "parent": "reminder_rule",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "reminder_delivery",
+          [
+            "user_id",
+            "rule_id"
+          ],
+          "reminder_rule",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "reminder_delivery",
+        "columns": [
+          "user_id",
+          "task_id"
+        ],
+        "parent": "task",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "reminder_delivery",
+          [
+            "user_id",
+            "task_id"
+          ],
+          "task",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "reminder_delivery",
+        "columns": [
+          "user_id",
+          "installation_id"
+        ],
+        "parent": "client_installation",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "reminder_delivery",
+          [
+            "user_id",
+            "installation_id"
+          ],
+          "client_installation",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      }
+    ]
+  },
+  "notification_inbox": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "row_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "deleted_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "notification_key",
+        "type": "CHAR(36) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "category",
+        "type": "VARCHAR(24)",
+        "nullable": false
+      },
+      {
+        "name": "title",
+        "type": "VARCHAR(100)",
+        "nullable": false
+      },
+      {
+        "name": "body_cipher",
+        "type": "VARBINARY(8192)",
+        "nullable": true
+      },
+      {
+        "name": "encryption_key_ref",
+        "type": "VARCHAR(128) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      },
+      {
+        "name": "target_type",
+        "type": "VARCHAR(24)",
+        "nullable": true
+      },
+      {
+        "name": "target_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "priority",
+        "type": "VARCHAR(12)",
+        "nullable": false
+      },
+      {
+        "name": "read_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "expires_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "dedup_key",
+        "type": "VARCHAR(190) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      }
+    ],
+    "foreign": [
+      {
+        "table": "notification_inbox",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "notification_inbox",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      }
+    ]
+  },
+  "outbox_event": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "row_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "deleted_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "event_key",
+        "type": "CHAR(36) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "event_type",
+        "type": "VARCHAR(48) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "aggregate_type",
+        "type": "VARCHAR(32) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "aggregate_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "aggregate_row_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "payload_schema_version",
+        "type": "SMALLINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "payload_json",
+        "type": "JSON",
+        "nullable": false
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      },
+      {
+        "name": "available_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "attempt_count",
+        "type": "SMALLINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "lease_owner",
+        "type": "VARCHAR(100) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      },
+      {
+        "name": "lease_until",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "processed_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "last_error_code",
+        "type": "VARCHAR(64) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      },
+      {
+        "name": "captured_dataset_epoch",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "captured_consent_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "consent_purpose",
+        "type": "VARCHAR(32) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      },
+      {
+        "name": "authorization_revision",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      }
+    ],
+    "foreign": [
+      {
+        "table": "outbox_event",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "outbox_event",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      }
+    ]
+  },
+  "file_object": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "row_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "deleted_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "file_key",
+        "type": "CHAR(36) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "purpose",
+        "type": "VARCHAR(24)",
+        "nullable": false
+      },
+      {
+        "name": "storage_provider",
+        "type": "VARCHAR(24) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "bucket_code",
+        "type": "VARCHAR(80) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "object_key",
+        "type": "VARCHAR(500) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "original_name_cipher",
+        "type": "VARBINARY(2048)",
+        "nullable": true
+      },
+      {
+        "name": "mime_type",
+        "type": "VARCHAR(100) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      },
+      {
+        "name": "byte_size",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "sha256",
+        "type": "BINARY(32)",
+        "nullable": true
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      },
+      {
+        "name": "encryption_key_ref",
+        "type": "VARCHAR(128) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "upload_expires_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "completed_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "retention_until",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "restricted_hold_until",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "deleted_from_storage_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "upload_token_hash",
+        "type": "BINARY(32)",
+        "nullable": true
+      },
+      {
+        "name": "upload_token_consumed_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "expected_byte_size",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "expected_sha256",
+        "type": "BINARY(32)",
+        "nullable": false
+      },
+      {
+        "name": "declared_mime_type",
+        "type": "VARCHAR(100) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      }
+    ],
+    "foreign": [
+      {
+        "table": "file_object",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "file_object",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      }
+    ]
+  },
+  "privacy_request": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "row_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "deleted_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "request_key",
+        "type": "CHAR(36) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "request_type",
+        "type": "VARCHAR(24)",
+        "nullable": false
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(20)",
+        "nullable": false
+      },
+      {
+        "name": "scope_filter_json",
+        "type": "JSON",
+        "nullable": false
+      },
+      {
+        "name": "scope_manifest_file_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "scope_digest",
+        "type": "BINARY(32)",
+        "nullable": false
+      },
+      {
+        "name": "scope_summary_json",
+        "type": "JSON",
+        "nullable": false
+      },
+      {
+        "name": "captured_dataset_epoch",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "preview_data_seq",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "preview_expires_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "confirmed_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "confirmation_operation_id",
+        "type": "CHAR(36) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      },
+      {
+        "name": "started_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "completed_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "progress_json",
+        "type": "JSON",
+        "nullable": false
+      },
+      {
+        "name": "result_file_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "receipt_token_hash",
+        "type": "BINARY(32)",
+        "nullable": true
+      },
+      {
+        "name": "receipt_expires_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "error_code",
+        "type": "VARCHAR(48) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      }
+    ],
+    "foreign": [
+      {
+        "table": "privacy_request",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "privacy_request",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "privacy_request",
+        "columns": [
+          "user_id",
+          "scope_manifest_file_id"
+        ],
+        "parent": "file_object",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "privacy_request",
+          [
+            "user_id",
+            "scope_manifest_file_id"
+          ],
+          "file_object",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "privacy_request",
+        "columns": [
+          "user_id",
+          "result_file_id"
+        ],
+        "parent": "file_object",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "privacy_request",
+          [
+            "user_id",
+            "result_file_id"
+          ],
+          "file_object",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      }
+    ]
+  },
+  "audit_log": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "actor_user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "subject_user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "actor_type",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      },
+      {
+        "name": "action_code",
+        "type": "VARCHAR(64) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "resource_type",
+        "type": "VARCHAR(32) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "resource_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "request_id",
+        "type": "CHAR(36) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "operation_id",
+        "type": "CHAR(36) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      },
+      {
+        "name": "outcome",
+        "type": "VARCHAR(12)",
+        "nullable": false
+      },
+      {
+        "name": "reason_code",
+        "type": "VARCHAR(64) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      },
+      {
+        "name": "metadata_json",
+        "type": "JSON",
+        "nullable": false
+      },
+      {
+        "name": "ip_hash",
+        "type": "BINARY(32)",
+        "nullable": true
+      },
+      {
+        "name": "retention_until",
+        "type": "DATETIME(3)",
+        "nullable": false
+      }
+    ],
+    "foreign": []
+  },
+  "feedback_ticket": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "row_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "deleted_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "ticket_no",
+        "type": "CHAR(26) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "category",
+        "type": "VARCHAR(20)",
+        "nullable": false
+      },
+      {
+        "name": "subject",
+        "type": "VARCHAR(120)",
+        "nullable": false
+      },
+      {
+        "name": "description_cipher",
+        "type": "MEDIUMBLOB",
+        "nullable": false
+      },
+      {
+        "name": "encryption_key_ref",
+        "type": "VARCHAR(128) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      },
+      {
+        "name": "installation_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "diagnostic_reference",
+        "type": "VARCHAR(100) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      },
+      {
+        "name": "assigned_to_user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "resolution_cipher",
+        "type": "MEDIUMBLOB",
+        "nullable": true
+      },
+      {
+        "name": "resolved_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "closed_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "attachment_file_ids_json",
+        "type": "JSON",
+        "nullable": false
+      },
+      {
+        "name": "contact_cipher",
+        "type": "VARBINARY(2048)",
+        "nullable": true
+      },
+      {
+        "name": "diagnostics_json",
+        "type": "JSON",
+        "nullable": true
+      },
+      {
+        "name": "replied_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "internal_note_cipher",
+        "type": "VARBINARY(8192)",
+        "nullable": true
+      }
+    ],
+    "foreign": [
+      {
+        "table": "feedback_ticket",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "feedback_ticket",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "feedback_ticket",
+        "columns": [
+          "user_id",
+          "installation_id"
+        ],
+        "parent": "client_installation",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "feedback_ticket",
+          [
+            "user_id",
+            "installation_id"
+          ],
+          "client_installation",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "feedback_ticket",
+        "columns": [
+          "assigned_to_user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "feedback_ticket",
+          [
+            "assigned_to_user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      }
+    ]
+  },
+  "app_configuration": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "row_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "deleted_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "config_key",
+        "type": "VARCHAR(100) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "environment",
+        "type": "VARCHAR(16) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "scope",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      },
+      {
+        "name": "value_type",
+        "type": "VARCHAR(12)",
+        "nullable": false
+      },
+      {
+        "name": "value_json",
+        "type": "JSON",
+        "nullable": false
+      },
+      {
+        "name": "schema_json",
+        "type": "JSON",
+        "nullable": false
+      },
+      {
+        "name": "description",
+        "type": "VARCHAR(500)",
+        "nullable": false
+      },
+      {
+        "name": "effective_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "changed_by_user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "change_reason",
+        "type": "VARCHAR(500)",
+        "nullable": false
+      },
+      {
+        "name": "is_enabled",
+        "type": "TINYINT UNSIGNED",
+        "nullable": false
+      }
+    ],
+    "foreign": [
+      {
+        "table": "app_configuration",
+        "columns": [
+          "changed_by_user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "app_configuration",
+          [
+            "changed_by_user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      }
+    ]
+  },
+  "user_sync_clock": {
+    "columns": [
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "committed_seq",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "retained_from_seq",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "dataset_epoch",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      }
+    ],
+    "foreign": [
+      {
+        "table": "user_sync_clock",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "user_sync_clock",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      }
+    ]
+  },
+  "sync_change": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "change_seq",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "dataset_epoch",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "entity_type",
+        "type": "VARCHAR(32) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "entity_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "entity_row_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "operation",
+        "type": "VARCHAR(8)",
+        "nullable": false
+      },
+      {
+        "name": "changed_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "payload_schema_version",
+        "type": "SMALLINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "payload_json",
+        "type": "JSON",
+        "nullable": false
+      },
+      {
+        "name": "operation_id",
+        "type": "CHAR(36) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      }
+    ],
+    "foreign": [
+      {
+        "table": "sync_change",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "sync_change",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      }
+    ]
+  },
+  "sync_operation": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "client_operation_id",
+        "type": "CHAR(36) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "operation_code",
+        "type": "VARCHAR(64) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "request_hash",
+        "type": "BINARY(32)",
+        "nullable": false
+      },
+      {
+        "name": "dataset_epoch",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      },
+      {
+        "name": "resource_type",
+        "type": "VARCHAR(32) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      },
+      {
+        "name": "resource_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "resource_row_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "last_change_seq",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "result_json",
+        "type": "JSON",
+        "nullable": true
+      },
+      {
+        "name": "completed_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "expires_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "installation_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      }
+    ],
+    "foreign": [
+      {
+        "table": "sync_operation",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "sync_operation",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "sync_operation",
+        "columns": [
+          "user_id",
+          "installation_id"
+        ],
+        "parent": "client_installation",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "sync_operation",
+          [
+            "user_id",
+            "installation_id"
+          ],
+          "client_installation",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      }
+    ]
+  },
+  "device_task_receipt": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "installation_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "task_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "device_operation_id",
+        "type": "CHAR(36) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "action",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      },
+      {
+        "name": "expected_task_row_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "captured_dataset_epoch",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "credential_revision",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "device_occurred_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "server_received_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(16)",
+        "nullable": false
+      },
+      {
+        "name": "rejection_code",
+        "type": "VARCHAR(48) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      },
+      {
+        "name": "applied_operation_id",
+        "type": "CHAR(36) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      },
+      {
+        "name": "result_task_row_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      }
+    ],
+    "foreign": [
+      {
+        "table": "device_task_receipt",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "device_task_receipt",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "device_task_receipt",
+        "columns": [
+          "user_id",
+          "installation_id"
+        ],
+        "parent": "client_installation",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "device_task_receipt",
+          [
+            "user_id",
+            "installation_id"
+          ],
+          "client_installation",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "device_task_receipt",
+        "columns": [
+          "user_id",
+          "task_id"
+        ],
+        "parent": "task",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "device_task_receipt",
+          [
+            "user_id",
+            "task_id"
+          ],
+          "task",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      }
+    ]
+  },
+  "external_data_connection": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "row_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "deleted_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "provider_code",
+        "type": "VARCHAR(32) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "connection_key",
+        "type": "CHAR(36) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "provider_subject_hash",
+        "type": "BINARY(32)",
+        "nullable": true
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(20)",
+        "nullable": false
+      },
+      {
+        "name": "state_hash",
+        "type": "BINARY(32)",
+        "nullable": true
+      },
+      {
+        "name": "authorization_expires_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "scopes_json",
+        "type": "JSON",
+        "nullable": false
+      },
+      {
+        "name": "authorization_revision",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "consent_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "access_token_cipher",
+        "type": "MEDIUMBLOB",
+        "nullable": true
+      },
+      {
+        "name": "refresh_token_cipher",
+        "type": "MEDIUMBLOB",
+        "nullable": true
+      },
+      {
+        "name": "encryption_key_ref",
+        "type": "VARCHAR(128) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      },
+      {
+        "name": "token_expires_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "authorized_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "revoked_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "last_sync_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "provider_cursor_cipher",
+        "type": "MEDIUMBLOB",
+        "nullable": true
+      },
+      {
+        "name": "last_error_code",
+        "type": "VARCHAR(48) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      },
+      {
+        "name": "active_provider",
+        "type": "VARCHAR(32) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      }
+    ],
+    "foreign": [
+      {
+        "table": "external_data_connection",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "external_data_connection",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      }
+    ]
+  },
+  "import_batch": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "row_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "deleted_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "batch_key",
+        "type": "CHAR(36) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "kind",
+        "type": "VARCHAR(24)",
+        "nullable": false
+      },
+      {
+        "name": "source_connection_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "source_file_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(20)",
+        "nullable": false
+      },
+      {
+        "name": "captured_dataset_epoch",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "captured_consent_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "authorization_revision",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "input_cursor_cipher",
+        "type": "MEDIUMBLOB",
+        "nullable": true
+      },
+      {
+        "name": "result_cursor_cipher",
+        "type": "MEDIUMBLOB",
+        "nullable": true
+      },
+      {
+        "name": "encryption_key_ref",
+        "type": "VARCHAR(128) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": true
+      },
+      {
+        "name": "candidate_payload_json",
+        "type": "JSON",
+        "nullable": true
+      },
+      {
+        "name": "total_count",
+        "type": "INT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "imported_count",
+        "type": "INT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "duplicate_count",
+        "type": "INT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "rejected_count",
+        "type": "INT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "started_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "finished_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "error_summary_json",
+        "type": "JSON",
+        "nullable": true
+      }
+    ],
+    "foreign": [
+      {
+        "table": "import_batch",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "import_batch",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "import_batch",
+        "columns": [
+          "user_id",
+          "source_connection_id"
+        ],
+        "parent": "external_data_connection",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "import_batch",
+          [
+            "user_id",
+            "source_connection_id"
+          ],
+          "external_data_connection",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "import_batch",
+        "columns": [
+          "user_id",
+          "source_file_id"
+        ],
+        "parent": "file_object",
+        "parent_columns": [
+          "user_id",
+          "id"
+        ],
+        "signature": [
+          "import_batch",
+          [
+            "user_id",
+            "source_file_id"
+          ],
+          "file_object",
+          [
+            "user_id",
+            "id"
+          ]
+        ]
+      }
+    ]
+  },
+  "sys_role": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "row_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "deleted_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "role_code",
+        "type": "VARCHAR(64) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "name",
+        "type": "VARCHAR(80)",
+        "nullable": false
+      },
+      {
+        "name": "description",
+        "type": "VARCHAR(500)",
+        "nullable": false
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(12)",
+        "nullable": false
+      },
+      {
+        "name": "is_builtin",
+        "type": "TINYINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "sort_order",
+        "type": "INT",
+        "nullable": false
+      },
+      {
+        "name": "permission_revision",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      }
+    ],
+    "foreign": []
+  },
+  "sys_permission": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "row_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "deleted_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "permission_code",
+        "type": "VARCHAR(80) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "name",
+        "type": "VARCHAR(100)",
+        "nullable": false
+      },
+      {
+        "name": "resource_group",
+        "type": "VARCHAR(40) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "action",
+        "type": "VARCHAR(24) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      },
+      {
+        "name": "description",
+        "type": "VARCHAR(500)",
+        "nullable": false
+      },
+      {
+        "name": "is_sensitive",
+        "type": "TINYINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(12)",
+        "nullable": false
+      }
+    ],
+    "foreign": []
+  },
+  "user_role_assignment": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "updated_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "row_version",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "deleted_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "role_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "status",
+        "type": "VARCHAR(12)",
+        "nullable": false
+      },
+      {
+        "name": "valid_from",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "valid_until",
+        "type": "DATETIME(3)",
+        "nullable": true
+      },
+      {
+        "name": "granted_by_user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "grant_reason",
+        "type": "VARCHAR(500)",
+        "nullable": false
+      },
+      {
+        "name": "revoked_by_user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "revoked_at",
+        "type": "DATETIME(3)",
+        "nullable": true
+      }
+    ],
+    "foreign": [
+      {
+        "table": "user_role_assignment",
+        "columns": [
+          "user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "user_role_assignment",
+          [
+            "user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "user_role_assignment",
+        "columns": [
+          "role_id"
+        ],
+        "parent": "sys_role",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "user_role_assignment",
+          [
+            "role_id"
+          ],
+          "sys_role",
+          [
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "user_role_assignment",
+        "columns": [
+          "granted_by_user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "user_role_assignment",
+          [
+            "granted_by_user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "user_role_assignment",
+        "columns": [
+          "revoked_by_user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "user_role_assignment",
+          [
+            "revoked_by_user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      }
+    ]
+  },
+  "role_permission": {
+    "columns": [
+      {
+        "name": "id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "created_at",
+        "type": "DATETIME(3)",
+        "nullable": false
+      },
+      {
+        "name": "role_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "permission_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": false
+      },
+      {
+        "name": "granted_by_user_id",
+        "type": "BIGINT UNSIGNED",
+        "nullable": true
+      },
+      {
+        "name": "operation_id",
+        "type": "CHAR(36) CHARACTER SET ascii COLLATE ascii_bin",
+        "nullable": false
+      }
+    ],
+    "foreign": [
+      {
+        "table": "role_permission",
+        "columns": [
+          "role_id"
+        ],
+        "parent": "sys_role",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "role_permission",
+          [
+            "role_id"
+          ],
+          "sys_role",
+          [
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "role_permission",
+        "columns": [
+          "permission_id"
+        ],
+        "parent": "sys_permission",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "role_permission",
+          [
+            "permission_id"
+          ],
+          "sys_permission",
+          [
+            "id"
+          ]
+        ]
+      },
+      {
+        "table": "role_permission",
+        "columns": [
+          "granted_by_user_id"
+        ],
+        "parent": "app_user",
+        "parent_columns": [
+          "id"
+        ],
+        "signature": [
+          "role_permission",
+          [
+            "granted_by_user_id"
+          ],
+          "app_user",
+          [
+            "id"
+          ]
+        ]
+      }
+    ]
+  }
+}

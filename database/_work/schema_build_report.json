@@ -1,0 +1,12 @@
+{
+  "tables": 60,
+  "business_columns": 830,
+  "physical_columns": 1066,
+  "unique_keys": 128,
+  "indexes": 149,
+  "foreign_keys": 135,
+  "checks": 432,
+  "source_sha256": "e1fbee4a783840561082ee3e1ed88b81c3f2b016825743ae14898abb2f60a7fa",
+  "sql_sha256": "d2ef404f03fc7c0cbef2b9c7c11d1203fd82c677204b7752ac23d8b29f1b3f5c",
+  "initialization_override": "role_permission.granted_by_user_id nullable only for controlled seed"
+}

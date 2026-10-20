@@ -1,0 +1,98 @@
+server:
+  port: ${SERVER_PORT:8080}
+  shutdown: graceful
+  servlet:
+    encoding:
+      charset: UTF-8
+      force: true
+  error:
+    include-message: never
+    include-stacktrace: never
+
+spring:
+  application:
+    name: zhiheng-backend
+  profiles:
+    default: local
+  datasource:
+    url: ${ZH_DB_URL:jdbc:mysql://127.0.0.1:3306/zhiheng?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC&connectionTimeZone=UTC&forceConnectionTimeZoneToSession=true}
+    username: ${ZH_DB_USERNAME:root}
+    password: ${ZH_DB_PASSWORD:123456}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 1
+      connection-init-sql: SET time_zone = '+00:00'
+  sql:
+    init:
+      mode: never
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: true
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 21MB
+  mail:
+    host: ${ZH_MAIL_HOST:}
+    port: ${ZH_MAIL_PORT:587}
+    username: ${ZH_MAIL_USERNAME:}
+    password: ${ZH_MAIL_PASSWORD:}
+    properties:
+      mail.smtp.auth: ${ZH_MAIL_AUTH:true}
+      mail.smtp.starttls.enable: ${ZH_MAIL_STARTTLS:true}
+      mail.smtp.connectiontimeout: 5000
+      mail.smtp.timeout: 5000
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.nologging.NoLoggingImpl
+  global-config:
+    banner: false
+
+zhiheng:
+  environment: ${ZH_ENVIRONMENT:DEV}
+  security:
+    encryption-key: ${ZH_ENCRYPTION_KEY:}
+    hmac-key: ${ZH_HMAC_KEY:}
+    key-file: ${ZH_KEY_FILE:.local/zhiheng.keys}
+    require-external-keys: ${ZH_REQUIRE_EXTERNAL_KEYS:false}
+    jwt-issuer: zhiheng
+  auth:
+    registration-enabled: ${ZH_REGISTRATION_ENABLED:false}
+    local-development-registration: false
+    verification-delivery: ${ZH_VERIFICATION_DELIVERY:SMTP}
+    service-policy-version: ${ZH_SERVICE_POLICY_VERSION:}
+    service-policy-url: ${ZH_SERVICE_POLICY_URL:}
+    consent-policy-version: ${ZH_CONSENT_POLICY_VERSION:}
+    ai-policy-url: ${ZH_AI_POLICY_URL:}
+    notification-policy-url: ${ZH_NOTIFICATION_POLICY_URL:}
+    external-health-policy-url: ${ZH_EXTERNAL_HEALTH_POLICY_URL:}
+    mail-from: ${ZH_MAIL_FROM:}
+  storage:
+    root: ${ZH_STORAGE_ROOT:.local/files}
+    upload-max-bytes: 20971520
+  files:
+    root: ${ZH_STORAGE_ROOT:.local/files}
+    scanner-command: ${ZH_FILE_SCANNER_COMMAND:}
+  public-base-url: ${ZH_PUBLIC_BASE_URL:http://127.0.0.1:8080}
+  privacy:
+    deletion-ledger: ${ZH_DELETION_LEDGER:.local/privacy-ledger.jsonl}
+  ai:
+    enabled: ${ZH_AI_ENABLED:false}
+    base-url: ${ZH_AI_BASE_URL:}
+    api-key: ${ZH_AI_API_KEY:}
+    model: ${ZH_AI_MODEL:}
+    timeout-seconds: 60
+  cors-allowed-origins:
+    - http://localhost:5173
+    - http://127.0.0.1:5173
+  jobs-enabled: ${ZH_JOBS_ENABLED:true}
+
+logging:
+  level:
+    root: INFO
+    com.yqsoft: INFO
+    org.springframework.jdbc: WARN
+    org.mybatis: WARN

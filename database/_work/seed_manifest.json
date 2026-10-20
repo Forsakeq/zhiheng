@@ -1,0 +1,117 @@
+{
+  "goals": [
+    "REGULAR_SLEEP",
+    "DAILY_ACTIVITY",
+    "LIFE_RECORD",
+    "MEAL_RECORD",
+    "CUSTOM"
+  ],
+  "permissions": [
+    "content.read",
+    "content.edit",
+    "content.review",
+    "content.publish",
+    "user.read",
+    "user.security",
+    "rbac.read",
+    "rbac.manage",
+    "config.read",
+    "config.manage",
+    "audit.read",
+    "job.read",
+    "job.retry",
+    "feedback.read",
+    "feedback.manage"
+  ],
+  "roles": [
+    "CONTENT_EDITOR",
+    "CONTENT_REVIEWER",
+    "CONTENT_PUBLISHER",
+    "SUPPORT",
+    "OPERATIONS",
+    "SYSTEM_ADMIN"
+  ],
+  "grants": {
+    "CONTENT_EDITOR": [
+      "content.read",
+      "content.edit"
+    ],
+    "CONTENT_REVIEWER": [
+      "content.read",
+      "content.review"
+    ],
+    "CONTENT_PUBLISHER": [
+      "content.read",
+      "content.publish"
+    ],
+    "SUPPORT": [
+      "feedback.read",
+      "feedback.manage"
+    ],
+    "OPERATIONS": [
+      "job.read",
+      "job.retry",
+      "audit.read"
+    ],
+    "SYSTEM_ADMIN": [
+      "user.read",
+      "user.security",
+      "rbac.read",
+      "rbac.manage",
+      "config.read",
+      "config.manage",
+      "audit.read"
+    ]
+  },
+  "configurationKeys": [
+    "feature.ai_plan",
+    "feature.ai_record",
+    "feature.ai_chat",
+    "feature.weekly_review",
+    "feature.local_reminder",
+    "feature.watch_task",
+    "feature.external_health",
+    "feature.voice",
+    "feature.course_import",
+    "feature.external_identity",
+    "feature.record_attachment",
+    "feature.feedback",
+    "feature.admin_console",
+    "auth.registration_enabled",
+    "privacy.require_reauthentication",
+    "privacy.restore_requires_deletion_ledger",
+    "sync.change_retention_days",
+    "sync.max_offline_days",
+    "sync.bootstrap_lease_minutes",
+    "sync.operation_retention_days",
+    "sync.batch_max_operations",
+    "sync.changes_page_default",
+    "sync.changes_page_max",
+    "record.restore_days",
+    "file.upload_max_bytes",
+    "file.avatar_max_bytes",
+    "file.image_max_bytes",
+    "file.download_url_seconds",
+    "privacy.export_download_url_seconds",
+    "privacy.preview_ttl_minutes",
+    "privacy.receipt_ttl_days",
+    "privacy.export_retention_hours",
+    "ai.max_concurrent_runs_per_user",
+    "ai.provider_timeout_seconds",
+    "auth.access_token_minutes",
+    "auth.refresh_token_days",
+    "auth.session_family_max_days",
+    "auth.verification_ttl_minutes",
+    "auth.verification_resend_seconds",
+    "auth.verification_max_attempts",
+    "auth.verification_hourly_limit"
+  ],
+  "counts": {
+    "goals": 5,
+    "permissions": 15,
+    "roles": 6,
+    "grants": 18,
+    "configurations": 123
+  },
+  "seedOperationId": "c74f7e1b-63bb-4ee4-a586-1d2d72a98160"
+}

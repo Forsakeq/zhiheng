@@ -1,0 +1,40 @@
+{
+  "name": "知衡",
+  "appid": "",
+  "description": "把生活调回自己的节奏",
+  "versionName": "0.1.0",
+  "versionCode": "100",
+  "transformPx": false,
+  "vueVersion": "3",
+  "app-plus": {
+    "usingComponents": true,
+    "nvueStyleCompiler": "uni-app",
+    "compilerVersion": 3,
+    "splashscreen": {
+      "alwaysShowBeforeRender": true,
+      "waiting": true,
+      "autoclose": true,
+      "delay": 0
+    },
+    "statusbar": { "style": "dark", "background": "#F5F7F5" },
+    "safearea": { "background": "#F5F7F5", "bottom": { "offset": "auto" } },
+    "distribute": {
+      "android": {
+        "minSdkVersion": 23,
+        "targetSdkVersion": 35,
+        "permissions": [
+          "<uses-permission android:name=\"android.permission.INTERNET\"/>",
+          "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>"
+        ]
+      },
+      "ios": { "dSYMs": false }
+    }
+  },
+  "h5": {
+    "title": "知衡",
+    "router": { "mode": "hash" },
+    "devServer": { "port": 5173, "https": false }
+  },
+  "app-harmony": { "distribute": {} },
+  "uniStatistics": { "enable": false }
+}

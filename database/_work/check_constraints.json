@@ -1,0 +1,2594 @@
+[
+  {
+    "table": "app_user",
+    "name": "ck_app_user_row_version_positive",
+    "expression": "`row_version` >= 1",
+    "note": "CM乐观版本从1开始。"
+  },
+  {
+    "table": "app_user",
+    "name": "ck_app_user_status_enum",
+    "expression": "CAST(`status` AS BINARY) IN ('ACTIVE','LOCKED','DELETING','DELETED')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "app_user",
+    "name": "ck_app_user_security_version_positive",
+    "expression": "`security_version` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "app_user",
+    "name": "ck_app_user_data_write_fence_enum",
+    "expression": "CAST(`data_write_fence` AS BINARY) IN ('OPEN','ERASING','ACCOUNT_DELETING')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "user_profile",
+    "name": "ck_user_profile_row_version_positive",
+    "expression": "`row_version` >= 1",
+    "note": "CM乐观版本从1开始。"
+  },
+  {
+    "table": "user_profile",
+    "name": "ck_user_profile_onboarding_step_enum",
+    "expression": "CAST(`onboarding_step` AS BINARY) IN ('GOALS','AVAILABILITY','PREFERENCES','COMPLETED')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "user_profile",
+    "name": "ck_user_profile_bio_cipher_key",
+    "expression": "`bio_cipher` IS NULL OR `encryption_key_ref` IS NOT NULL",
+    "note": "非空密文必须有外部密钥引用；不把密钥本体存库。"
+  },
+  {
+    "table": "user_profile",
+    "name": "ck_user_profile_key_has_cipher",
+    "expression": "`encryption_key_ref` IS NULL OR (`bio_cipher` IS NOT NULL)",
+    "note": "该表key_ref只用于列明密文，避免孤立密钥引用。"
+  },
+  {
+    "table": "user_preference",
+    "name": "ck_user_preference_row_version_positive",
+    "expression": "`row_version` >= 1",
+    "note": "CM乐观版本从1开始。"
+  },
+  {
+    "table": "user_preference",
+    "name": "ck_user_preference_preferred_wake_time_time",
+    "expression": "`preferred_wake_time` >= '00:00:00' AND `preferred_wake_time` < '24:00:00' AND MOD(TIME_TO_SEC(`preferred_wake_time`),60)=0",
+    "note": "本地时分精度；拒绝负TIME、24小时以上及非整分钟。"
+  },
+  {
+    "table": "user_preference",
+    "name": "ck_user_preference_preferred_bed_time_time",
+    "expression": "`preferred_bed_time` >= '00:00:00' AND `preferred_bed_time` < '24:00:00' AND MOD(TIME_TO_SEC(`preferred_bed_time`),60)=0",
+    "note": "本地时分精度；拒绝负TIME、24小时以上及非整分钟。"
+  },
+  {
+    "table": "user_preference",
+    "name": "ck_user_preference_plan_tone_enum",
+    "expression": "CAST(`plan_tone` AS BINARY) IN ('NEUTRAL','ENCOURAGING','CONCISE')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "user_preference",
+    "name": "ck_user_preference_theme_mode_enum",
+    "expression": "CAST(`theme_mode` AS BINARY) IN ('SYSTEM','LIGHT','DARK')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "user_preference",
+    "name": "ck_user_preference_reduced_motion_range",
+    "expression": "`reduced_motion` BETWEEN 0 AND 1",
+    "note": "文档或已明确接口范围；NULL可选值保留SQL UNKNOWN语义。"
+  },
+  {
+    "table": "user_preference",
+    "name": "ck_user_preference_quiet_hours_enabled_range",
+    "expression": "`quiet_hours_enabled` BETWEEN 0 AND 1",
+    "note": "文档或已明确接口范围；NULL可选值保留SQL UNKNOWN语义。"
+  },
+  {
+    "table": "user_preference",
+    "name": "ck_user_preference_quiet_start_time",
+    "expression": "`quiet_start` >= '00:00:00' AND `quiet_start` < '24:00:00' AND MOD(TIME_TO_SEC(`quiet_start`),60)=0",
+    "note": "本地时分精度；拒绝负TIME、24小时以上及非整分钟。"
+  },
+  {
+    "table": "user_preference",
+    "name": "ck_user_preference_quiet_end_time",
+    "expression": "`quiet_end` >= '00:00:00' AND `quiet_end` < '24:00:00' AND MOD(TIME_TO_SEC(`quiet_end`),60)=0",
+    "note": "本地时分精度；拒绝负TIME、24小时以上及非整分钟。"
+  },
+  {
+    "table": "user_preference",
+    "name": "ck_user_preference_preference_schema_version_positive",
+    "expression": "`preference_schema_version` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "auth_identity",
+    "name": "ck_auth_identity_row_version_positive",
+    "expression": "`row_version` >= 1",
+    "note": "CM乐观版本从1开始。"
+  },
+  {
+    "table": "auth_identity",
+    "name": "ck_auth_identity_binding_status_enum",
+    "expression": "CAST(`binding_status` AS BINARY) IN ('ACTIVE','REVOKED')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "auth_identity",
+    "name": "ck_auth_identity_authorization_revision_positive",
+    "expression": "`authorization_revision` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "auth_identity",
+    "name": "ck_auth_identity_subject_cipher_key",
+    "expression": "`subject_cipher` IS NULL OR `encryption_key_ref` IS NOT NULL",
+    "note": "非空密文必须有外部密钥引用；不把密钥本体存库。"
+  },
+  {
+    "table": "auth_identity",
+    "name": "ck_auth_identity_key_has_cipher",
+    "expression": "`encryption_key_ref` IS NULL OR (`subject_cipher` IS NOT NULL)",
+    "note": "该表key_ref只用于列明密文，避免孤立密钥引用。"
+  },
+  {
+    "table": "auth_session",
+    "name": "ck_auth_session_security_version_positive",
+    "expression": "`security_version` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "auth_session",
+    "name": "ck_auth_session_client_audience_enum",
+    "expression": "CAST(`client_audience` AS BINARY) IN ('MOBILE','ADMIN')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "auth_session",
+    "name": "ck_auth_session_generation_positive",
+    "expression": "`generation` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "auth_verification",
+    "name": "ck_auth_verification_purpose_enum",
+    "expression": "CAST(`purpose` AS BINARY) IN ('REGISTER','RESET_PASSWORD','REAUTH','CONTACT_CHANGE')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "auth_verification",
+    "name": "ck_auth_verification_channel_enum",
+    "expression": "CAST(`channel` AS BINARY) IN ('EMAIL')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "auth_verification",
+    "name": "ck_auth_verification_client_audience_enum",
+    "expression": "CAST(`client_audience` AS BINARY) IN ('MOBILE','ADMIN')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "auth_verification",
+    "name": "ck_auth_verification_destination_cipher_key",
+    "expression": "`destination_cipher` IS NULL OR `encryption_key_ref` IS NOT NULL",
+    "note": "非空密文必须有外部密钥引用；不把密钥本体存库。"
+  },
+  {
+    "table": "auth_verification",
+    "name": "ck_auth_verification_key_has_cipher",
+    "expression": "`encryption_key_ref` IS NULL OR (`destination_cipher` IS NOT NULL)",
+    "note": "该表key_ref只用于列明密文，避免孤立密钥引用。"
+  },
+  {
+    "table": "client_installation",
+    "name": "ck_client_installation_row_version_positive",
+    "expression": "`row_version` >= 1",
+    "note": "CM乐观版本从1开始。"
+  },
+  {
+    "table": "client_installation",
+    "name": "ck_client_installation_platform_enum",
+    "expression": "CAST(`platform` AS BINARY) IN ('ANDROID','HARMONYOS','IOS','WEB')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "client_installation",
+    "name": "ck_client_installation_bootstrap_epoch_positive",
+    "expression": "`bootstrap_epoch` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "client_installation",
+    "name": "ck_client_installation_notification_permission_enum",
+    "expression": "CAST(`notification_permission` AS BINARY) IN ('UNKNOWN','GRANTED','DENIED')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "client_installation",
+    "name": "ck_client_installation_installation_kind_enum",
+    "expression": "CAST(`installation_kind` AS BINARY) IN ('PHONE','WATCH','WEB')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "client_installation",
+    "name": "ck_client_installation_credential_revision_positive",
+    "expression": "`credential_revision` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "client_installation",
+    "name": "ck_client_installation_sync_state_enum",
+    "expression": "CAST(`sync_state` AS BINARY) IN ('UNINITIALIZED','INITIALIZING','READY')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "client_installation",
+    "name": "ck_client_installation_sync_epoch_positive",
+    "expression": "`sync_epoch` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "user_consent",
+    "name": "ck_user_consent_row_version_positive",
+    "expression": "`row_version` >= 1",
+    "note": "CM乐观版本从1开始。"
+  },
+  {
+    "table": "user_consent",
+    "name": "ck_user_consent_purpose_code_enum",
+    "expression": "CAST(`purpose_code` AS BINARY) IN ('AI_PROCESSING','NOTIFICATION','EXTERNAL_HEALTH')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "user_consent",
+    "name": "ck_user_consent_status_enum",
+    "expression": "CAST(`status` AS BINARY) IN ('NOT_GRANTED','GRANTED','REVOKED')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "user_consent",
+    "name": "ck_user_consent_consent_version_positive",
+    "expression": "`consent_version` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "user_consent_event",
+    "name": "ck_user_consent_event_event_type_enum",
+    "expression": "CAST(`event_type` AS BINARY) IN ('GRANT','REVOKE','UPDATE_SCOPE','EXPIRE')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "user_consent_event",
+    "name": "ck_user_consent_event_consent_version_positive",
+    "expression": "`consent_version` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "goal_definition",
+    "name": "ck_goal_definition_row_version_positive",
+    "expression": "`row_version` >= 1",
+    "note": "CM乐观版本从1开始。"
+  },
+  {
+    "table": "goal_definition",
+    "name": "ck_goal_definition_goal_category_enum",
+    "expression": "CAST(`goal_category` AS BINARY) IN ('ROUTINE','ACTIVITY','RECORDING','CUSTOM')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "goal_definition",
+    "name": "ck_goal_definition_status_enum",
+    "expression": "CAST(`status` AS BINARY) IN ('ACTIVE','DISABLED')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "goal_definition",
+    "name": "ck_goal_definition_schema_version_positive",
+    "expression": "`schema_version` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "user_goal",
+    "name": "ck_user_goal_row_version_positive",
+    "expression": "`row_version` >= 1",
+    "note": "CM乐观版本从1开始。"
+  },
+  {
+    "table": "user_goal",
+    "name": "ck_user_goal_parameter_schema_version_positive",
+    "expression": "`parameter_schema_version` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "user_goal",
+    "name": "ck_user_goal_status_enum",
+    "expression": "CAST(`status` AS BINARY) IN ('ACTIVE','PAUSED','COMPLETED','ARCHIVED')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "user_goal",
+    "name": "ck_user_goal_motivation_cipher_key",
+    "expression": "`motivation_cipher` IS NULL OR `encryption_key_ref` IS NOT NULL",
+    "note": "非空密文必须有外部密钥引用；不把密钥本体存库。"
+  },
+  {
+    "table": "user_goal",
+    "name": "ck_user_goal_key_has_cipher",
+    "expression": "`encryption_key_ref` IS NULL OR (`motivation_cipher` IS NOT NULL)",
+    "note": "该表key_ref只用于列明密文，避免孤立密钥引用。"
+  },
+  {
+    "table": "availability_rule",
+    "name": "ck_availability_rule_row_version_positive",
+    "expression": "`row_version` >= 1",
+    "note": "CM乐观版本从1开始。"
+  },
+  {
+    "table": "availability_rule",
+    "name": "ck_availability_rule_rule_kind_enum",
+    "expression": "CAST(`rule_kind` AS BINARY) IN ('AVAILABLE','BUSY','RESERVED_REST')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "availability_rule",
+    "name": "ck_availability_rule_is_enabled_range",
+    "expression": "`is_enabled` BETWEEN 0 AND 1",
+    "note": "文档或已明确接口范围；NULL可选值保留SQL UNKNOWN语义。"
+  },
+  {
+    "table": "availability_rule",
+    "name": "ck_availability_rule_source_type_enum",
+    "expression": "CAST(`source_type` AS BINARY) IN ('MANUAL','AI_CONFIRMED','COURSE_IMPORT')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "availability_rule",
+    "name": "ck_availability_rule_end_day_offset_range",
+    "expression": "`end_day_offset` BETWEEN 0 AND 1",
+    "note": "文档或已明确接口范围；NULL可选值保留SQL UNKNOWN语义。"
+  },
+  {
+    "table": "availability_exception",
+    "name": "ck_availability_exception_row_version_positive",
+    "expression": "`row_version` >= 1",
+    "note": "CM乐观版本从1开始。"
+  },
+  {
+    "table": "availability_exception",
+    "name": "ck_availability_exception_mode_enum",
+    "expression": "CAST(`mode` AS BINARY) IN ('REPLACE_DAY','APPEND')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "availability_exception",
+    "name": "ck_availability_exception_slots_schema_version_positive",
+    "expression": "`slots_schema_version` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "availability_exception",
+    "name": "ck_availability_exception_is_enabled_range",
+    "expression": "`is_enabled` BETWEEN 0 AND 1",
+    "note": "文档或已明确接口范围；NULL可选值保留SQL UNKNOWN语义。"
+  },
+  {
+    "table": "availability_exception",
+    "name": "ck_availability_exception_source_type_enum",
+    "expression": "CAST(`source_type` AS BINARY) IN ('MANUAL','AI_CONFIRMED','COURSE_IMPORT')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "availability_exception",
+    "name": "ck_availability_exception_reason_cipher_key",
+    "expression": "`reason_cipher` IS NULL OR `encryption_key_ref` IS NOT NULL",
+    "note": "非空密文必须有外部密钥引用；不把密钥本体存库。"
+  },
+  {
+    "table": "availability_exception",
+    "name": "ck_availability_exception_key_has_cipher",
+    "expression": "`encryption_key_ref` IS NULL OR (`reason_cipher` IS NOT NULL)",
+    "note": "该表key_ref只用于列明密文，避免孤立密钥引用。"
+  },
+  {
+    "table": "health_record",
+    "name": "ck_health_record_row_version_positive",
+    "expression": "`row_version` >= 1",
+    "note": "CM乐观版本从1开始。"
+  },
+  {
+    "table": "health_record",
+    "name": "ck_health_record_record_type_enum",
+    "expression": "CAST(`record_type` AS BINARY) IN ('SLEEP','ACTIVITY','MEAL','ENERGY')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "health_record",
+    "name": "ck_health_record_source_type_enum",
+    "expression": "CAST(`source_type` AS BINARY) IN ('MANUAL','AI_CONFIRMED','EXTERNAL')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "health_record",
+    "name": "ck_health_record_quality_status_enum",
+    "expression": "CAST(`quality_status` AS BINARY) IN ('VALID','INVALID')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "health_record",
+    "name": "ck_health_record_notes_cipher_key",
+    "expression": "`notes_cipher` IS NULL OR `encryption_key_ref` IS NOT NULL",
+    "note": "非空密文必须有外部密钥引用；不把密钥本体存库。"
+  },
+  {
+    "table": "health_record",
+    "name": "ck_health_record_key_has_cipher",
+    "expression": "`encryption_key_ref` IS NULL OR (`notes_cipher` IS NOT NULL)",
+    "note": "该表key_ref只用于列明密文，避免孤立密钥引用。"
+  },
+  {
+    "table": "sleep_record_detail",
+    "name": "ck_sleep_record_detail_detail_type_enum",
+    "expression": "CAST(`detail_type` AS BINARY) IN ('SLEEP')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "sleep_record_detail",
+    "name": "ck_sleep_record_detail_sleep_kind_enum",
+    "expression": "CAST(`sleep_kind` AS BINARY) IN ('MAIN','NAP')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "sleep_record_detail",
+    "name": "ck_sleep_record_detail_measurement_method_enum",
+    "expression": "CAST(`measurement_method` AS BINARY) IN ('SELF_REPORTED','VERIFIED_PROVIDER')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "sleep_record_detail",
+    "name": "ck_sleep_record_detail_interruption_note_cipher_key",
+    "expression": "`interruption_note_cipher` IS NULL OR `encryption_key_ref` IS NOT NULL",
+    "note": "非空密文必须有外部密钥引用；不把密钥本体存库。"
+  },
+  {
+    "table": "sleep_record_detail",
+    "name": "ck_sleep_record_detail_key_has_cipher",
+    "expression": "`encryption_key_ref` IS NULL OR (`interruption_note_cipher` IS NOT NULL)",
+    "note": "该表key_ref只用于列明密文，避免孤立密钥引用。"
+  },
+  {
+    "table": "activity_record_detail",
+    "name": "ck_activity_record_detail_detail_type_enum",
+    "expression": "CAST(`detail_type` AS BINARY) IN ('ACTIVITY')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "activity_record_detail",
+    "name": "ck_activity_record_detail_activity_type_enum",
+    "expression": "CAST(`activity_type` AS BINARY) IN ('WALK','RUN','CYCLING','STRETCH','SPORT','OTHER')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "activity_record_detail",
+    "name": "ck_activity_record_detail_duration_method_enum",
+    "expression": "CAST(`duration_method` AS BINARY) IN ('SELF_REPORTED','VERIFIED_PROVIDER')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "activity_record_detail",
+    "name": "ck_activity_record_detail_perceived_intensity_enum",
+    "expression": "CAST(`perceived_intensity` AS BINARY) IN ('EASY','MODERATE','HARD')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "activity_record_detail",
+    "name": "ck_activity_record_detail_distance_method_enum",
+    "expression": "CAST(`distance_method` AS BINARY) IN ('SELF_REPORTED','VERIFIED_PROVIDER')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "activity_record_detail",
+    "name": "ck_activity_record_detail_location_label_cipher_key",
+    "expression": "`location_label_cipher` IS NULL OR `encryption_key_ref` IS NOT NULL",
+    "note": "非空密文必须有外部密钥引用；不把密钥本体存库。"
+  },
+  {
+    "table": "activity_record_detail",
+    "name": "ck_activity_record_detail_key_has_cipher",
+    "expression": "`encryption_key_ref` IS NULL OR (`location_label_cipher` IS NOT NULL)",
+    "note": "该表key_ref只用于列明密文，避免孤立密钥引用。"
+  },
+  {
+    "table": "meal_record_detail",
+    "name": "ck_meal_record_detail_detail_type_enum",
+    "expression": "CAST(`detail_type` AS BINARY) IN ('MEAL')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "meal_record_detail",
+    "name": "ck_meal_record_detail_meal_type_enum",
+    "expression": "CAST(`meal_type` AS BINARY) IN ('BREAKFAST','LUNCH','DINNER','SNACK','OTHER')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "meal_record_detail",
+    "name": "ck_meal_record_detail_vegetable_present_range",
+    "expression": "`vegetable_present` BETWEEN 0 AND 1",
+    "note": "文档或已明确接口范围；NULL可选值保留SQL UNKNOWN语义。"
+  },
+  {
+    "table": "meal_record_detail",
+    "name": "ck_meal_record_detail_fruit_present_range",
+    "expression": "`fruit_present` BETWEEN 0 AND 1",
+    "note": "文档或已明确接口范围；NULL可选值保留SQL UNKNOWN语义。"
+  },
+  {
+    "table": "meal_record_detail",
+    "name": "ck_meal_record_detail_protein_food_present_range",
+    "expression": "`protein_food_present` BETWEEN 0 AND 1",
+    "note": "文档或已明确接口范围；NULL可选值保留SQL UNKNOWN语义。"
+  },
+  {
+    "table": "meal_record_detail",
+    "name": "ck_meal_record_detail_whole_grain_present_range",
+    "expression": "`whole_grain_present` BETWEEN 0 AND 1",
+    "note": "文档或已明确接口范围；NULL可选值保留SQL UNKNOWN语义。"
+  },
+  {
+    "table": "meal_record_detail",
+    "name": "ck_meal_record_detail_meal_context_enum",
+    "expression": "CAST(`meal_context` AS BINARY) IN ('CANTEEN','HOME','TAKEAWAY','RESTAURANT','OTHER')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "meal_record_detail",
+    "name": "ck_meal_record_detail_description_cipher_key",
+    "expression": "`description_cipher` IS NULL OR `encryption_key_ref` IS NOT NULL",
+    "note": "非空密文必须有外部密钥引用；不把密钥本体存库。"
+  },
+  {
+    "table": "energy_record_detail",
+    "name": "ck_energy_record_detail_detail_type_enum",
+    "expression": "CAST(`detail_type` AS BINARY) IN ('ENERGY')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "energy_record_detail",
+    "name": "ck_energy_record_detail_scale_version_positive",
+    "expression": "`scale_version` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "energy_record_detail",
+    "name": "ck_energy_record_detail_context_code_enum",
+    "expression": "CAST(`context_code` AS BINARY) IN ('WAKE','STUDY','ACTIVITY','EVENING','OTHER')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "energy_record_detail",
+    "name": "ck_energy_record_detail_reported_method_enum",
+    "expression": "CAST(`reported_method` AS BINARY) IN ('SELF_REPORT','AI_CONFIRMED')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "energy_record_detail",
+    "name": "ck_energy_record_detail_description_cipher_key",
+    "expression": "`description_cipher` IS NULL OR `encryption_key_ref` IS NOT NULL",
+    "note": "非空密文必须有外部密钥引用；不把密钥本体存库。"
+  },
+  {
+    "table": "energy_record_detail",
+    "name": "ck_energy_record_detail_key_has_cipher",
+    "expression": "`encryption_key_ref` IS NULL OR (`description_cipher` IS NOT NULL)",
+    "note": "该表key_ref只用于列明密文，避免孤立密钥引用。"
+  },
+  {
+    "table": "record_tag",
+    "name": "ck_record_tag_row_version_positive",
+    "expression": "`row_version` >= 1",
+    "note": "CM乐观版本从1开始。"
+  },
+  {
+    "table": "record_tag",
+    "name": "ck_record_tag_applicable_record_type_enum",
+    "expression": "CAST(`applicable_record_type` AS BINARY) IN ('SLEEP','ACTIVITY','MEAL','ENERGY')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "record_tag",
+    "name": "ck_record_tag_is_archived_range",
+    "expression": "`is_archived` BETWEEN 0 AND 1",
+    "note": "文档或已明确接口范围；NULL可选值保留SQL UNKNOWN语义。"
+  },
+  {
+    "table": "record_tag",
+    "name": "ck_record_tag_name_cipher_key",
+    "expression": "`name_cipher` IS NULL OR `encryption_key_ref` IS NOT NULL",
+    "note": "非空密文必须有外部密钥引用；不把密钥本体存库。"
+  },
+  {
+    "table": "record_tag_relation",
+    "name": "ck_record_tag_relation_assigned_source_enum",
+    "expression": "CAST(`assigned_source` AS BINARY) IN ('MANUAL','AI_CONFIRMED')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "record_attachment",
+    "name": "ck_record_attachment_attachment_role_enum",
+    "expression": "CAST(`attachment_role` AS BINARY) IN ('PHOTO','NOTE_ATTACHMENT')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "record_attachment",
+    "name": "ck_record_attachment_caption_cipher_key",
+    "expression": "`caption_cipher` IS NULL OR `encryption_key_ref` IS NOT NULL",
+    "note": "非空密文必须有外部密钥引用；不把密钥本体存库。"
+  },
+  {
+    "table": "record_attachment",
+    "name": "ck_record_attachment_key_has_cipher",
+    "expression": "`encryption_key_ref` IS NULL OR (`caption_cipher` IS NOT NULL)",
+    "note": "该表key_ref只用于列明密文，避免孤立密钥引用。"
+  },
+  {
+    "table": "plan",
+    "name": "ck_plan_row_version_positive",
+    "expression": "`row_version` >= 1",
+    "note": "CM乐观版本从1开始。"
+  },
+  {
+    "table": "plan",
+    "name": "ck_plan_plan_kind_enum",
+    "expression": "CAST(`plan_kind` AS BINARY) IN ('DAY','WEEK','CUSTOM')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "plan",
+    "name": "ck_plan_status_enum",
+    "expression": "CAST(`status` AS BINARY) IN ('DRAFT','ACTIVE','PAUSED','ARCHIVED')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "plan",
+    "name": "ck_plan_source_type_enum",
+    "expression": "CAST(`source_type` AS BINARY) IN ('MANUAL','AI_CONFIRMED','RESTORE')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "plan_version",
+    "name": "ck_plan_version_row_version_positive",
+    "expression": "`row_version` >= 1",
+    "note": "CM乐观版本从1开始。"
+  },
+  {
+    "table": "plan_version",
+    "name": "ck_plan_version_version_no_positive",
+    "expression": "`version_no` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "plan_version",
+    "name": "ck_plan_version_status_enum",
+    "expression": "CAST(`status` AS BINARY) IN ('DRAFT','SEALED','DISCARDED')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "plan_version",
+    "name": "ck_plan_version_source_type_enum",
+    "expression": "CAST(`source_type` AS BINARY) IN ('MANUAL','AI_CONFIRMED','RESTORE')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "task",
+    "name": "ck_task_row_version_positive",
+    "expression": "`row_version` >= 1",
+    "note": "CM乐观版本从1开始。"
+  },
+  {
+    "table": "task",
+    "name": "ck_task_task_type_enum",
+    "expression": "CAST(`task_type` AS BINARY) IN ('ROUTINE','ACTIVITY','MEAL_HABIT','RECORDING','CUSTOM')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "task",
+    "name": "ck_task_status_enum",
+    "expression": "CAST(`status` AS BINARY) IN ('DRAFT','PENDING','COMPLETED','SKIPPED','CANCELLED')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "task",
+    "name": "ck_task_is_fixed_range",
+    "expression": "`is_fixed` BETWEEN 0 AND 1",
+    "note": "文档或已明确接口范围；NULL可选值保留SQL UNKNOWN语义。"
+  },
+  {
+    "table": "task",
+    "name": "ck_task_source_type_enum",
+    "expression": "CAST(`source_type` AS BINARY) IN ('MANUAL','AI_CONFIRMED','RULE_EXPANDED')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "task",
+    "name": "ck_task_instruction_cipher_key",
+    "expression": "`instruction_cipher` IS NULL OR `encryption_key_ref` IS NOT NULL",
+    "note": "非空密文必须有外部密钥引用；不把密钥本体存库。"
+  },
+  {
+    "table": "task",
+    "name": "ck_task_key_has_cipher",
+    "expression": "`encryption_key_ref` IS NULL OR (`instruction_cipher` IS NOT NULL)",
+    "note": "该表key_ref只用于列明密文，避免孤立密钥引用。"
+  },
+  {
+    "table": "plan_version_task",
+    "name": "ck_plan_version_task_row_version_positive",
+    "expression": "`row_version` >= 1",
+    "note": "CM乐观版本从1开始。"
+  },
+  {
+    "table": "plan_version_task",
+    "name": "ck_plan_version_task_task_type_enum",
+    "expression": "CAST(`task_type` AS BINARY) IN ('ROUTINE','ACTIVITY','MEAL_HABIT','RECORDING','CUSTOM')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "plan_version_task",
+    "name": "ck_plan_version_task_is_fixed_range",
+    "expression": "`is_fixed` BETWEEN 0 AND 1",
+    "note": "文档或已明确接口范围；NULL可选值保留SQL UNKNOWN语义。"
+  },
+  {
+    "table": "plan_version_task",
+    "name": "ck_plan_version_task_change_action_enum",
+    "expression": "CAST(`change_action` AS BINARY) IN ('ADD','KEEP','UPDATE','REMOVE')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "plan_version_task",
+    "name": "ck_plan_version_task_instruction_cipher_key",
+    "expression": "`instruction_cipher` IS NULL OR `encryption_key_ref` IS NOT NULL",
+    "note": "非空密文必须有外部密钥引用；不把密钥本体存库。"
+  },
+  {
+    "table": "plan_version_task",
+    "name": "ck_plan_version_task_key_has_cipher",
+    "expression": "`encryption_key_ref` IS NULL OR (`instruction_cipher` IS NOT NULL)",
+    "note": "该表key_ref只用于列明密文，避免孤立密钥引用。"
+  },
+  {
+    "table": "plan_rule",
+    "name": "ck_plan_rule_row_version_positive",
+    "expression": "`row_version` >= 1",
+    "note": "CM乐观版本从1开始。"
+  },
+  {
+    "table": "plan_rule",
+    "name": "ck_plan_rule_task_type_enum",
+    "expression": "CAST(`task_type` AS BINARY) IN ('ROUTINE','ACTIVITY','MEAL_HABIT','RECORDING','CUSTOM')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "plan_rule",
+    "name": "ck_plan_rule_recurrence_kind_enum",
+    "expression": "CAST(`recurrence_kind` AS BINARY) IN ('DAILY','WEEKLY')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "plan_rule",
+    "name": "ck_plan_rule_start_local_time_time",
+    "expression": "`start_local_time` >= '00:00:00' AND `start_local_time` < '24:00:00' AND MOD(TIME_TO_SEC(`start_local_time`),60)=0",
+    "note": "本地时分精度；拒绝负TIME、24小时以上及非整分钟。"
+  },
+  {
+    "table": "plan_rule",
+    "name": "ck_plan_rule_status_enum",
+    "expression": "CAST(`status` AS BINARY) IN ('ACTIVE','PAUSED','ARCHIVED')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "plan_rule",
+    "name": "ck_plan_rule_template_revision_positive",
+    "expression": "`template_revision` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "plan_rule",
+    "name": "ck_plan_rule_end_local_time_time",
+    "expression": "`end_local_time` >= '00:00:00' AND `end_local_time` < '24:00:00' AND MOD(TIME_TO_SEC(`end_local_time`),60)=0",
+    "note": "本地时分精度；拒绝负TIME、24小时以上及非整分钟。"
+  },
+  {
+    "table": "plan_rule",
+    "name": "ck_plan_rule_end_day_offset_range",
+    "expression": "`end_day_offset` BETWEEN 0 AND 1",
+    "note": "文档或已明确接口范围；NULL可选值保留SQL UNKNOWN语义。"
+  },
+  {
+    "table": "plan_rule",
+    "name": "ck_plan_rule_is_fixed_range",
+    "expression": "`is_fixed` BETWEEN 0 AND 1",
+    "note": "文档或已明确接口范围；NULL可选值保留SQL UNKNOWN语义。"
+  },
+  {
+    "table": "plan_rule",
+    "name": "ck_plan_rule_instruction_cipher_key",
+    "expression": "`instruction_cipher` IS NULL OR `encryption_key_ref` IS NOT NULL",
+    "note": "非空密文必须有外部密钥引用；不把密钥本体存库。"
+  },
+  {
+    "table": "plan_rule",
+    "name": "ck_plan_rule_key_has_cipher",
+    "expression": "`encryption_key_ref` IS NULL OR (`instruction_cipher` IS NOT NULL)",
+    "note": "该表key_ref只用于列明密文，避免孤立密钥引用。"
+  },
+  {
+    "table": "task_event",
+    "name": "ck_task_event_event_type_enum",
+    "expression": "CAST(`event_type` AS BINARY) IN ('CREATE','COMPLETE','SKIP','REOPEN','RESCHEDULE','EDIT','CANCEL')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "task_event",
+    "name": "ck_task_event_source_type_enum",
+    "expression": "CAST(`source_type` AS BINARY) IN ('MOBILE','WATCH','AI_APPLY','SYSTEM')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "task_event",
+    "name": "ck_task_event_after_row_version_positive",
+    "expression": "`after_row_version` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "task_event",
+    "name": "ck_task_event_reason_cipher_key",
+    "expression": "`reason_cipher` IS NULL OR `encryption_key_ref` IS NOT NULL",
+    "note": "非空密文必须有外部密钥引用；不把密钥本体存库。"
+  },
+  {
+    "table": "task_event",
+    "name": "ck_task_event_key_has_cipher",
+    "expression": "`encryption_key_ref` IS NULL OR (`reason_cipher` IS NOT NULL)",
+    "note": "该表key_ref只用于列明密文，避免孤立密钥引用。"
+  },
+  {
+    "table": "task_record_link",
+    "name": "ck_task_record_link_link_type_enum",
+    "expression": "CAST(`link_type` AS BINARY) IN ('USER_CONFIRMED','AI_CONFIRMED')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "ai_conversation",
+    "name": "ck_ai_conversation_row_version_positive",
+    "expression": "`row_version` >= 1",
+    "note": "CM乐观版本从1开始。"
+  },
+  {
+    "table": "ai_conversation",
+    "name": "ck_ai_conversation_status_enum",
+    "expression": "CAST(`status` AS BINARY) IN ('ACTIVE','ARCHIVED')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "ai_conversation",
+    "name": "ck_ai_conversation_scene_enum",
+    "expression": "CAST(`scene` AS BINARY) IN ('GENERAL','PLAN','RECORD','REVIEW')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "ai_conversation",
+    "name": "ck_ai_conversation_title_cipher_key",
+    "expression": "`title_cipher` IS NULL OR `encryption_key_ref` IS NOT NULL",
+    "note": "非空密文必须有外部密钥引用；不把密钥本体存库。"
+  },
+  {
+    "table": "ai_conversation",
+    "name": "ck_ai_conversation_key_has_cipher",
+    "expression": "`encryption_key_ref` IS NULL OR (`title_cipher` IS NOT NULL)",
+    "note": "该表key_ref只用于列明密文，避免孤立密钥引用。"
+  },
+  {
+    "table": "ai_message",
+    "name": "ck_ai_message_role_enum",
+    "expression": "CAST(`role` AS BINARY) IN ('USER','ASSISTANT','SYSTEM_NOTICE')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "ai_message",
+    "name": "ck_ai_message_message_type_enum",
+    "expression": "CAST(`message_type` AS BINARY) IN ('TEXT','CLARIFICATION','PLAN_CARD','RECORD_CARD','SOURCE_CARD','ERROR_NOTICE')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "ai_message",
+    "name": "ck_ai_message_delivery_status_enum",
+    "expression": "CAST(`delivery_status` AS BINARY) IN ('ACCEPTED','GENERATING','READY','FAILED','CANCELLED')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "ai_message",
+    "name": "ck_ai_message_finish_reason_enum",
+    "expression": "CAST(`finish_reason` AS BINARY) IN ('STOP','LENGTH','FILTERED','CANCELLED','PROVIDER_ERROR')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "ai_message",
+    "name": "ck_ai_message_content_cipher_key",
+    "expression": "`content_cipher` IS NULL OR `encryption_key_ref` IS NOT NULL",
+    "note": "非空密文必须有外部密钥引用；不把密钥本体存库。"
+  },
+  {
+    "table": "ai_message",
+    "name": "ck_ai_message_key_has_cipher",
+    "expression": "`encryption_key_ref` IS NULL OR (`content_cipher` IS NOT NULL)",
+    "note": "该表key_ref只用于列明密文，避免孤立密钥引用。"
+  },
+  {
+    "table": "ai_run",
+    "name": "ck_ai_run_row_version_positive",
+    "expression": "`row_version` >= 1",
+    "note": "CM乐观版本从1开始。"
+  },
+  {
+    "table": "ai_run",
+    "name": "ck_ai_run_kind_enum",
+    "expression": "CAST(`kind` AS BINARY) IN ('PLAN_GENERATE','PLAN_ADJUST','RECORD_EXTRACT','CHAT','WEEKLY_REVIEW','VOICE_TRANSCRIBE','COURSE_IMPORT')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "ai_run",
+    "name": "ck_ai_run_status_enum",
+    "expression": "CAST(`status` AS BINARY) IN ('QUEUED','RUNNING','SUCCEEDED','FAILED','CANCEL_REQUESTED','CANCELLED')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "ai_run",
+    "name": "ck_ai_run_captured_dataset_epoch_positive",
+    "expression": "`captured_dataset_epoch` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "ai_run",
+    "name": "ck_ai_run_captured_consent_version_positive",
+    "expression": "`captured_consent_version` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "ai_run",
+    "name": "ck_ai_run_input_snapshot_cipher_key",
+    "expression": "`input_snapshot_cipher` IS NULL OR `encryption_key_ref` IS NOT NULL",
+    "note": "非空密文必须有外部密钥引用；不把密钥本体存库。"
+  },
+  {
+    "table": "ai_run",
+    "name": "ck_ai_run_key_has_cipher",
+    "expression": "`encryption_key_ref` IS NULL OR (`input_snapshot_cipher` IS NOT NULL)",
+    "note": "该表key_ref只用于列明密文，避免孤立密钥引用。"
+  },
+  {
+    "table": "ai_draft",
+    "name": "ck_ai_draft_row_version_positive",
+    "expression": "`row_version` >= 1",
+    "note": "CM乐观版本从1开始。"
+  },
+  {
+    "table": "ai_draft",
+    "name": "ck_ai_draft_kind_enum",
+    "expression": "CAST(`kind` AS BINARY) IN ('PLAN_CREATE','PLAN_ADJUST','RECORD_EXTRACT')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "ai_draft",
+    "name": "ck_ai_draft_status_enum",
+    "expression": "CAST(`status` AS BINARY) IN ('NEEDS_INPUT','READY','APPLIED','EXPIRED','CANCELLED','FAILED')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "ai_draft",
+    "name": "ck_ai_draft_current_revision_no_positive",
+    "expression": "`current_revision_no` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "ai_draft",
+    "name": "ck_ai_draft_validated_revision_no_positive",
+    "expression": "`validated_revision_no` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "ai_draft",
+    "name": "ck_ai_draft_captured_dataset_epoch_positive",
+    "expression": "`captured_dataset_epoch` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "ai_draft",
+    "name": "ck_ai_draft_applied_resource_type_enum",
+    "expression": "CAST(`applied_resource_type` AS BINARY) IN ('PLAN','PLAN_VERSION','HEALTH_RECORD')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "ai_draft_revision",
+    "name": "ck_ai_draft_revision_revision_no_positive",
+    "expression": "`revision_no` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "ai_draft_revision",
+    "name": "ck_ai_draft_revision_source_revision_positive",
+    "expression": "`source_revision` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "ai_draft_revision",
+    "name": "ck_ai_draft_revision_edit_source_enum",
+    "expression": "CAST(`edit_source` AS BINARY) IN ('MODEL','USER','REVALIDATION')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "ai_draft_revision",
+    "name": "ck_ai_draft_revision_payload_schema_version_positive",
+    "expression": "`payload_schema_version` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "ai_draft_revision",
+    "name": "ck_ai_draft_revision_validation_status_enum",
+    "expression": "CAST(`validation_status` AS BINARY) IN ('NOT_VALIDATED','NEEDS_INPUT','VALID','INVALID')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "ai_message_citation",
+    "name": "ck_ai_message_citation_citation_no_positive",
+    "expression": "`citation_no` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "ai_message_citation",
+    "name": "ck_ai_message_citation_retrieval_method_enum",
+    "expression": "CAST(`retrieval_method` AS BINARY) IN ('KEYWORD','TAG','MANUAL')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "ai_message_citation",
+    "name": "ck_ai_message_citation_claim_excerpt_cipher_key",
+    "expression": "`claim_excerpt_cipher` IS NULL OR `encryption_key_ref` IS NOT NULL",
+    "note": "非空密文必须有外部密钥引用；不把密钥本体存库。"
+  },
+  {
+    "table": "ai_message_citation",
+    "name": "ck_ai_message_citation_key_has_cipher",
+    "expression": "`encryption_key_ref` IS NULL OR (`claim_excerpt_cipher` IS NOT NULL)",
+    "note": "该表key_ref只用于列明密文，避免孤立密钥引用。"
+  },
+  {
+    "table": "knowledge_article",
+    "name": "ck_knowledge_article_row_version_positive",
+    "expression": "`row_version` >= 1",
+    "note": "CM乐观版本从1开始。"
+  },
+  {
+    "table": "knowledge_article",
+    "name": "ck_knowledge_article_category_enum",
+    "expression": "CAST(`category` AS BINARY) IN ('ROUTINE','ACTIVITY','MEAL_HABIT','RECORDING','APP_HELP')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "knowledge_article",
+    "name": "ck_knowledge_article_status_enum",
+    "expression": "CAST(`status` AS BINARY) IN ('DRAFT','ACTIVE','RETIRED')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "knowledge_article_version",
+    "name": "ck_knowledge_article_version_row_version_positive",
+    "expression": "`row_version` >= 1",
+    "note": "CM乐观版本从1开始。"
+  },
+  {
+    "table": "knowledge_article_version",
+    "name": "ck_knowledge_article_version_version_no_positive",
+    "expression": "`version_no` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "knowledge_article_version",
+    "name": "ck_knowledge_article_version_status_enum",
+    "expression": "CAST(`status` AS BINARY) IN ('DRAFT','IN_REVIEW','PUBLISHED','REJECTED','RETIRED')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "knowledge_article_version",
+    "name": "ck_knowledge_article_version_review_decision_enum",
+    "expression": "CAST(`review_decision` AS BINARY) IN ('APPROVED','REJECTED')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "knowledge_source",
+    "name": "ck_knowledge_source_row_version_positive",
+    "expression": "`row_version` >= 1",
+    "note": "CM乐观版本从1开始。"
+  },
+  {
+    "table": "knowledge_source",
+    "name": "ck_knowledge_source_source_kind_enum",
+    "expression": "CAST(`source_kind` AS BINARY) IN ('OFFICIAL_WEB','GUIDELINE','PAPER','APP_DOCUMENTATION')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "knowledge_source",
+    "name": "ck_knowledge_source_verification_status_enum",
+    "expression": "CAST(`verification_status` AS BINARY) IN ('PENDING','VERIFIED','UNAVAILABLE','REJECTED')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "knowledge_source",
+    "name": "ck_knowledge_source_usage_basis_enum",
+    "expression": "CAST(`usage_basis` AS BINARY) IN ('LINK_ONLY','PERMITTED_EXCERPT','LICENSED','PUBLIC_DOMAIN')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "knowledge_version_source",
+    "name": "ck_knowledge_version_source_reference_no_positive",
+    "expression": "`reference_no` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "daily_stat",
+    "name": "ck_daily_stat_row_version_positive",
+    "expression": "`row_version` >= 1",
+    "note": "CM乐观版本从1开始。"
+  },
+  {
+    "table": "daily_stat",
+    "name": "ck_daily_stat_dataset_epoch_positive",
+    "expression": "`dataset_epoch` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "daily_stat",
+    "name": "ck_daily_stat_status_enum",
+    "expression": "CAST(`status` AS BINARY) IN ('FRESH','STALE','BUILDING','FAILED')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "weekly_review",
+    "name": "ck_weekly_review_row_version_positive",
+    "expression": "`row_version` >= 1",
+    "note": "CM乐观版本从1开始。"
+  },
+  {
+    "table": "weekly_review",
+    "name": "ck_weekly_review_revision_no_positive",
+    "expression": "`revision_no` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "weekly_review",
+    "name": "ck_weekly_review_status_enum",
+    "expression": "CAST(`status` AS BINARY) IN ('GENERATING','READY','STALE','FAILED','ARCHIVED')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "weekly_review",
+    "name": "ck_weekly_review_dataset_epoch_positive",
+    "expression": "`dataset_epoch` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "weekly_review",
+    "name": "ck_weekly_review_summary_cipher_key",
+    "expression": "`summary_cipher` IS NULL OR `encryption_key_ref` IS NOT NULL",
+    "note": "非空密文必须有外部密钥引用；不把密钥本体存库。"
+  },
+  {
+    "table": "weekly_review",
+    "name": "ck_weekly_review_key_has_cipher",
+    "expression": "`encryption_key_ref` IS NULL OR (`summary_cipher` IS NOT NULL)",
+    "note": "该表key_ref只用于列明密文，避免孤立密钥引用。"
+  },
+  {
+    "table": "weekly_review_evidence",
+    "name": "ck_weekly_review_evidence_evidence_type_enum",
+    "expression": "CAST(`evidence_type` AS BINARY) IN ('DAILY_STAT','RECORD','TASK_EVENT')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "weekly_review_evidence",
+    "name": "ck_weekly_review_evidence_evidence_row_version_positive",
+    "expression": "`evidence_row_version` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "reminder_rule",
+    "name": "ck_reminder_rule_row_version_positive",
+    "expression": "`row_version` >= 1",
+    "note": "CM乐观版本从1开始。"
+  },
+  {
+    "table": "reminder_rule",
+    "name": "ck_reminder_rule_rule_type_enum",
+    "expression": "CAST(`rule_type` AS BINARY) IN ('TASK_START','RECORD_CHECKIN')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "reminder_rule",
+    "name": "ck_reminder_rule_channel_enum",
+    "expression": "CAST(`channel` AS BINARY) IN ('LOCAL_SYSTEM','IN_APP')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "reminder_rule",
+    "name": "ck_reminder_rule_trigger_kind_enum",
+    "expression": "CAST(`trigger_kind` AS BINARY) IN ('OFFSET','DAILY_LOCAL')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "reminder_rule",
+    "name": "ck_reminder_rule_local_fire_time_time",
+    "expression": "`local_fire_time` >= '00:00:00' AND `local_fire_time` < '24:00:00' AND MOD(TIME_TO_SEC(`local_fire_time`),60)=0",
+    "note": "本地时分精度；拒绝负TIME、24小时以上及非整分钟。"
+  },
+  {
+    "table": "reminder_rule",
+    "name": "ck_reminder_rule_is_enabled_range",
+    "expression": "`is_enabled` BETWEEN 0 AND 1",
+    "note": "文档或已明确接口范围；NULL可选值保留SQL UNKNOWN语义。"
+  },
+  {
+    "table": "reminder_rule",
+    "name": "ck_reminder_rule_respect_quiet_hours_range",
+    "expression": "`respect_quiet_hours` BETWEEN 0 AND 1",
+    "note": "文档或已明确接口范围；NULL可选值保留SQL UNKNOWN语义。"
+  },
+  {
+    "table": "reminder_rule",
+    "name": "ck_reminder_rule_quiet_policy_enum",
+    "expression": "CAST(`quiet_policy` AS BINARY) IN ('SUPPRESS','NEXT_ALLOWED')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "reminder_delivery",
+    "name": "ck_reminder_delivery_row_version_positive",
+    "expression": "`row_version` >= 1",
+    "note": "CM乐观版本从1开始。"
+  },
+  {
+    "table": "reminder_delivery",
+    "name": "ck_reminder_delivery_task_row_version_positive",
+    "expression": "`task_row_version` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "reminder_delivery",
+    "name": "ck_reminder_delivery_channel_enum",
+    "expression": "CAST(`channel` AS BINARY) IN ('LOCAL_SYSTEM','IN_APP')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "reminder_delivery",
+    "name": "ck_reminder_delivery_status_enum",
+    "expression": "CAST(`status` AS BINARY) IN ('PENDING','REGISTERED','DELIVERED','UNKNOWN','FAILED','CANCEL_REQUESTED','CANCELLED','EXPIRED')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "reminder_delivery",
+    "name": "ck_reminder_delivery_captured_dataset_epoch_positive",
+    "expression": "`captured_dataset_epoch` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "reminder_delivery",
+    "name": "ck_reminder_delivery_captured_consent_version_positive",
+    "expression": "`captured_consent_version` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "reminder_delivery",
+    "name": "ck_reminder_delivery_rule_row_version_positive",
+    "expression": "`rule_row_version` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "reminder_delivery",
+    "name": "ck_reminder_delivery_system_handle_cipher_key",
+    "expression": "`system_handle_cipher` IS NULL OR `encryption_key_ref` IS NOT NULL",
+    "note": "非空密文必须有外部密钥引用；不把密钥本体存库。"
+  },
+  {
+    "table": "reminder_delivery",
+    "name": "ck_reminder_delivery_key_has_cipher",
+    "expression": "`encryption_key_ref` IS NULL OR (`system_handle_cipher` IS NOT NULL)",
+    "note": "该表key_ref只用于列明密文，避免孤立密钥引用。"
+  },
+  {
+    "table": "notification_inbox",
+    "name": "ck_notification_inbox_row_version_positive",
+    "expression": "`row_version` >= 1",
+    "note": "CM乐观版本从1开始。"
+  },
+  {
+    "table": "notification_inbox",
+    "name": "ck_notification_inbox_category_enum",
+    "expression": "CAST(`category` AS BINARY) IN ('PLAN','SYNC','PRIVACY','REMINDER','REVIEW','SYSTEM')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "notification_inbox",
+    "name": "ck_notification_inbox_target_type_enum",
+    "expression": "CAST(`target_type` AS BINARY) IN ('PLAN','TASK','PRIVACY_REQUEST','REVIEW')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "notification_inbox",
+    "name": "ck_notification_inbox_priority_enum",
+    "expression": "CAST(`priority` AS BINARY) IN ('LOW','NORMAL','HIGH')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "notification_inbox",
+    "name": "ck_notification_inbox_body_cipher_key",
+    "expression": "`body_cipher` IS NULL OR `encryption_key_ref` IS NOT NULL",
+    "note": "非空密文必须有外部密钥引用；不把密钥本体存库。"
+  },
+  {
+    "table": "notification_inbox",
+    "name": "ck_notification_inbox_key_has_cipher",
+    "expression": "`encryption_key_ref` IS NULL OR (`body_cipher` IS NOT NULL)",
+    "note": "该表key_ref只用于列明密文，避免孤立密钥引用。"
+  },
+  {
+    "table": "outbox_event",
+    "name": "ck_outbox_event_row_version_positive",
+    "expression": "`row_version` >= 1",
+    "note": "CM乐观版本从1开始。"
+  },
+  {
+    "table": "outbox_event",
+    "name": "ck_outbox_event_aggregate_row_version_positive",
+    "expression": "`aggregate_row_version` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "outbox_event",
+    "name": "ck_outbox_event_payload_schema_version_positive",
+    "expression": "`payload_schema_version` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "outbox_event",
+    "name": "ck_outbox_event_status_enum",
+    "expression": "CAST(`status` AS BINARY) IN ('PENDING','CLAIMED','DONE','RETRY','DEAD','CANCELLED')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "outbox_event",
+    "name": "ck_outbox_event_captured_dataset_epoch_positive",
+    "expression": "`captured_dataset_epoch` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "outbox_event",
+    "name": "ck_outbox_event_captured_consent_version_positive",
+    "expression": "`captured_consent_version` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "outbox_event",
+    "name": "ck_outbox_event_authorization_revision_positive",
+    "expression": "`authorization_revision` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "file_object",
+    "name": "ck_file_object_row_version_positive",
+    "expression": "`row_version` >= 1",
+    "note": "CM乐观版本从1开始。"
+  },
+  {
+    "table": "file_object",
+    "name": "ck_file_object_purpose_enum",
+    "expression": "CAST(`purpose` AS BINARY) IN ('AVATAR','RECORD_ATTACHMENT','EXPORT','PRIVACY_MANIFEST','COURSE_IMAGE','VOICE_TEMP','FEEDBACK_ATTACHMENT')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "file_object",
+    "name": "ck_file_object_status_enum",
+    "expression": "CAST(`status` AS BINARY) IN ('UPLOADING','SCANNING','CLEAN','REJECTED','DELETING','DELETED')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "file_object",
+    "name": "ck_file_object_original_name_cipher_key",
+    "expression": "`original_name_cipher` IS NULL OR `encryption_key_ref` IS NOT NULL",
+    "note": "非空密文必须有外部密钥引用；不把密钥本体存库。"
+  },
+  {
+    "table": "privacy_request",
+    "name": "ck_privacy_request_row_version_positive",
+    "expression": "`row_version` >= 1",
+    "note": "CM乐观版本从1开始。"
+  },
+  {
+    "table": "privacy_request",
+    "name": "ck_privacy_request_request_type_enum",
+    "expression": "CAST(`request_type` AS BINARY) IN ('EXPORT','DELETE_RECORDS','ERASE_HEALTH_DATA','DELETE_ACCOUNT')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "privacy_request",
+    "name": "ck_privacy_request_status_enum",
+    "expression": "CAST(`status` AS BINARY) IN ('PREVIEW_READY','QUEUED','PROCESSING','COMPLETED','PARTIAL_FAILED','FAILED','CANCELLED','EXPIRED')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "privacy_request",
+    "name": "ck_privacy_request_captured_dataset_epoch_positive",
+    "expression": "`captured_dataset_epoch` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "audit_log",
+    "name": "ck_audit_log_actor_type_enum",
+    "expression": "CAST(`actor_type` AS BINARY) IN ('USER','ADMIN','WORKER','ANONYMOUS')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "audit_log",
+    "name": "ck_audit_log_outcome_enum",
+    "expression": "CAST(`outcome` AS BINARY) IN ('SUCCESS','DENIED','FAILED')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "feedback_ticket",
+    "name": "ck_feedback_ticket_row_version_positive",
+    "expression": "`row_version` >= 1",
+    "note": "CM乐观版本从1开始。"
+  },
+  {
+    "table": "feedback_ticket",
+    "name": "ck_feedback_ticket_category_enum",
+    "expression": "CAST(`category` AS BINARY) IN ('BUG','SUGGESTION','SYNC','PRIVACY','AI_QUALITY')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "feedback_ticket",
+    "name": "ck_feedback_ticket_status_enum",
+    "expression": "CAST(`status` AS BINARY) IN ('OPEN','IN_PROGRESS','WAITING_USER','RESOLVED','CLOSED')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "feedback_ticket",
+    "name": "ck_feedback_ticket_description_cipher_key",
+    "expression": "`description_cipher` IS NULL OR `encryption_key_ref` IS NOT NULL",
+    "note": "非空密文必须有外部密钥引用；不把密钥本体存库。"
+  },
+  {
+    "table": "feedback_ticket",
+    "name": "ck_feedback_ticket_resolution_cipher_key",
+    "expression": "`resolution_cipher` IS NULL OR `encryption_key_ref` IS NOT NULL",
+    "note": "非空密文必须有外部密钥引用；不把密钥本体存库。"
+  },
+  {
+    "table": "feedback_ticket",
+    "name": "ck_feedback_ticket_contact_cipher_key",
+    "expression": "`contact_cipher` IS NULL OR `encryption_key_ref` IS NOT NULL",
+    "note": "非空密文必须有外部密钥引用；不把密钥本体存库。"
+  },
+  {
+    "table": "feedback_ticket",
+    "name": "ck_feedback_ticket_internal_note_cipher_key",
+    "expression": "`internal_note_cipher` IS NULL OR `encryption_key_ref` IS NOT NULL",
+    "note": "非空密文必须有外部密钥引用；不把密钥本体存库。"
+  },
+  {
+    "table": "app_configuration",
+    "name": "ck_app_configuration_row_version_positive",
+    "expression": "`row_version` >= 1",
+    "note": "CM乐观版本从1开始。"
+  },
+  {
+    "table": "app_configuration",
+    "name": "ck_app_configuration_environment_enum",
+    "expression": "CAST(`environment` AS BINARY) IN ('DEV','TEST','PROD')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "app_configuration",
+    "name": "ck_app_configuration_scope_enum",
+    "expression": "CAST(`scope` AS BINARY) IN ('PUBLIC','SERVER')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "app_configuration",
+    "name": "ck_app_configuration_value_type_enum",
+    "expression": "CAST(`value_type` AS BINARY) IN ('BOOLEAN','NUMBER','STRING','OBJECT')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "app_configuration",
+    "name": "ck_app_configuration_is_enabled_range",
+    "expression": "`is_enabled` BETWEEN 0 AND 1",
+    "note": "文档或已明确接口范围；NULL可选值保留SQL UNKNOWN语义。"
+  },
+  {
+    "table": "user_sync_clock",
+    "name": "ck_user_sync_clock_dataset_epoch_positive",
+    "expression": "`dataset_epoch` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "sync_change",
+    "name": "ck_sync_change_dataset_epoch_positive",
+    "expression": "`dataset_epoch` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "sync_change",
+    "name": "ck_sync_change_entity_type_enum",
+    "expression": "CAST(`entity_type` AS BINARY) IN ('PROFILE','PREFERENCE','GOAL','AVAILABILITY_RULE','AVAILABILITY_EXCEPTION','RECORD','RECORD_TAG','PLAN','PLAN_VERSION','TASK','REMINDER_RULE','NOTIFICATION')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "sync_change",
+    "name": "ck_sync_change_entity_row_version_positive",
+    "expression": "`entity_row_version` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "sync_change",
+    "name": "ck_sync_change_operation_enum",
+    "expression": "CAST(`operation` AS BINARY) IN ('UPSERT','DELETE')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "sync_change",
+    "name": "ck_sync_change_payload_schema_version_positive",
+    "expression": "`payload_schema_version` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "sync_operation",
+    "name": "ck_sync_operation_dataset_epoch_positive",
+    "expression": "`dataset_epoch` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "sync_operation",
+    "name": "ck_sync_operation_status_enum",
+    "expression": "CAST(`status` AS BINARY) IN ('PROCESSING','SUCCEEDED')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "sync_operation",
+    "name": "ck_sync_operation_resource_row_version_positive",
+    "expression": "`resource_row_version` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "device_task_receipt",
+    "name": "ck_device_task_receipt_action_enum",
+    "expression": "CAST(`action` AS BINARY) IN ('COMPLETE','SKIP')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "device_task_receipt",
+    "name": "ck_device_task_receipt_expected_task_row_version_positive",
+    "expression": "`expected_task_row_version` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "device_task_receipt",
+    "name": "ck_device_task_receipt_captured_dataset_epoch_positive",
+    "expression": "`captured_dataset_epoch` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "device_task_receipt",
+    "name": "ck_device_task_receipt_credential_revision_positive",
+    "expression": "`credential_revision` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "device_task_receipt",
+    "name": "ck_device_task_receipt_status_enum",
+    "expression": "CAST(`status` AS BINARY) IN ('ACCEPTED','REPLAYED','REJECTED')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "device_task_receipt",
+    "name": "ck_device_task_receipt_result_task_row_version_positive",
+    "expression": "`result_task_row_version` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "external_data_connection",
+    "name": "ck_external_data_connection_row_version_positive",
+    "expression": "`row_version` >= 1",
+    "note": "CM乐观版本从1开始。"
+  },
+  {
+    "table": "external_data_connection",
+    "name": "ck_external_data_connection_status_enum",
+    "expression": "CAST(`status` AS BINARY) IN ('AUTHORIZING','ACTIVE','EXPIRED','REVOKED','ERROR')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "external_data_connection",
+    "name": "ck_external_data_connection_authorization_revision_positive",
+    "expression": "`authorization_revision` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "external_data_connection",
+    "name": "ck_external_data_connection_consent_version_positive",
+    "expression": "`consent_version` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "external_data_connection",
+    "name": "ck_external_data_connection_access_token_cipher_key",
+    "expression": "`access_token_cipher` IS NULL OR `encryption_key_ref` IS NOT NULL",
+    "note": "非空密文必须有外部密钥引用；不把密钥本体存库。"
+  },
+  {
+    "table": "external_data_connection",
+    "name": "ck_external_data_connection_refresh_token_cipher_key",
+    "expression": "`refresh_token_cipher` IS NULL OR `encryption_key_ref` IS NOT NULL",
+    "note": "非空密文必须有外部密钥引用；不把密钥本体存库。"
+  },
+  {
+    "table": "external_data_connection",
+    "name": "ck_external_data_connection_provider_cursor_cipher_key",
+    "expression": "`provider_cursor_cipher` IS NULL OR `encryption_key_ref` IS NOT NULL",
+    "note": "非空密文必须有外部密钥引用；不把密钥本体存库。"
+  },
+  {
+    "table": "external_data_connection",
+    "name": "ck_external_data_connection_key_has_cipher",
+    "expression": "`encryption_key_ref` IS NULL OR (`access_token_cipher` IS NOT NULL OR `refresh_token_cipher` IS NOT NULL OR `provider_cursor_cipher` IS NOT NULL)",
+    "note": "该表key_ref只用于列明密文，避免孤立密钥引用。"
+  },
+  {
+    "table": "import_batch",
+    "name": "ck_import_batch_row_version_positive",
+    "expression": "`row_version` >= 1",
+    "note": "CM乐观版本从1开始。"
+  },
+  {
+    "table": "import_batch",
+    "name": "ck_import_batch_kind_enum",
+    "expression": "CAST(`kind` AS BINARY) IN ('EXTERNAL_RECORDS','COURSE_IMAGE','VOICE_RECORD')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "import_batch",
+    "name": "ck_import_batch_status_enum",
+    "expression": "CAST(`status` AS BINARY) IN ('QUEUED','RUNNING','AWAITING_CONFIRM','SUCCEEDED','PARTIAL_FAILED','FAILED','CANCELLED')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "import_batch",
+    "name": "ck_import_batch_captured_dataset_epoch_positive",
+    "expression": "`captured_dataset_epoch` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "import_batch",
+    "name": "ck_import_batch_captured_consent_version_positive",
+    "expression": "`captured_consent_version` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "import_batch",
+    "name": "ck_import_batch_authorization_revision_positive",
+    "expression": "`authorization_revision` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "import_batch",
+    "name": "ck_import_batch_input_cursor_cipher_key",
+    "expression": "`input_cursor_cipher` IS NULL OR `encryption_key_ref` IS NOT NULL",
+    "note": "非空密文必须有外部密钥引用；不把密钥本体存库。"
+  },
+  {
+    "table": "import_batch",
+    "name": "ck_import_batch_result_cursor_cipher_key",
+    "expression": "`result_cursor_cipher` IS NULL OR `encryption_key_ref` IS NOT NULL",
+    "note": "非空密文必须有外部密钥引用；不把密钥本体存库。"
+  },
+  {
+    "table": "sys_role",
+    "name": "ck_sys_role_row_version_positive",
+    "expression": "`row_version` >= 1",
+    "note": "CM乐观版本从1开始。"
+  },
+  {
+    "table": "sys_role",
+    "name": "ck_sys_role_status_enum",
+    "expression": "CAST(`status` AS BINARY) IN ('ACTIVE','DISABLED')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "sys_role",
+    "name": "ck_sys_role_is_builtin_range",
+    "expression": "`is_builtin` BETWEEN 0 AND 1",
+    "note": "文档或已明确接口范围；NULL可选值保留SQL UNKNOWN语义。"
+  },
+  {
+    "table": "sys_role",
+    "name": "ck_sys_role_permission_revision_positive",
+    "expression": "`permission_revision` >= 1",
+    "note": "文档中从1起的版本/代际/引用序号；SQL NULL仍允许。"
+  },
+  {
+    "table": "sys_permission",
+    "name": "ck_sys_permission_row_version_positive",
+    "expression": "`row_version` >= 1",
+    "note": "CM乐观版本从1开始。"
+  },
+  {
+    "table": "sys_permission",
+    "name": "ck_sys_permission_resource_group_enum",
+    "expression": "CAST(`resource_group` AS BINARY) IN ('KNOWLEDGE','CONFIG','AUDIT','FEEDBACK','ROLE','USER','JOB')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "sys_permission",
+    "name": "ck_sys_permission_action_enum",
+    "expression": "CAST(`action` AS BINARY) IN ('READ','CREATE','UPDATE','REVIEW','PUBLISH','ASSIGN')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "sys_permission",
+    "name": "ck_sys_permission_is_sensitive_range",
+    "expression": "`is_sensitive` BETWEEN 0 AND 1",
+    "note": "文档或已明确接口范围；NULL可选值保留SQL UNKNOWN语义。"
+  },
+  {
+    "table": "sys_permission",
+    "name": "ck_sys_permission_status_enum",
+    "expression": "CAST(`status` AS BINARY) IN ('ACTIVE','DISABLED')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "user_role_assignment",
+    "name": "ck_user_role_assignment_row_version_positive",
+    "expression": "`row_version` >= 1",
+    "note": "CM乐观版本从1开始。"
+  },
+  {
+    "table": "user_role_assignment",
+    "name": "ck_user_role_assignment_status_enum",
+    "expression": "CAST(`status` AS BINARY) IN ('ACTIVE','REVOKED')",
+    "note": "明确枚举；CAST AS BINARY使大小写精确，NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "user_profile",
+    "name": "ck_user_profile_week_start_day_range",
+    "expression": "`week_start_day` BETWEEN 1 AND 7",
+    "note": "文档或已明确接口范围；NULL可选值保留SQL UNKNOWN语义。"
+  },
+  {
+    "table": "user_preference",
+    "name": "ck_user_preference_daily_task_limit_range",
+    "expression": "`daily_task_limit` BETWEEN 1 AND 12",
+    "note": "文档或已明确接口范围；NULL可选值保留SQL UNKNOWN语义。"
+  },
+  {
+    "table": "user_preference",
+    "name": "ck_user_preference_default_task_minutes_range",
+    "expression": "`default_task_minutes` BETWEEN 1 AND 240",
+    "note": "文档或已明确接口范围；NULL可选值保留SQL UNKNOWN语义。"
+  },
+  {
+    "table": "user_preference",
+    "name": "ck_user_preference_preferred_session_minutes_range",
+    "expression": "`preferred_session_minutes` BETWEEN 1 AND 240",
+    "note": "文档或已明确接口范围；NULL可选值保留SQL UNKNOWN语义。"
+  },
+  {
+    "table": "user_preference",
+    "name": "ck_user_preference_font_scale_range",
+    "expression": "`font_scale` BETWEEN 0.80 AND 2.00",
+    "note": "文档或已明确接口范围；NULL可选值保留SQL UNKNOWN语义。"
+  },
+  {
+    "table": "auth_verification",
+    "name": "ck_auth_verification_max_attempts_range",
+    "expression": "`max_attempts` BETWEEN 1 AND 10",
+    "note": "文档或已明确接口范围；NULL可选值保留SQL UNKNOWN语义。"
+  },
+  {
+    "table": "user_goal",
+    "name": "ck_user_goal_priority_range",
+    "expression": "`priority` BETWEEN 1 AND 5",
+    "note": "文档或已明确接口范围；NULL可选值保留SQL UNKNOWN语义。"
+  },
+  {
+    "table": "availability_rule",
+    "name": "ck_availability_rule_weekday_range",
+    "expression": "`weekday` BETWEEN 1 AND 7",
+    "note": "文档或已明确接口范围；NULL可选值保留SQL UNKNOWN语义。"
+  },
+  {
+    "table": "availability_rule",
+    "name": "ck_availability_rule_start_minute_range",
+    "expression": "`start_minute` BETWEEN 0 AND 1439",
+    "note": "文档或已明确接口范围；NULL可选值保留SQL UNKNOWN语义。"
+  },
+  {
+    "table": "availability_rule",
+    "name": "ck_availability_rule_end_minute_range",
+    "expression": "`end_minute` BETWEEN 0 AND 1439",
+    "note": "文档或已明确接口范围；NULL可选值保留SQL UNKNOWN语义。"
+  },
+  {
+    "table": "health_record",
+    "name": "ck_health_record_utc_offset_minutes_range",
+    "expression": "`utc_offset_minutes` BETWEEN -840 AND 840",
+    "note": "文档或已明确接口范围；NULL可选值保留SQL UNKNOWN语义。"
+  },
+  {
+    "table": "sleep_record_detail",
+    "name": "ck_sleep_record_detail_elapsed_minutes_range",
+    "expression": "`elapsed_minutes` BETWEEN 1 AND 2160",
+    "note": "文档或已明确接口范围；NULL可选值保留SQL UNKNOWN语义。"
+  },
+  {
+    "table": "sleep_record_detail",
+    "name": "ck_sleep_record_detail_rested_level_range",
+    "expression": "`rested_level` BETWEEN 1 AND 5",
+    "note": "文档或已明确接口范围；NULL可选值保留SQL UNKNOWN语义。"
+  },
+  {
+    "table": "activity_record_detail",
+    "name": "ck_activity_record_detail_actual_duration_minutes_range",
+    "expression": "`actual_duration_minutes` BETWEEN 1 AND 1440",
+    "note": "文档或已明确接口范围；NULL可选值保留SQL UNKNOWN语义。"
+  },
+  {
+    "table": "activity_record_detail",
+    "name": "ck_activity_record_detail_distance_meters_range",
+    "expression": "`distance_meters` BETWEEN 0 AND 1000000",
+    "note": "文档或已明确接口范围；NULL可选值保留SQL UNKNOWN语义。"
+  },
+  {
+    "table": "meal_record_detail",
+    "name": "ck_meal_record_detail_satiety_level_range",
+    "expression": "`satiety_level` BETWEEN 1 AND 5",
+    "note": "文档或已明确接口范围；NULL可选值保留SQL UNKNOWN语义。"
+  },
+  {
+    "table": "energy_record_detail",
+    "name": "ck_energy_record_detail_energy_level_range",
+    "expression": "`energy_level` BETWEEN 1 AND 5",
+    "note": "文档或已明确接口范围；NULL可选值保留SQL UNKNOWN语义。"
+  },
+  {
+    "table": "task",
+    "name": "ck_task_planned_duration_minutes_range",
+    "expression": "`planned_duration_minutes` BETWEEN 1 AND 1440",
+    "note": "文档或已明确接口范围；NULL可选值保留SQL UNKNOWN语义。"
+  },
+  {
+    "table": "task",
+    "name": "ck_task_priority_range",
+    "expression": "`priority` BETWEEN 1 AND 5",
+    "note": "文档或已明确接口范围；NULL可选值保留SQL UNKNOWN语义。"
+  },
+  {
+    "table": "plan_version_task",
+    "name": "ck_plan_version_task_planned_duration_minutes_range",
+    "expression": "`planned_duration_minutes` BETWEEN 1 AND 1440",
+    "note": "文档或已明确接口范围；NULL可选值保留SQL UNKNOWN语义。"
+  },
+  {
+    "table": "plan_version_task",
+    "name": "ck_plan_version_task_priority_range",
+    "expression": "`priority` BETWEEN 1 AND 5",
+    "note": "文档或已明确接口范围；NULL可选值保留SQL UNKNOWN语义。"
+  },
+  {
+    "table": "plan_rule",
+    "name": "ck_plan_rule_planned_duration_minutes_range",
+    "expression": "`planned_duration_minutes` BETWEEN 1 AND 1440",
+    "note": "文档或已明确接口范围；NULL可选值保留SQL UNKNOWN语义。"
+  },
+  {
+    "table": "reminder_rule",
+    "name": "ck_reminder_rule_offset_minutes_range",
+    "expression": "`offset_minutes` BETWEEN -1440 AND 0",
+    "note": "文档或已明确接口范围；NULL可选值保留SQL UNKNOWN语义。"
+  },
+  {
+    "table": "user_sync_clock",
+    "name": "ck_user_sync_clock_retention",
+    "expression": "`retained_from_seq` >= 1 AND `retained_from_seq` <= `committed_seq` + 1",
+    "note": "无事件时retained_from_seq=committed_seq+1；不是自增ID游标。"
+  },
+  {
+    "table": "sync_change",
+    "name": "ck_sync_change_change_seq_positive",
+    "expression": "`change_seq` >= 1",
+    "note": "真实变更序号从1起。"
+  },
+  {
+    "table": "sync_operation",
+    "name": "ck_sync_operation_last_change_seq_positive",
+    "expression": "`last_change_seq` IS NULL OR `last_change_seq` >= 1",
+    "note": "不进入个人同步流的回执可无seq。"
+  },
+  {
+    "table": "user_preference",
+    "name": "ck_user_preference_quiet_hours",
+    "expression": "(`quiet_start` IS NULL) = (`quiet_end` IS NULL) AND (`quiet_hours_enabled`=0 OR (`quiet_start` IS NOT NULL AND `quiet_end` IS NOT NULL AND `quiet_start`<>`quiet_end`))",
+    "note": "免打扰起止成对，启用时不可缺失或相等；可跨午夜。"
+  },
+  {
+    "table": "auth_session",
+    "name": "ck_auth_session_expiry",
+    "expression": "`expires_at` > `issued_at` AND `family_expires_at` >= `expires_at`",
+    "note": "旋转不能超过绝对会话截止。"
+  },
+  {
+    "table": "auth_session",
+    "name": "ck_auth_session_consumed_at_pair",
+    "expression": "(`consumed_at` IS NULL) = (`replaced_by_session_id` IS NULL)",
+    "note": "文档规定的同空同有。"
+  },
+  {
+    "table": "auth_verification",
+    "name": "ck_auth_verification_attempts",
+    "expression": "`attempt_count` <= `max_attempts`",
+    "note": "挑战失败次数上限。"
+  },
+  {
+    "table": "auth_verification",
+    "name": "ck_auth_verification_expiry",
+    "expression": "`expires_at` > `created_at`",
+    "note": "验证码失效时间晚于创建。"
+  },
+  {
+    "table": "auth_verification",
+    "name": "ck_auth_verification_destination_cipher_pair",
+    "expression": "(`destination_cipher` IS NULL) = (`encryption_key_ref` IS NULL)",
+    "note": "文档规定的同空同有。"
+  },
+  {
+    "table": "client_installation",
+    "name": "ck_client_installation_pairing_token_hash_pair",
+    "expression": "(`pairing_token_hash` IS NULL) = (`pairing_expires_at` IS NULL)",
+    "note": "文档规定的同空同有。"
+  },
+  {
+    "table": "client_installation",
+    "name": "ck_client_installation_device_credential_hash_pair",
+    "expression": "(`device_credential_hash` IS NULL) = (`credential_expires_at` IS NULL)",
+    "note": "文档规定的同空同有。"
+  },
+  {
+    "table": "client_installation",
+    "name": "ck_client_installation_parent_kind",
+    "expression": "(CAST(`installation_kind` AS BINARY)='WATCH' AND `parent_installation_id` IS NOT NULL) OR (CAST(`installation_kind` AS BINARY) IN ('PHONE','WEB') AND `parent_installation_id` IS NULL)",
+    "note": "WATCH必须有PHONE父安装；同用户/父类型由FK及服务保证。"
+  },
+  {
+    "table": "client_installation",
+    "name": "ck_client_installation_web_platform",
+    "expression": "(CAST(`installation_kind` AS BINARY)='WEB') = (CAST(`platform` AS BINARY)='WEB')",
+    "note": "WEB安装与WEB平台对应；PHONE/WATCH不冒用WEB。"
+  },
+  {
+    "table": "client_installation",
+    "name": "ck_client_installation_ack_bound",
+    "expression": "`last_ack_seq` <= `last_delivered_seq`",
+    "note": "ack不得超出已交付水位。"
+  },
+  {
+    "table": "client_installation",
+    "name": "ck_client_installation_initializing_lease",
+    "expression": "CAST(`sync_state` AS BINARY)<>'INITIALIZING' OR (`bootstrap_id` IS NOT NULL AND `bootstrap_from_seq` IS NOT NULL AND `bootstrap_expires_at` IS NOT NULL AND `bootstrap_epoch` IS NOT NULL)",
+    "note": "初始化必须有完整租约；READY不继续受2小时租约限制。"
+  },
+  {
+    "table": "client_installation",
+    "name": "ck_client_installation_ready_epoch",
+    "expression": "CAST(`sync_state` AS BINARY)<>'READY' OR (`sync_epoch` IS NOT NULL AND `bootstrap_completed_at` IS NOT NULL)",
+    "note": "READY需要已完成初始化的epoch与时间。"
+  },
+  {
+    "table": "user_goal",
+    "name": "ck_user_goal_valid_date_range",
+    "expression": "`end_local_date` IS NULL OR `end_local_date` >= `start_local_date`",
+    "note": "日期/有效期不反向；NULL表示无截止。"
+  },
+  {
+    "table": "availability_rule",
+    "name": "ck_availability_rule_valid_date_range",
+    "expression": "`valid_until` IS NULL OR `valid_until` >= `valid_from`",
+    "note": "日期/有效期不反向；NULL表示无截止。"
+  },
+  {
+    "table": "plan",
+    "name": "ck_plan_valid_date_range",
+    "expression": "`range_end_date` IS NULL OR `range_end_date` >= `range_start_date`",
+    "note": "日期/有效期不反向；NULL表示无截止。"
+  },
+  {
+    "table": "plan_rule",
+    "name": "ck_plan_rule_valid_date_range",
+    "expression": "`valid_until` IS NULL OR `valid_until` >= `valid_from`",
+    "note": "日期/有效期不反向；NULL表示无截止。"
+  },
+  {
+    "table": "reminder_rule",
+    "name": "ck_reminder_rule_valid_date_range",
+    "expression": "`valid_until` IS NULL OR `valid_until` >= `valid_from`",
+    "note": "日期/有效期不反向；NULL表示无截止。"
+  },
+  {
+    "table": "user_role_assignment",
+    "name": "ck_user_role_assignment_valid_date_range",
+    "expression": "`valid_until` IS NULL OR `valid_until` >= `valid_from`",
+    "note": "日期/有效期不反向；NULL表示无截止。"
+  },
+  {
+    "table": "availability_rule",
+    "name": "ck_availability_rule_duration",
+    "expression": "`end_minute` + 1440*`end_day_offset` - `start_minute` BETWEEN 1 AND 1440",
+    "note": "跨午夜显式end_day_offset，有效时段最多一天。"
+  },
+  {
+    "table": "health_record",
+    "name": "ck_health_record_time_range",
+    "expression": "`ended_at` IS NULL OR `ended_at` >= `started_at`",
+    "note": "记录区间不反向。"
+  },
+  {
+    "table": "health_record",
+    "name": "ck_health_record_type_time",
+    "expression": "(CAST(`record_type` AS BINARY) IN ('SLEEP','ACTIVITY') AND `ended_at` IS NOT NULL AND `ended_at`>`started_at`) OR (CAST(`record_type` AS BINARY)='ENERGY' AND `ended_at` IS NULL) OR CAST(`record_type` AS BINARY)='MEAL'",
+    "note": "睡眠/活动必须有结束；主观精力是单点，MEAL保留可选结束。"
+  },
+  {
+    "table": "health_record",
+    "name": "ck_health_record_source_pair",
+    "expression": "(CAST(`source_type` AS BINARY)='EXTERNAL' AND `source_connection_id` IS NOT NULL AND `provider_record_key` IS NOT NULL) OR (CAST(`source_type` AS BINARY) IN ('MANUAL','AI_CONFIRMED') AND `source_connection_id` IS NULL AND `provider_record_key` IS NULL)",
+    "note": "文档明确三种来源互斥；外部稳定键必须齐全。"
+  },
+  {
+    "table": "sleep_record_detail",
+    "name": "ck_sleep_record_detail_sleep_range",
+    "expression": "`wake_at` > `sleep_start_at` AND TIMESTAMPDIFF(SECOND,`sleep_start_at`,`wake_at`) <= 129600",
+    "note": "用户记录睡眠区间大于0、至多36小时；非实测总睡眠。"
+  },
+  {
+    "table": "activity_record_detail",
+    "name": "ck_activity_record_detail_other_name",
+    "expression": "CAST(`activity_type` AS BINARY)<>'OTHER' OR (`custom_activity_name` IS NOT NULL AND CHAR_LENGTH(TRIM(`custom_activity_name`))>=1)",
+    "note": "OTHER活动必须有自定义名称。"
+  },
+  {
+    "table": "activity_record_detail",
+    "name": "ck_activity_record_detail_distance_meters_pair",
+    "expression": "(`distance_meters` IS NULL) = (`distance_method` IS NULL)",
+    "note": "文档规定的同空同有。"
+  },
+  {
+    "table": "task",
+    "name": "ck_task_schedule",
+    "expression": "`scheduled_end_at` > `scheduled_start_at` AND `planned_duration_minutes`*60 <= TIMESTAMPDIFF(SECOND,`scheduled_start_at`,`scheduled_end_at`)",
+    "note": "计划时长不超过明确时间窗，不等同实际活动。"
+  },
+  {
+    "table": "task",
+    "name": "ck_task_rule_id_pair",
+    "expression": "(`rule_id` IS NULL) = (`occurrence_key` IS NULL)",
+    "note": "文档规定的同空同有。"
+  },
+  {
+    "table": "plan_version_task",
+    "name": "ck_plan_version_task_schedule",
+    "expression": "`scheduled_end_at` > `scheduled_start_at` AND `planned_duration_minutes`*60 <= TIMESTAMPDIFF(SECOND,`scheduled_start_at`,`scheduled_end_at`)",
+    "note": "计划时长不超过明确时间窗，不等同实际活动。"
+  },
+  {
+    "table": "plan_version_task",
+    "name": "ck_plan_version_task_rule_id_pair",
+    "expression": "(`rule_id` IS NULL) = (`occurrence_key` IS NULL)",
+    "note": "文档规定的同空同有。"
+  },
+  {
+    "table": "plan_version",
+    "name": "ck_plan_version_sealed_metadata",
+    "expression": "CAST(`status` AS BINARY)<>'SEALED' OR (`sealed_at` IS NOT NULL AND `sealed_by_operation_id` IS NOT NULL AND `content_digest` IS NOT NULL)",
+    "note": "封存必须有审计与摘要；子项不可变及task_id非空须服务事务保证。"
+  },
+  {
+    "table": "plan_rule",
+    "name": "ck_plan_rule_local_window",
+    "expression": "(TIME_TO_SEC(`end_local_time`)+86400*`end_day_offset`-TIME_TO_SEC(`start_local_time`)) BETWEEN 60 AND 86400 AND `planned_duration_minutes`*60 <= TIME_TO_SEC(`end_local_time`)+86400*`end_day_offset`-TIME_TO_SEC(`start_local_time`)",
+    "note": "模板时间窗1–1440分钟，计划时长不能超过窗。"
+  },
+  {
+    "table": "plan_rule",
+    "name": "ck_plan_rule_weekly_days",
+    "expression": "CAST(`recurrence_kind` AS BINARY)<>'WEEKLY' OR `weekdays_json` IS NOT NULL",
+    "note": "WEEKLY必须有星期数组；DAILY可无。"
+  },
+  {
+    "table": "task_event",
+    "name": "ck_task_event_row_versions",
+    "expression": "`after_row_version` > `before_row_version`",
+    "note": "CREATE可before=0；动作后版本必须增加。"
+  },
+  {
+    "table": "ai_draft",
+    "name": "ck_ai_draft_revision_order",
+    "expression": "`validated_revision_no` IS NULL OR `validated_revision_no` <= `current_revision_no`",
+    "note": "通过校验的修订不能来自未来。"
+  },
+  {
+    "table": "ai_draft",
+    "name": "ck_ai_draft_applied_receipt",
+    "expression": "(CAST(`status` AS BINARY)='APPLIED' AND `applied_at` IS NOT NULL AND `applied_resource_type` IS NOT NULL AND `applied_resource_id` IS NOT NULL AND `applied_operation_id` IS NOT NULL) OR (CAST(`status` AS BINARY)<>'APPLIED' AND `applied_at` IS NULL AND `applied_resource_type` IS NULL AND `applied_resource_id` IS NULL AND `applied_operation_id` IS NULL)",
+    "note": "文档给出的APPLIED四字段完整回执约束；非APPLIED不能残留。"
+  },
+  {
+    "table": "ai_draft_revision",
+    "name": "ck_ai_draft_revision_source_revision",
+    "expression": "`source_revision` IS NULL OR `source_revision` < `revision_no`",
+    "note": "每次修订基于更早版本。"
+  },
+  {
+    "table": "knowledge_article_version",
+    "name": "ck_knowledge_article_version_published_time",
+    "expression": "CAST(`status` AS BINARY)<>'PUBLISHED' OR `published_at` IS NOT NULL",
+    "note": "已发布版本必须有发布时间。"
+  },
+  {
+    "table": "knowledge_article_version",
+    "name": "ck_knowledge_article_version_different_reviewer",
+    "expression": "`reviewer_user_id` IS NULL OR `author_user_id` IS NULL OR `reviewer_user_id`<>`author_user_id`",
+    "note": "最终接口规定编辑审核分离，不能自审。"
+  },
+  {
+    "table": "daily_stat",
+    "name": "ck_daily_stat_task_counts",
+    "expression": "`task_completed_count` + `task_skipped_count` <= `task_denominator`",
+    "note": "完成和跳过均在执行分母内。"
+  },
+  {
+    "table": "daily_stat",
+    "name": "ck_daily_stat_energy_sum",
+    "expression": "(`energy_sample_count`=0 AND `energy_level_sum` IS NULL) OR (`energy_sample_count`>0 AND `energy_level_sum` IS NOT NULL AND `energy_level_sum` BETWEEN `energy_sample_count` AND 5*`energy_sample_count`)",
+    "note": "无主观精力数据用NULL；有数据时每次五级评分。"
+  },
+  {
+    "table": "weekly_review",
+    "name": "ck_weekly_review_week_range",
+    "expression": "`week_end_date` = DATE_ADD(`week_start_date`, INTERVAL 6 DAY)",
+    "note": "周回顾固定7天。"
+  },
+  {
+    "table": "weekly_review_evidence",
+    "name": "ck_weekly_review_evidence_exactly_one",
+    "expression": "(CAST(`evidence_type` AS BINARY)='DAILY_STAT' AND `daily_stat_id` IS NOT NULL AND `record_id` IS NULL AND `task_event_id` IS NULL) OR (CAST(`evidence_type` AS BINARY)='RECORD' AND `record_id` IS NOT NULL AND `daily_stat_id` IS NULL AND `task_event_id` IS NULL) OR (CAST(`evidence_type` AS BINARY)='TASK_EVENT' AND `task_event_id` IS NOT NULL AND `daily_stat_id` IS NULL AND `record_id` IS NULL)",
+    "note": "每条证据恰好指向一种实体，显式IS NOT NULL消除UNKNOWN漏洞。"
+  },
+  {
+    "table": "reminder_rule",
+    "name": "ck_reminder_rule_trigger_fields",
+    "expression": "(CAST(`trigger_kind` AS BINARY)='OFFSET' AND CAST(`rule_type` AS BINARY)='TASK_START' AND `task_id` IS NOT NULL AND `offset_minutes` IS NOT NULL AND `local_fire_time` IS NULL) OR (CAST(`trigger_kind` AS BINARY)='DAILY_LOCAL' AND CAST(`rule_type` AS BINARY)='RECORD_CHECKIN' AND `task_id` IS NULL AND `local_fire_time` IS NOT NULL AND `offset_minutes` IS NULL)",
+    "note": "任务offset与每日本地提醒两种明确分支。"
+  },
+  {
+    "table": "reminder_delivery",
+    "name": "ck_reminder_delivery_task_version_pair",
+    "expression": "(`task_id` IS NULL) = (`task_row_version` IS NULL)",
+    "note": "有任务提醒必须附任务版本；日常记录提醒两者皆空。"
+  },
+  {
+    "table": "file_object",
+    "name": "ck_file_object_clean_metadata",
+    "expression": "CAST(`status` AS BINARY)<>'CLEAN' OR (`byte_size` IS NOT NULL AND `sha256` IS NOT NULL AND `mime_type` IS NOT NULL AND `completed_at` IS NOT NULL)",
+    "note": "文件CLEAN必须已核验实际元数据并有完成时间。"
+  },
+  {
+    "table": "file_object",
+    "name": "ck_file_object_expected_size",
+    "expression": "`expected_byte_size` >= 1",
+    "note": "上传/内部文件的预期大小必须为正。"
+  },
+  {
+    "table": "file_object",
+    "name": "ck_file_object_actual_size",
+    "expression": "`byte_size` IS NULL OR `byte_size` >= 1",
+    "note": "可选实际字节数非零。"
+  },
+  {
+    "table": "notification_inbox",
+    "name": "ck_notification_inbox_target_pair",
+    "expression": "(`target_type` IS NULL) = (`target_id` IS NULL)",
+    "note": "目标类型和ID成对；无目标用SQL NULL。"
+  },
+  {
+    "table": "outbox_event",
+    "name": "ck_outbox_event_claim_lease",
+    "expression": "CAST(`status` AS BINARY)<>'CLAIMED' OR (`lease_owner` IS NOT NULL AND `lease_until` IS NOT NULL)",
+    "note": "已领取事件必须有工作者与租约；外部调用不持行锁。"
+  },
+  {
+    "table": "import_batch",
+    "name": "ck_import_batch_counts",
+    "expression": "`total_count` IS NULL OR `imported_count` + `duplicate_count` + `rejected_count` <= `total_count`",
+    "note": "导入成功、重复、拒绝数量不超过已知候选总数。"
+  },
+  {
+    "table": "import_batch",
+    "name": "ck_import_batch_source_kind",
+    "expression": "(CAST(`kind` AS BINARY)='EXTERNAL_RECORDS' AND `source_connection_id` IS NOT NULL AND `authorization_revision` IS NOT NULL AND `source_file_id` IS NULL) OR (CAST(`kind` AS BINARY) IN ('COURSE_IMAGE','VOICE_RECORD') AND `source_file_id` IS NOT NULL AND `source_connection_id` IS NULL)",
+    "note": "外部读取与图片/语音导入的来源引用分开。"
+  },
+  {
+    "table": "user_preference",
+    "name": "ck_user_preference_preferred_activity_types_json_shape",
+    "expression": "JSON_TYPE(`preferred_activity_types_json`) IN ('ARRAY')",
+    "note": "仅约束已明确JSON形状；业务字段/schema与引用所有权仍由服务校验。"
+  },
+  {
+    "table": "user_preference",
+    "name": "ck_user_preference_excluded_activity_types_json_shape",
+    "expression": "JSON_TYPE(`excluded_activity_types_json`) IN ('ARRAY')",
+    "note": "仅约束已明确JSON形状；业务字段/schema与引用所有权仍由服务校验。"
+  },
+  {
+    "table": "client_installation",
+    "name": "ck_client_installation_capabilities_json_shape",
+    "expression": "JSON_TYPE(`capabilities_json`) IN ('OBJECT')",
+    "note": "仅约束已明确JSON形状；业务字段/schema与引用所有权仍由服务校验。"
+  },
+  {
+    "table": "client_installation",
+    "name": "ck_client_installation_bootstrap_progress_json_shape",
+    "expression": "JSON_TYPE(`bootstrap_progress_json`) IN ('OBJECT')",
+    "note": "仅约束已明确JSON形状；业务字段/schema与引用所有权仍由服务校验。"
+  },
+  {
+    "table": "client_installation",
+    "name": "ck_client_installation_device_scope_json_shape",
+    "expression": "JSON_TYPE(`device_scope_json`) IN ('ARRAY')",
+    "note": "仅约束已明确JSON形状；业务字段/schema与引用所有权仍由服务校验。"
+  },
+  {
+    "table": "user_consent",
+    "name": "ck_user_consent_scope_json_shape",
+    "expression": "JSON_TYPE(`scope_json`) IN ('OBJECT','ARRAY')",
+    "note": "仅约束已明确JSON形状；业务字段/schema与引用所有权仍由服务校验。"
+  },
+  {
+    "table": "user_consent_event",
+    "name": "ck_user_consent_event_scope_json_shape",
+    "expression": "JSON_TYPE(`scope_json`) IN ('OBJECT','ARRAY')",
+    "note": "仅约束已明确JSON形状；业务字段/schema与引用所有权仍由服务校验。"
+  },
+  {
+    "table": "goal_definition",
+    "name": "ck_goal_definition_parameter_schema_json_shape",
+    "expression": "JSON_TYPE(`parameter_schema_json`) IN ('OBJECT')",
+    "note": "仅约束已明确JSON形状；业务字段/schema与引用所有权仍由服务校验。"
+  },
+  {
+    "table": "goal_definition",
+    "name": "ck_goal_definition_suggested_parameters_json_shape",
+    "expression": "JSON_TYPE(`suggested_parameters_json`) IN ('OBJECT')",
+    "note": "仅约束已明确JSON形状；业务字段/schema与引用所有权仍由服务校验。"
+  },
+  {
+    "table": "user_goal",
+    "name": "ck_user_goal_parameters_json_shape",
+    "expression": "JSON_TYPE(`parameters_json`) IN ('OBJECT')",
+    "note": "仅约束已明确JSON形状；业务字段/schema与引用所有权仍由服务校验。"
+  },
+  {
+    "table": "user_goal",
+    "name": "ck_user_goal_success_criterion_json_shape",
+    "expression": "JSON_TYPE(`success_criterion_json`) IN ('OBJECT')",
+    "note": "仅约束已明确JSON形状；业务字段/schema与引用所有权仍由服务校验。"
+  },
+  {
+    "table": "availability_exception",
+    "name": "ck_availability_exception_slots_json_shape",
+    "expression": "JSON_TYPE(`slots_json`) IN ('ARRAY')",
+    "note": "仅约束已明确JSON形状；业务字段/schema与引用所有权仍由服务校验。"
+  },
+  {
+    "table": "plan_version",
+    "name": "ck_plan_version_affected_task_ids_json_shape",
+    "expression": "JSON_TYPE(`affected_task_ids_json`) IN ('ARRAY')",
+    "note": "仅约束已明确JSON形状；业务字段/schema与引用所有权仍由服务校验。"
+  },
+  {
+    "table": "plan_version",
+    "name": "ck_plan_version_constraint_snapshot_json_shape",
+    "expression": "JSON_TYPE(`constraint_snapshot_json`) IN ('OBJECT')",
+    "note": "仅约束已明确JSON形状；业务字段/schema与引用所有权仍由服务校验。"
+  },
+  {
+    "table": "plan_version",
+    "name": "ck_plan_version_validation_report_json_shape",
+    "expression": "JSON_TYPE(`validation_report_json`) IN ('OBJECT')",
+    "note": "仅约束已明确JSON形状；业务字段/schema与引用所有权仍由服务校验。"
+  },
+  {
+    "table": "plan_version_task",
+    "name": "ck_plan_version_task_reminder_snapshot_json_shape",
+    "expression": "JSON_TYPE(`reminder_snapshot_json`) IN ('OBJECT')",
+    "note": "仅约束已明确JSON形状；业务字段/schema与引用所有权仍由服务校验。"
+  },
+  {
+    "table": "plan_rule",
+    "name": "ck_plan_rule_weekdays_json_shape",
+    "expression": "JSON_TYPE(`weekdays_json`) IN ('ARRAY')",
+    "note": "仅约束已明确JSON形状；业务字段/schema与引用所有权仍由服务校验。"
+  },
+  {
+    "table": "plan_rule",
+    "name": "ck_plan_rule_reminder_snapshot_json_shape",
+    "expression": "JSON_TYPE(`reminder_snapshot_json`) IN ('OBJECT')",
+    "note": "仅约束已明确JSON形状；业务字段/schema与引用所有权仍由服务校验。"
+  },
+  {
+    "table": "task_event",
+    "name": "ck_task_event_before_schedule_json_shape",
+    "expression": "JSON_TYPE(`before_schedule_json`) IN ('OBJECT')",
+    "note": "仅约束已明确JSON形状；业务字段/schema与引用所有权仍由服务校验。"
+  },
+  {
+    "table": "task_event",
+    "name": "ck_task_event_after_schedule_json_shape",
+    "expression": "JSON_TYPE(`after_schedule_json`) IN ('OBJECT')",
+    "note": "仅约束已明确JSON形状；业务字段/schema与引用所有权仍由服务校验。"
+  },
+  {
+    "table": "ai_draft_revision",
+    "name": "ck_ai_draft_revision_payload_json_shape",
+    "expression": "JSON_TYPE(`payload_json`) IN ('OBJECT')",
+    "note": "仅约束已明确JSON形状；业务字段/schema与引用所有权仍由服务校验。"
+  },
+  {
+    "table": "ai_draft_revision",
+    "name": "ck_ai_draft_revision_base_snapshot_json_shape",
+    "expression": "JSON_TYPE(`base_snapshot_json`) IN ('OBJECT')",
+    "note": "仅约束已明确JSON形状；业务字段/schema与引用所有权仍由服务校验。"
+  },
+  {
+    "table": "ai_draft_revision",
+    "name": "ck_ai_draft_revision_validation_report_json_shape",
+    "expression": "JSON_TYPE(`validation_report_json`) IN ('OBJECT')",
+    "note": "仅约束已明确JSON形状；业务字段/schema与引用所有权仍由服务校验。"
+  },
+  {
+    "table": "knowledge_article",
+    "name": "ck_knowledge_article_tag_codes_json_shape",
+    "expression": "JSON_TYPE(`tag_codes_json`) IN ('ARRAY')",
+    "note": "仅约束已明确JSON形状；业务字段/schema与引用所有权仍由服务校验。"
+  },
+  {
+    "table": "knowledge_article_version",
+    "name": "ck_knowledge_article_version_tags_json_shape",
+    "expression": "JSON_TYPE(`tags_json`) IN ('ARRAY')",
+    "note": "仅约束已明确JSON形状；业务字段/schema与引用所有权仍由服务校验。"
+  },
+  {
+    "table": "daily_stat",
+    "name": "ck_daily_stat_coverage_json_shape",
+    "expression": "JSON_TYPE(`coverage_json`) IN ('OBJECT')",
+    "note": "仅约束已明确JSON形状；业务字段/schema与引用所有权仍由服务校验。"
+  },
+  {
+    "table": "daily_stat",
+    "name": "ck_daily_stat_quality_flags_json_shape",
+    "expression": "JSON_TYPE(`quality_flags_json`) IN ('ARRAY')",
+    "note": "仅约束已明确JSON形状；业务字段/schema与引用所有权仍由服务校验。"
+  },
+  {
+    "table": "daily_stat",
+    "name": "ck_daily_stat_source_time_zones_json_shape",
+    "expression": "JSON_TYPE(`source_time_zones_json`) IN ('ARRAY')",
+    "note": "仅约束已明确JSON形状；业务字段/schema与引用所有权仍由服务校验。"
+  },
+  {
+    "table": "weekly_review",
+    "name": "ck_weekly_review_coverage_json_shape",
+    "expression": "JSON_TYPE(`coverage_json`) IN ('OBJECT')",
+    "note": "仅约束已明确JSON形状；业务字段/schema与引用所有权仍由服务校验。"
+  },
+  {
+    "table": "weekly_review",
+    "name": "ck_weekly_review_suggestions_json_shape",
+    "expression": "JSON_TYPE(`suggestions_json`) IN ('OBJECT')",
+    "note": "仅约束已明确JSON形状；业务字段/schema与引用所有权仍由服务校验。"
+  },
+  {
+    "table": "weekly_review_evidence",
+    "name": "ck_weekly_review_evidence_value_snapshot_json_shape",
+    "expression": "JSON_TYPE(`value_snapshot_json`) IN ('OBJECT')",
+    "note": "仅约束已明确JSON形状；业务字段/schema与引用所有权仍由服务校验。"
+  },
+  {
+    "table": "outbox_event",
+    "name": "ck_outbox_event_payload_json_shape",
+    "expression": "JSON_TYPE(`payload_json`) IN ('OBJECT')",
+    "note": "仅约束已明确JSON形状；业务字段/schema与引用所有权仍由服务校验。"
+  },
+  {
+    "table": "privacy_request",
+    "name": "ck_privacy_request_scope_filter_json_shape",
+    "expression": "JSON_TYPE(`scope_filter_json`) IN ('OBJECT')",
+    "note": "仅约束已明确JSON形状；业务字段/schema与引用所有权仍由服务校验。"
+  },
+  {
+    "table": "privacy_request",
+    "name": "ck_privacy_request_scope_summary_json_shape",
+    "expression": "JSON_TYPE(`scope_summary_json`) IN ('OBJECT')",
+    "note": "仅约束已明确JSON形状；业务字段/schema与引用所有权仍由服务校验。"
+  },
+  {
+    "table": "privacy_request",
+    "name": "ck_privacy_request_progress_json_shape",
+    "expression": "JSON_TYPE(`progress_json`) IN ('OBJECT')",
+    "note": "仅约束已明确JSON形状；业务字段/schema与引用所有权仍由服务校验。"
+  },
+  {
+    "table": "audit_log",
+    "name": "ck_audit_log_metadata_json_shape",
+    "expression": "JSON_TYPE(`metadata_json`) IN ('OBJECT')",
+    "note": "仅约束已明确JSON形状；业务字段/schema与引用所有权仍由服务校验。"
+  },
+  {
+    "table": "feedback_ticket",
+    "name": "ck_feedback_ticket_attachment_file_ids_json_shape",
+    "expression": "JSON_TYPE(`attachment_file_ids_json`) IN ('ARRAY')",
+    "note": "仅约束已明确JSON形状；业务字段/schema与引用所有权仍由服务校验。"
+  },
+  {
+    "table": "feedback_ticket",
+    "name": "ck_feedback_ticket_diagnostics_json_shape",
+    "expression": "JSON_TYPE(`diagnostics_json`) IN ('OBJECT')",
+    "note": "仅约束已明确JSON形状；业务字段/schema与引用所有权仍由服务校验。"
+  },
+  {
+    "table": "app_configuration",
+    "name": "ck_app_configuration_schema_json_shape",
+    "expression": "JSON_TYPE(`schema_json`) IN ('OBJECT')",
+    "note": "仅约束已明确JSON形状；业务字段/schema与引用所有权仍由服务校验。"
+  },
+  {
+    "table": "sync_change",
+    "name": "ck_sync_change_payload_json_shape",
+    "expression": "JSON_TYPE(`payload_json`) IN ('OBJECT')",
+    "note": "仅约束已明确JSON形状；业务字段/schema与引用所有权仍由服务校验。"
+  },
+  {
+    "table": "sync_operation",
+    "name": "ck_sync_operation_result_json_shape",
+    "expression": "JSON_TYPE(`result_json`) IN ('OBJECT')",
+    "note": "仅约束已明确JSON形状；业务字段/schema与引用所有权仍由服务校验。"
+  },
+  {
+    "table": "external_data_connection",
+    "name": "ck_external_data_connection_scopes_json_shape",
+    "expression": "JSON_TYPE(`scopes_json`) IN ('ARRAY')",
+    "note": "仅约束已明确JSON形状；业务字段/schema与引用所有权仍由服务校验。"
+  },
+  {
+    "table": "import_batch",
+    "name": "ck_import_batch_candidate_payload_json_shape",
+    "expression": "JSON_TYPE(`candidate_payload_json`) IN ('OBJECT')",
+    "note": "仅约束已明确JSON形状；业务字段/schema与引用所有权仍由服务校验。"
+  },
+  {
+    "table": "import_batch",
+    "name": "ck_import_batch_error_summary_json_shape",
+    "expression": "JSON_TYPE(`error_summary_json`) IN ('OBJECT','ARRAY')",
+    "note": "仅约束已明确JSON形状；业务字段/schema与引用所有权仍由服务校验。"
+  },
+  {
+    "table": "user_preference",
+    "name": "ck_user_preference_preferred_activity_types_json_schema",
+    "expression": "JSON_SCHEMA_VALID('{\"type\":\"array\",\"maxItems\":6,\"uniqueItems\":true,\"items\":{\"type\":\"string\",\"enum\":[\"WALK\",\"RUN\",\"CYCLING\",\"STRETCH\",\"SPORT\",\"OTHER\"]}}',`preferred_activity_types_json`) = 1",
+    "note": "MySQL JSON_SCHEMA_VALID draft-04单表结构约束；NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "user_preference",
+    "name": "ck_user_preference_excluded_activity_types_json_schema",
+    "expression": "JSON_SCHEMA_VALID('{\"type\":\"array\",\"maxItems\":6,\"uniqueItems\":true,\"items\":{\"type\":\"string\",\"enum\":[\"WALK\",\"RUN\",\"CYCLING\",\"STRETCH\",\"SPORT\",\"OTHER\"]}}',`excluded_activity_types_json`) = 1",
+    "note": "MySQL JSON_SCHEMA_VALID draft-04单表结构约束；NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "plan_rule",
+    "name": "ck_plan_rule_weekdays_json_schema",
+    "expression": "JSON_SCHEMA_VALID('{\"type\":\"array\",\"minItems\":1,\"maxItems\":7,\"uniqueItems\":true,\"items\":{\"type\":\"integer\",\"minimum\":1,\"maximum\":7}}',`weekdays_json`) = 1",
+    "note": "MySQL JSON_SCHEMA_VALID draft-04单表结构约束；NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "plan_version",
+    "name": "ck_plan_version_affected_task_ids_json_schema",
+    "expression": "JSON_SCHEMA_VALID('{\"type\":\"array\",\"maxItems\":500,\"uniqueItems\":true,\"items\":{\"type\":\"string\",\"pattern\":\"^[1-9][0-9]{0,19}$\"}}',`affected_task_ids_json`) = 1",
+    "note": "MySQL JSON_SCHEMA_VALID draft-04单表结构约束；NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "feedback_ticket",
+    "name": "ck_feedback_ticket_attachment_file_ids_json_schema",
+    "expression": "JSON_SCHEMA_VALID('{\"type\":\"array\",\"maxItems\":3,\"uniqueItems\":true,\"items\":{\"type\":\"string\",\"pattern\":\"^[1-9][0-9]{0,19}$\"}}',`attachment_file_ids_json`) = 1",
+    "note": "MySQL JSON_SCHEMA_VALID draft-04单表结构约束；NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "knowledge_article",
+    "name": "ck_knowledge_article_tag_codes_json_schema",
+    "expression": "JSON_SCHEMA_VALID('{\"type\":\"array\",\"maxItems\":10,\"uniqueItems\":true,\"items\":{\"type\":\"string\",\"minLength\":1,\"maxLength\":30}}',`tag_codes_json`) = 1",
+    "note": "MySQL JSON_SCHEMA_VALID draft-04单表结构约束；NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "knowledge_article_version",
+    "name": "ck_knowledge_article_version_tags_json_schema",
+    "expression": "JSON_SCHEMA_VALID('{\"type\":\"array\",\"maxItems\":10,\"uniqueItems\":true,\"items\":{\"type\":\"string\",\"minLength\":1,\"maxLength\":30}}',`tags_json`) = 1",
+    "note": "MySQL JSON_SCHEMA_VALID draft-04单表结构约束；NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "client_installation",
+    "name": "ck_client_installation_device_scope_json_schema",
+    "expression": "JSON_SCHEMA_VALID('{\"type\":\"array\",\"maxItems\":2,\"uniqueItems\":true,\"items\":{\"type\":\"string\",\"enum\":[\"task.read\",\"task.action\"]}}',`device_scope_json`) = 1",
+    "note": "MySQL JSON_SCHEMA_VALID draft-04单表结构约束；NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "daily_stat",
+    "name": "ck_daily_stat_source_time_zones_json_schema",
+    "expression": "JSON_SCHEMA_VALID('{\"type\":\"array\",\"uniqueItems\":true,\"items\":{\"type\":\"string\",\"minLength\":1,\"maxLength\":64}}',`source_time_zones_json`) = 1",
+    "note": "MySQL JSON_SCHEMA_VALID draft-04单表结构约束；NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "availability_exception",
+    "name": "ck_availability_exception_slots_json_schema",
+    "expression": "JSON_SCHEMA_VALID('{\"type\":\"array\",\"maxItems\":24,\"items\":{\"type\":\"object\",\"required\":[\"kind\",\"startTime\",\"endTime\",\"endDayOffset\"],\"properties\":{\"slotKey\":{\"type\":\"string\",\"minLength\":1},\"kind\":{\"type\":\"string\",\"enum\":[\"BUSY\",\"AVAILABLE\",\"REST\"]},\"startTime\":{\"type\":\"string\",\"pattern\":\"^([01][0-9]|2[0-3]):[0-5][0-9]$\"},\"endTime\":{\"type\":\"string\",\"pattern\":\"^([01][0-9]|2[0-3]):[0-5][0-9]$\"},\"endDayOffset\":{\"type\":\"integer\",\"minimum\":0,\"maximum\":1},\"startOffsetMinutes\":{\"type\":[\"integer\",\"null\"],\"minimum\":-840,\"maximum\":840},\"endOffsetMinutes\":{\"type\":[\"integer\",\"null\"],\"minimum\":-840,\"maximum\":840}}}}',`slots_json`) = 1",
+    "note": "MySQL JSON_SCHEMA_VALID draft-04单表结构约束；NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "ai_draft_revision",
+    "name": "ck_ai_draft_revision_payload_json_encrypted_envelope",
+    "expression": "JSON_SCHEMA_VALID('{\"type\":\"object\",\"required\":[\"alg\",\"keyRef\",\"nonce\",\"ciphertext\"],\"properties\":{\"alg\":{\"type\":\"string\",\"minLength\":1},\"keyRef\":{\"type\":\"string\",\"minLength\":1},\"nonce\":{\"type\":\"string\",\"minLength\":1},\"ciphertext\":{\"type\":\"string\",\"minLength\":1}}}',`payload_json`) = 1",
+    "note": "MySQL JSON_SCHEMA_VALID draft-04单表结构约束；NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "weekly_review",
+    "name": "ck_weekly_review_suggestions_json_encrypted_envelope",
+    "expression": "JSON_SCHEMA_VALID('{\"type\":\"object\",\"required\":[\"alg\",\"keyRef\",\"nonce\",\"ciphertext\"],\"properties\":{\"alg\":{\"type\":\"string\",\"minLength\":1},\"keyRef\":{\"type\":\"string\",\"minLength\":1},\"nonce\":{\"type\":\"string\",\"minLength\":1},\"ciphertext\":{\"type\":\"string\",\"minLength\":1}}}',`suggestions_json`) = 1",
+    "note": "MySQL JSON_SCHEMA_VALID draft-04单表结构约束；NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "import_batch",
+    "name": "ck_import_batch_candidate_payload_json_encrypted_envelope",
+    "expression": "JSON_SCHEMA_VALID('{\"type\":\"object\",\"required\":[\"alg\",\"keyRef\",\"nonce\",\"ciphertext\"],\"properties\":{\"alg\":{\"type\":\"string\",\"minLength\":1},\"keyRef\":{\"type\":\"string\",\"minLength\":1},\"nonce\":{\"type\":\"string\",\"minLength\":1},\"ciphertext\":{\"type\":\"string\",\"minLength\":1}}}',`candidate_payload_json`) = 1",
+    "note": "MySQL JSON_SCHEMA_VALID draft-04单表结构约束；NULL可选列仍允许SQL NULL。"
+  },
+  {
+    "table": "app_configuration",
+    "name": "ck_app_configuration_value_json_shape",
+    "expression": "JSON_TYPE(`value_json`) IN ('OBJECT')",
+    "note": "仅约束已明确JSON形状；业务字段/schema与引用所有权仍由服务校验。"
+  },
+  {
+    "table": "app_configuration",
+    "name": "ck_app_configuration_value_wrapper",
+    "expression": "(CAST(`value_type` AS BINARY)='BOOLEAN' AND JSON_SCHEMA_VALID('{\"type\":\"object\",\"required\":[\"booleanValue\"],\"properties\":{\"booleanValue\":{\"type\":\"boolean\"}},\"additionalProperties\":false}',`value_json`)=1) OR (CAST(`value_type` AS BINARY)='NUMBER' AND JSON_SCHEMA_VALID('{\"type\":\"object\",\"required\":[\"numberValue\"],\"properties\":{\"numberValue\":{\"type\":\"number\"}},\"additionalProperties\":false}',`value_json`)=1) OR (CAST(`value_type` AS BINARY)='STRING' AND JSON_SCHEMA_VALID('{\"type\":\"object\",\"required\":[\"stringValue\"],\"properties\":{\"stringValue\":{\"type\":\"string\",\"minLength\":1,\"maxLength\":2000}},\"additionalProperties\":false}',`value_json`)=1) OR (CAST(`value_type` AS BINARY)='OBJECT' AND JSON_SCHEMA_VALID('{\"anyOf\":[{\"type\":\"object\",\"required\":[\"featureCode\",\"enabled\",\"allowedPlatforms\"],\"properties\":{\"featureCode\":{\"type\":\"string\",\"minLength\":1,\"maxLength\":64},\"enabled\":{\"type\":\"boolean\"},\"allowedPlatforms\":{\"type\":\"array\",\"maxItems\":4,\"uniqueItems\":true,\"items\":{\"type\":\"string\",\"enum\":[\"ANDROID\",\"HARMONYOS\",\"IOS\",\"WEB\"]}},\"minAppVersion\":{\"type\":[\"string\",\"null\"],\"maxLength\":32},\"rolloutPercent\":{\"type\":\"integer\",\"minimum\":0,\"maximum\":100}},\"additionalProperties\":false},{\"type\":\"object\",\"required\":[\"items\"],\"properties\":{\"items\":{\"type\":\"array\",\"maxItems\":100,\"uniqueItems\":true,\"items\":{\"type\":\"string\",\"minLength\":1,\"maxLength\":100}}},\"additionalProperties\":false}]}',`value_json`)=1)",
+    "note": "value_type是API包装分支；不误把包装OBJECT要求为顶层BOOLEAN/NUMBER。"
+  }
+]

@@ -1,0 +1,7 @@
+# Local development only. Activating another profile does not include this file.
+zhiheng:
+  auth:
+    registration-enabled: ${ZH_REGISTRATION_ENABLED:true}
+    local-development-registration: true
+    verification-delivery: ${ZH_VERIFICATION_DELIVERY:CONSOLE}
+    service-policy-version: ${ZH_SERVICE_POLICY_VERSION:local-service-v1}

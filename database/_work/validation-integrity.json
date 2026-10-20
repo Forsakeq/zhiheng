@@ -1,0 +1,180 @@
+{
+  "serverVersion": "8.0.29",
+  "schema": "zhiheng_validation_02",
+  "checks": [
+    {
+      "name": "Exact schema coverage",
+      "passed": true
+    },
+    {
+      "name": "Seed counts and no default user/health facts",
+      "passed": true
+    },
+    {
+      "name": "All seeded configuration values satisfy their JSON schemas",
+      "passed": true
+    },
+    {
+      "name": "Valid encrypted-account placeholder fixtures accepted",
+      "passed": true
+    },
+    {
+      "name": "Unknown status rejected",
+      "passed": true,
+      "mysqlCode": 3819,
+      "expected": [
+        3819
+      ]
+    },
+    {
+      "name": "Lowercase enum rejected despite default text collation",
+      "passed": true,
+      "mysqlCode": 3819,
+      "expected": [
+        3819
+      ]
+    },
+    {
+      "name": "Zero row version rejected",
+      "passed": true,
+      "mysqlCode": 3819,
+      "expected": [
+        3819
+      ]
+    },
+    {
+      "name": "Required email hash cannot be NULL",
+      "passed": true,
+      "mysqlCode": 1048,
+      "expected": [
+        1048
+      ]
+    },
+    {
+      "name": "Offline client record UUID deduplicates",
+      "passed": true,
+      "mysqlCode": 1062
+    },
+    {
+      "name": "Sleep interval cannot reverse",
+      "passed": true,
+      "mysqlCode": 3819,
+      "expected": [
+        3819
+      ]
+    },
+    {
+      "name": "External record requires connection and provider key",
+      "passed": true,
+      "mysqlCode": 3819,
+      "expected": [
+        3819
+      ]
+    },
+    {
+      "name": "Matching record detail accepted",
+      "passed": true
+    },
+    {
+      "name": "Detail cannot cross account ownership",
+      "passed": true,
+      "mysqlCode": 1452,
+      "expected": [
+        1452
+      ]
+    },
+    {
+      "name": "Parent type cannot contradict existing detail",
+      "passed": true,
+      "mysqlCode": 1451,
+      "expected": [
+        1451
+      ]
+    },
+    {
+      "name": "Active version cannot point to a different plan",
+      "passed": true,
+      "mysqlCode": 1452,
+      "expected": [
+        1452
+      ]
+    },
+    {
+      "name": "Same-plan task snapshot accepted",
+      "passed": true
+    },
+    {
+      "name": "Snapshot cannot reference another plan task",
+      "passed": true,
+      "mysqlCode": 1452,
+      "expected": [
+        1452
+      ]
+    },
+    {
+      "name": "CREATE event legitimately allows before version zero",
+      "passed": true
+    },
+    {
+      "name": "Unverified upload cannot become CLEAN",
+      "passed": true,
+      "mysqlCode": 3819,
+      "expected": [
+        3819
+      ]
+    },
+    {
+      "name": "Only one active connection per provider",
+      "passed": true,
+      "mysqlCode": 1062,
+      "expected": [
+        1062
+      ]
+    },
+    {
+      "name": "Revoked connection releases generated active uniqueness slot",
+      "passed": true
+    },
+    {
+      "name": "Feedback attachment count is bounded to three",
+      "passed": true,
+      "mysqlCode": 3819,
+      "expected": [
+        3819
+      ]
+    },
+    {
+      "name": "Synchronization entity type is restricted to the formal whitelist",
+      "passed": true,
+      "mysqlCode": 3819,
+      "expected": [
+        3819
+      ]
+    },
+    {
+      "name": "No fixture users or health records persisted",
+      "passed": true
+    }
+  ],
+  "objectCounts": {
+    "tables": 60,
+    "columns": 1066,
+    "foreignKeys": 135,
+    "checkConstraints": 432
+  },
+  "seedCounts": [
+    5,
+    15,
+    6,
+    18,
+    123,
+    0,
+    0
+  ],
+  "afterRollback": [
+    0,
+    0
+  ],
+  "passed": 24,
+  "failed": 0
+}

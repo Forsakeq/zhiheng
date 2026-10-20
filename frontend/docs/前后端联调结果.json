@@ -1,0 +1,16 @@
+{
+  "configurationIsLocalConsole": true,
+  "registrationWorksWithSeedFlagDisabled": true,
+  "localPolicyLoaded": true,
+  "verificationPrintedInJavaConsole": true,
+  "verificationNotInHttpResponse": true,
+  "registrationPersisted": true,
+  "loginSucceeded": true,
+  "recordPersistedAndReadBack": true,
+  "homeShowsStoredRecord": true,
+  "backendTests": {
+    "passed": 85,
+    "skipped": 0,
+    "failed": 0
+  }
+}
